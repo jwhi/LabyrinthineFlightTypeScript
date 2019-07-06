@@ -1,0 +1,297 @@
+Admiral
+Adventurer
+Instructor
+Ally
+Ambassador
+Apostle
+Archangel
+Archdruid 
+Architect
+Archmage
+Master
+Arrowdodger
+Artisan
+Assassin
+Associate
+Walker
+Avatar
+Avenger
+Bait
+Bane
+Battlelord
+Battlemaster
+Berserker
+Blade
+Defender
+Champion
+Guard
+Bloodknight
+Bloodseeker
+Bloodthirsty
+Butcher
+Searcher
+Breaker
+Pulverizer
+Bounty Hunter
+Brawler
+Brewmaster
+Gladiator
+Brute
+Brutecleaver
+Butcher
+Cannon Fodder
+Captain
+Carcass Carver
+Casket Filler
+Celebrity
+Centurion
+Challenger
+Champion
+Chef
+Chicken Chaser
+Chuckler
+Collector
+Colorblind
+Commander
+Commando
+Concoctioner
+Confessor
+Conjurer    
+Conqueror
+Conscript
+Conservationist
+Corporal
+Corpse Cutter
+Crusader
+Crusher
+Cutpurse
+Daisy Pusher
+Darkener
+Darkmaster
+Deadly Gladiator
+Death Defier
+Death Stalker
+Deathbringer
+Deathlord
+Debris Destroyer
+Defender
+Defender of a Shattered World
+Defender of the Wall
+Defiler
+Delver of the Vaults
+Gladiator
+Demonologist
+Demonslayer
+Denier of Disease
+Desperado
+Destroyer
+Destroyer's End
+Devoted Inquirer
+Diplomat
+Dissector
+Dockmaster
+Dog Lover
+Doom Bringer
+Dragonslayer
+Dreamer
+Druid
+Duelist
+Dumpling
+Easy Target
+Echo Hunter
+Elder
+Emperor
+Enchanter
+Evangelist
+Executioner
+Exhibitionist
+Exiler
+Explorer
+Exporter
+Extravagant
+Farmer
+Fashionable
+Fearmonger
+Feckless
+Field Marshal
+Field Medic
+Fine Fuser
+Fire Snuffer
+Firelord
+Fire-Watcher
+First Sergeant
+Fisher
+Flame Keeper
+Flamebreaker
+Flameweaver
+Victor
+Flirt
+Foe of the Cannibal
+Fowl Finisher
+Frost
+Frozen
+Garbage Disposal
+Gardener
+General
+Gladiator
+Gourmand
+Grandmaster
+Griffonslayer
+Groundbreaker
+Grunt
+Guardian
+Harvester
+Headmaster
+Heedless
+Herald
+Hero
+Hexed
+Highlord
+Hoarder
+Hood
+Hopebringer
+Hornsnapper
+Hound Hunter
+Howler
+Huntmaster
+Huntsman
+Iron Bender
+Joker
+Judged
+Juggler
+Keep Crippler
+Keep Krusher
+Keep Raider
+Killer
+King
+Kingslayer
+Knight
+Legend
+Legionnaire
+Liberator
+Light of Dawn
+Lightbringer
+Lionheart
+Litter Bug
+Locust
+Loot Harlot
+Lord Lasher
+Loremaster
+Love Fool
+Low
+Lumberjack
+Magic Seeker
+Manipulator
+Manslayer
+Master
+Master Chief
+Mauler
+Mayor
+Meat Shield
+Narcissist
+Navigator
+Necromancer
+Never-Rester
+Night
+Nobhead
+Noble
+Ogler
+Oppressor
+Opulent
+Overachiever
+Pack Hunter
+Painmaster
+Paladin
+Pancake
+Patron
+Pawner
+Peacekeeper
+Pebble Pulverizer
+Peddler
+Peon
+Piemaster
+Piledigger
+Pilgrim
+Pin Cushion
+Pioneer
+Pirate
+Pivotal Force
+Plunderer
+Poser
+Postmaster
+Power Hungry
+Predator
+Priest
+Professor
+Prolific
+Prominent
+Psychopath
+Purifier
+Queen
+Ranger
+Ravenslayer
+Reaper
+Reclusive
+Remains Robber
+Revolutionary
+Rival
+Road Warden
+Rock Pulverizer
+Rubbish Remover
+Runemaster
+Sabre
+Salad Dodger
+Scale Breaker
+Scout
+Scrapper
+Seeker
+Self-Centered
+Shadowblade
+Shadowfiend 
+Showman
+Showoff
+Singed
+Skeleton Hunter
+Skinner
+Slayer
+Snob
+Socialite
+Soul
+Spark Snuffer
+Sparrow
+Spite Splitter
+Stable Master
+Starcaller
+Steel Bender
+Stonewalled
+Storm
+Stormbreaker
+Stormbrewer
+Stylist
+Supporter
+Talker
+Tamer
+Target
+Tease
+Timelord
+Tin Bender
+Tooth Skinner
+Topper
+Trader
+Tragic
+Trainer
+Tranquil
+Troll
+Trooper
+Twilight
+Vamp
+Vanquisher
+Veteran
+Victim
+Voyeur
+Warlord
+Warlord
+Watcher
+Wind
+World Shaper
+
