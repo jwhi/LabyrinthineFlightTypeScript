@@ -20,16 +20,16 @@ var malePlayerNameData;
 var femalePlayerNameData;
 var adjectiveData;
 var nicknameData;
-fs.readFile('keeperrl_male_names.txt', function (err, data) {
+fs.readFile(__dirname + '/private/names/keeperrl_male_names.txt', function (err, data) {
     malePlayerNameData = data.toString().split(os.EOL);
 });
-fs.readFile('keeperrl_female_names.txt', function (err, data) {
+fs.readFile(__dirname + '/private/names/keeperrl_female_names.txt', function (err, data) {
     femalePlayerNameData = data.toString().split(os.EOL);
 });
-fs.readFile('adjectives.txt', function (err, data) {
+fs.readFile(__dirname + '/private/names/adjectives.txt', function (err, data) {
     adjectiveData = data.toString().split(os.EOL);
 });
-fs.readFile('nicknames.txt', function (err, data) {
+fs.readFile(__dirname + '/private/names/nicknames.txt', function (err, data) {
     if (err) {
         console.error(err);
         return;
@@ -41,7 +41,6 @@ function getPlayerName() {
     while (!malePlayerNameData || !femalePlayerNameData) { }
     // Decide which name file to use.
     if (Math.round(Math.random())) {
-        nameFile = 'keeperrl_male_names.txt';
         var rnd = Math.floor(Math.random() * malePlayerNameData.length);
         return malePlayerNameData[rnd];
     }

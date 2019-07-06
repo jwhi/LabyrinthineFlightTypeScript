@@ -15,8 +15,6 @@ var server = new http.Server(app);
 var io = socketio.listen(server);
 
 
-
-
 app.use('/js', express.static(__dirname + '/public/javascripts'));
 app.use('/assets', express.static(__dirname + '/public/assets'));
 app.get('/map', function (req, res) {
