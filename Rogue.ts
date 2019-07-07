@@ -200,6 +200,8 @@ class Floor {
 
         if (this.levelNumber == 0) {
             this.map = new Map(TownData);
+            this.playerX = 32;
+            this.playerY = 31;
             return;
         }
 

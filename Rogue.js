@@ -171,6 +171,8 @@ class Floor {
         this.levelNumber = levelNumber;
         if (this.levelNumber == 0) {
             this.map = new Map(startingTown_json_1.default);
+            this.playerX = 32;
+            this.playerY = 31;
             return;
         }
         return;

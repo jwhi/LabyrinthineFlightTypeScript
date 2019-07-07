@@ -1,4 +1,4 @@
-/*
+﻿/*
     
     Calls from server:
         'dungeon'
@@ -796,7 +796,6 @@ function play(delta) {
         var player_x = getPlayerX();
         var player_y = getPlayerY();
         if (canWalk(player_x + player.vx, player_y + player.vy)) {
-            
             player_x += player.vx;
             player_y += player.vy;
 
@@ -855,14 +854,13 @@ function canWalk(x, y) {
         return false;
     }
 
-    switch (level.map.asciiTiles[x + ',' + y]) {
-        case '&':
-        case '#':
-        case '%':
-            return false;
-        default:
-            return true;
+    var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+    if (nonWalkableTiles.includes(level.map.asciiTiles[x + ',' + y])) {
+        return false;
     }
+    console.log(level.map.asciiTiles[x + ',' + y]);
+    return true;
+    
 }
 
 /******************* BLOCK 6 - Graphics Helper Functions *******************/
