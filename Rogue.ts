@@ -1,7 +1,8 @@
-﻿"use strict";
-import ROT = require('rot-js');
+﻿import ROT = require('rot-js');
 import fs = require('fs');
 import os = require('os');
+
+import TownData from './private/maps/startingTown.json';
 
 // #: Room wall
 // &: Hallway wall
@@ -26,19 +27,19 @@ var adjectiveData;
 var nicknameData;
 
 
-fs.readFile(__dirname + '/private/names/keeperrl_male_names.txt', function (err, data) {
+fs.readFile('./private/names/keeperrl_male_names.txt', function (err, data) {
     malePlayerNameData = data.toString().split(os.EOL);
 });
 
-fs.readFile(__dirname + '/private/names/keeperrl_female_names.txt', function (err, data) {
+fs.readFile('./private/names/keeperrl_female_names.txt', function (err, data) {
     femalePlayerNameData = data.toString().split(os.EOL);
 });
 
-fs.readFile(__dirname + '/private/names/adjectives.txt', function (err, data) {
+fs.readFile('./private/names/adjectives.txt', function (err, data) {
     adjectiveData = data.toString().split(os.EOL);
 });
 
-fs.readFile(__dirname + '/private/names/nicknames.txt', function (err, data) {
+fs.readFile('./private/names/nicknames.txt', function (err, data) {
     if (err) {
         console.error(err);
         return;
@@ -178,7 +179,7 @@ class Dungeon {
 }
 
 class Floor {
-    map: Object = {};
+    map: Map;
     width: number;
     height: number;
     playerX: number;
@@ -197,7 +198,15 @@ class Floor {
         this.height = height;
         this.levelNumber = levelNumber;
 
-        if ((this.levelNumber + 1) % 5 == 0) {
+        if (this.levelNumber == 0) {
+            this.map = new Map(TownData);
+            return;
+        }
+
+        return;
+
+        // TODO: Update this to the new Map object.
+        if ((this.levelNumber) % 5 == 0) {
 
         /* create a connected map where the player can reach all non-wall sections */
             var options = { connected: true }
@@ -841,4 +850,50 @@ class Enemy {
         return this.path;
     }
 }
+
+class Map {
+    asciiTiles: Object;
+    tileNames;
+    constructor(townData: Object) {
+        if (townData.hasOwnProperty("tiles")) {
+            this.asciiTiles = (<any>townData).tiles;
+        }
+    }
+}
+
+class TownRoom {
+    name: string;
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    description: string = "";
+}
+
+class Interactable {
+    name: string;
+    interacted: boolean = false;
+    description: string = "";
+}
+
+class Sign extends Interactable {
+    text: string = "";
+    constructor() {
+        super();
+    }
+}
+
+class Book extends Interactable {
+    title: string = "";
+    author: string = "";
+    contents: Object;
+    constructor() {
+        super();
+    }
+}
+
+class Door extends Interactable {
+    locked: boolean = false;
+}
+
 export { Dungeon, Floor, Enemy, getPlayerName, getPlayerTitle };

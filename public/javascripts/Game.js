@@ -201,19 +201,15 @@ let gameMessagesApp = new Application({
     sharedTicker: true
 });
 
+var townSprite;
 
 
 // Texture loading of font and map sprite sheets.
 // This currently causes a large number of the warning "pixi.min.js:8 Texture added to the cache with an id 'text-id' that already had an entry"
 // This is caused by me using the same texture names in the JSON files.
 // Probably a new way I should be loading images in PIXI v5.
-/*
-loader.add('level', 'assets/level_creatures.json')
-    .add('level_new', 'assets/level_creatures_new.json')
-    .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
-    .load(setup);
-*/
 loader.add('level', 'assets/1bit2x-expanded.json')
+    .add('town', 'assets/starting-town2x-transparent.png')
     .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
     .load(setup);
 
@@ -377,7 +373,7 @@ function setup() {
         var str = '';
         for (var y = 0; y < mapHeight; y++) {
             for (var x = 0; x < mapWidth; x++) {
-                str += level.map[x+','+y];
+                str += (level.map.asciiTiles[x + ',' + y]) ? (level.map.asciiTiles[x + ',' + y]) : ' ';
             }
             str += '\n';
         }
@@ -397,13 +393,19 @@ function setup() {
         // Received whenever the player starts a new game or uses stairs. Draw tiles once received and set the state to play after
         // all tiles are drawn to allow the user to start moving the player.
         // TODO: Reduce memory of tiles. Find a way to have sprites as clones as each other instead of each an individual instance
-        if (level.tileData) {
-            Object.keys(level.tileData).forEach(key => {
+        if (level.tileNames) {
+            Object.keys(level.tileNames).forEach(key => {
                 var x, y;
-                [x,y] = key.split(',');
-                var tileSprite = placeTile(level.tileData[key], x * tileSize, y * tileSize);
+                [x, y] = key.split(',');
+                var tileSprite = placeTile(level.Names[key], x * tileSize, y * tileSize);
                 mapSprites[key] = tileSprite;
             });
+        } else {
+            var townTexture = resources['town'].texture;
+            townSprite = new Sprite(townTexture);
+            townSprite.position.set(0, 0);
+            townSprite.alpha = 1;
+            gameTiles.addChild(townSprite);
         }
     
         if (level.fov) {
@@ -495,9 +497,9 @@ function setup() {
             updateEnemySprites(level.enemies)
         }
         if (worldTurnData.map && level) {
-            Object.keys(worldTurnData.map).forEach(function(key) {
-                level.map[key] = worldTurnData.map[key];
-                if (level.map[key] == '-') {
+            Object.keys(worldTurnData.map).forEach(function (key) {
+                level.map.asciiTiles[key] = worldTurnData.map[key];
+                if (level.map.asciiTiles[key] == '-') {
                     mapSprites[key].texture = mapTiles['doorOpen'];
                 }
             });
@@ -808,9 +810,10 @@ function play(delta) {
             // FOV is still calculated server side so that will lag behind a little.
             // If a player attacks an enemy, disable player movement until client receive world's turn from server
             socket.emit('playerTurn', {x: player_x, y: player_y});
-            if (level.map[player_x+','+player_y] === '+') {
-                level.map[player_x+','+player_y] = '-';
-                mapSprites[player_x+','+player_y].texture = mapTiles['doorOpen'];
+            if (level.map.asciiTiles[player_x+','+player_y] === '+') {
+                level.map.asciiTiles[player_x + ',' + player_y] = '-';
+                // This doesn't work when you are in the town because there is no individual tiles.
+                // mapSprites[player_x+','+player_y].texture = mapTiles['doorOpen'];
             }
         
             // Renderer is updated when the game receives updated FOV from player
@@ -852,7 +855,7 @@ function canWalk(x, y) {
         return false;
     }
 
-    switch (level.map[x+','+y]) {
+    switch (level.map.asciiTiles[x + ',' + y]) {
         case '&':
         case '#':
         case '%':
@@ -1082,8 +1085,8 @@ function updatePlayerData(playerInfo) {
     drawText2X(playerInfo.attack[0] + '-' + playerInfo.attack[1], 13*fontSize, 2*fontHeight*2, 'white', infoTiles);
     drawText2X('Save', 0, fontHeight*3, tileSets ? 'orange' : 'blue', infoTiles);
     drawInvisibleButton(0,2*fontHeight*3, fontSize*4, 2*fontHeight, infoTiles, save);
-    
-    var playerTile = level.map[getPlayerX()+','+getPlayerY()];
+
+    var playerTile = level.map.asciiTiles[getPlayerX() + ',' + getPlayerY()];
     if ((playerTile === '<') || (playerTile === '>')) {
         var x = 2*fontSize*8;
         var y = 2*fontHeight*3;
@@ -1358,9 +1361,9 @@ function useStairs(keyPressed) {
         console.log('stairs');
         console.log(keyPressed);
     if (!keyPressed) {
-        keyPressed = level.map[getPlayerX()+','+getPlayerY()];
+        keyPressed = level.map.asciiTiles[getPlayerX() + ',' + getPlayerY()];
     }
-    if (keyPressed ===  level.map[getPlayerX()+','+getPlayerY()]) {
+    if (keyPressed === level.map.asciiTiles[getPlayerX() + ',' + getPlayerY()]) {
         if (keyPressed === '>') {
             state = error;
             screenWithText('Loading...');

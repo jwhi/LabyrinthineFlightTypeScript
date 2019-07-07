@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const ROT = require("rot-js");
 const fs = require("fs");
 const os = require("os");
+const startingTown_json_1 = __importDefault(require("./private/maps/startingTown.json"));
 // #: Room wall
 // &: Hallway wall
 // %: Cave wall
@@ -20,16 +24,16 @@ var malePlayerNameData;
 var femalePlayerNameData;
 var adjectiveData;
 var nicknameData;
-fs.readFile(__dirname + '/private/names/keeperrl_male_names.txt', function (err, data) {
+fs.readFile('./private/names/keeperrl_male_names.txt', function (err, data) {
     malePlayerNameData = data.toString().split(os.EOL);
 });
-fs.readFile(__dirname + '/private/names/keeperrl_female_names.txt', function (err, data) {
+fs.readFile('./private/names/keeperrl_female_names.txt', function (err, data) {
     femalePlayerNameData = data.toString().split(os.EOL);
 });
-fs.readFile(__dirname + '/private/names/adjectives.txt', function (err, data) {
+fs.readFile('./private/names/adjectives.txt', function (err, data) {
     adjectiveData = data.toString().split(os.EOL);
 });
-fs.readFile(__dirname + '/private/names/nicknames.txt', function (err, data) {
+fs.readFile('./private/names/nicknames.txt', function (err, data) {
     if (err) {
         console.error(err);
         return;
@@ -159,14 +163,19 @@ class Dungeon {
 exports.Dungeon = Dungeon;
 class Floor {
     constructor(width, height, levelNumber, spawnOnDownStairs = false) {
-        this.map = {};
         this.enemies = [];
         // Map Explored also contains the FOV for the player
         this.mapExplored = {};
         this.width = width;
         this.height = height;
         this.levelNumber = levelNumber;
-        if ((this.levelNumber + 1) % 5 == 0) {
+        if (this.levelNumber == 0) {
+            this.map = new Map(startingTown_json_1.default);
+            return;
+        }
+        return;
+        // TODO: Update this to the new Map object.
+        if ((this.levelNumber) % 5 == 0) {
             /* create a connected map where the player can reach all non-wall sections */
             var options = { connected: true };
             var cellMap = new ROT.Map.Cellular(width, height, options);
@@ -782,4 +791,41 @@ class Enemy {
     }
 }
 exports.Enemy = Enemy;
+class Map {
+    constructor(townData) {
+        if (townData.hasOwnProperty("tiles")) {
+            this.asciiTiles = townData.tiles;
+        }
+    }
+}
+class TownRoom {
+    constructor() {
+        this.description = "";
+    }
+}
+class Interactable {
+    constructor() {
+        this.interacted = false;
+        this.description = "";
+    }
+}
+class Sign extends Interactable {
+    constructor() {
+        super();
+        this.text = "";
+    }
+}
+class Book extends Interactable {
+    constructor() {
+        super();
+        this.title = "";
+        this.author = "";
+    }
+}
+class Door extends Interactable {
+    constructor() {
+        super(...arguments);
+        this.locked = false;
+    }
+}
 //# sourceMappingURL=Rogue.js.map
