@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 /**
  * LabyrinthineFlight.js
  * 
@@ -10,11 +10,31 @@
  */
 
 class LabyrinthineFlight {
-    constructor(mapInfomation, playerInformation) {
+    constructor(mapInfomation, playerInformation, enemyInformation) {
         this.width = 75;
-        this.mapHeight = 40;
+        this.height = 40;
         this.map = map;
-        this.player 
+    }
+
+    /**
+    * canWalk
+    * Walking is handled client side to give the user a better gameplay experience.
+    * To test whether a player can move to a tile on the map, check the x,y coordinate
+    * on the map passed to the client from the server. So far, blank tiles and '#' are
+    * they only tiles that block movement
+    * @param x The X value of the tile to be checked
+    * @param y The Y value of the tile to be checked
+    * @returns a boolean that is true for walkable tiles, false for walls
+    */
+    canWalk(x, y) {
+        if (x > this.width || y > this.height || x < 0 || y < 0) {
+            return false;
+        }
+        var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+        if (nonWalkableTiles.includes(this.map.asciiTiles[x + ',' + y])) {
+            return false;
+        }
+        return true;
     }
 }
 

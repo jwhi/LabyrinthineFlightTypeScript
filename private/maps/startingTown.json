@@ -163,7 +163,7 @@
       }
     }
   },
-  "tiles": {
+  "asciiTiles": {
     "_comment": "These values are used to detect walkable tiles, player's field-of-vision, and more. Key is (x,y) coordinates on the map starting at top-left. Ideally the game is playable without graphics and only using these characters for graphics.",
     "29,33": "#",
     "28,33": "#",
@@ -1318,5 +1318,18 @@
     "29,11": "╬",
     "29,7": "╬",
     "30,28": "¶"
+  },
+  "spriteNames": {
+    "_comment": "These values are used to draw textures from the map tilesheets. Only need to include tiles that will be updated. E.g. doors, chests, books, etc.",
+    "13,24": "door",
+    "32,27": "door",
+    "54,15": "door",
+    "36,15": "door",
+    "31,12": "door",
+    "31,8": "door",
+    "9,14": "door",
+    "56,3": "metal_gate",
+    "32,32": "chest",
+    "30,28": "book"
   }
 }

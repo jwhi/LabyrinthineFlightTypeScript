@@ -173,5 +173,5 @@ server.listen(PORT, function () {
 
 process.on('SIGINT', function () {
     console.log('Shuting down...');
-    process.exit();
+    process.exit(0);
 });

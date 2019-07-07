@@ -855,10 +855,13 @@ class Enemy {
 
 class Map {
     asciiTiles: Object;
-    tileNames;
+    spriteNames;
     constructor(townData: Object) {
-        if (townData.hasOwnProperty("tiles")) {
-            this.asciiTiles = (<any>townData).tiles;
+        if (townData.hasOwnProperty("asciiTiles")) {
+            this.asciiTiles = (<any>townData).asciiTiles;
+        }
+        if (townData.hasOwnProperty("spriteNames")) {
+            this.spriteNames = (<any>townData).spriteNames;
         }
     }
 }

@@ -795,8 +795,11 @@ class Enemy {
 exports.Enemy = Enemy;
 class Map {
     constructor(townData) {
-        if (townData.hasOwnProperty("tiles")) {
-            this.asciiTiles = townData.tiles;
+        if (townData.hasOwnProperty("asciiTiles")) {
+            this.asciiTiles = townData.asciiTiles;
+        }
+        if (townData.hasOwnProperty("spriteNames")) {
+            this.spriteNames = townData.spriteNames;
         }
     }
 }

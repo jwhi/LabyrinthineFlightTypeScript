@@ -1305,7 +1305,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-        "cave_wall_NEW":
+    "cave_wall_NEW":
 		{
 			"frame": {"x":205,"y":375,"w":32,"h":32},
 			"rotated": false,

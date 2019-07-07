@@ -38,6 +38,11 @@
     <Content Include="private\names\nicknames.txt" />
     <Content Include="public\assets\1bit-expanded-grid.png" />
     <Content Include="public\assets\1bit-expanded.png" />
+    <Content Include="public\assets\1bit-map-grid.png" />
+    <Content Include="public\assets\1bit-map.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\assets\1bit-map.png" />
     <Content Include="public\assets\1bit2x-expanded.json" />
     <Content Include="public\assets\blue_font.json" />
     <Content Include="public\assets\blue_font.png" />

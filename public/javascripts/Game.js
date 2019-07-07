@@ -153,7 +153,8 @@ var timeoutFunction;
 
 // Stores the PIXI loader for all the map textures, except for open doors which I
 // patched in on the go and haven't had the chance to merge it into the spritesheet.
-var mapTiles;
+var gameTextures;
+var mapTextures;
 
 // PIXI can store sprites in a container. This allows all game sprites to be deleted
 // and redrawn easily after a player changes floors
@@ -209,7 +210,8 @@ var townSprite;
 // This is caused by me using the same texture names in the JSON files.
 // Probably a new way I should be loading images in PIXI v5.
 loader.add('level', 'assets/1bit2x-expanded.json')
-    .add('town', 'assets/starting-town2x-transparent.png')
+    .add('map', 'assets/1bit-map.json')
+    .add('town', 'assets/starting-town.png')
     .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
     .load(setup);
 
@@ -383,35 +385,39 @@ function setup() {
          * Sends requests to the server to get the tile names and alpha values for the new floor.
          */
         clearApp();
-        player = new Sprite(mapTiles['player']);
+        player = new Sprite(gameTextures['player']);
         player.position.set(tileSize * level.playerX,
                             tileSize * level.playerY);
         player.vx = 0;
         player.vy = 0;
-        
-        // Tile names are determined by the server since the function required function calls that could only be done by the server.
-        // Received whenever the player starts a new game or uses stairs. Draw tiles once received and set the state to play after
-        // all tiles are drawn to allow the user to start moving the player.
-        // TODO: Reduce memory of tiles. Find a way to have sprites as clones as each other instead of each an individual instance
-        if (level.tileNames) {
-            Object.keys(level.tileNames).forEach(key => {
-                var x, y;
-                [x, y] = key.split(',');
-                var tileSprite = placeTile(level.Names[key], x * tileSize, y * tileSize);
-                mapSprites[key] = tileSprite;
-            });
-        } else {
+
+        if (level.levelNumber == 0) {
             var townTexture = resources['town'].texture;
             townSprite = new Sprite(townTexture);
             townSprite.position.set(0, 0);
             townSprite.alpha = 1;
             gameTiles.addChild(townSprite);
         }
-    
+        
+        // Tile names are determined by the server since the function required function calls that could only be done by the server.
+        // Received whenever the player starts a new game or uses stairs. Draw tiles once received and set the state to play after
+        // all tiles are drawn to allow the user to start moving the player.
+        // TODO: Reduce memory of tiles. Find a way to have sprites as clones as each other instead of each an individual instance
+        if (level.map.spriteNames) {
+            Object.keys(level.map.spriteNames).forEach(key => {
+                var x, y;
+                [x, y] = key.split(',');
+                var tileSprite = placeMapTile(level.map.spriteNames[key], x * tileSize, y * tileSize);
+                mapSprites[key] = tileSprite;
+            });
+
+            
+        }
+        /*
         if (level.fov) {
             updateMapFOV(level.fov);
         }
-
+        */
         if (level.enemies) {
             for (let i = 0; i < level.enemies.length; i++) {
                 currentEnemy = level.enemies[i];
@@ -423,8 +429,9 @@ function setup() {
             }
             updateEnemySprites(level.enemies);
         }   
-        app.stage.addChild(gameTiles);
+
         gameTiles.addChild(player);
+        app.stage.addChild(gameTiles);
 
 
         // First dungeon packet from server contains the player's name and the game's save ID. Received once a new game begins or a player
@@ -489,9 +496,11 @@ function setup() {
             player.vx = 0;
             player.vy = 0;    
         }
+        /*
         if (worldTurnData.fov) {
             updateMapFOV(worldTurnData.fov);
         }
+        */
         if (worldTurnData.enemies && level) {
             level.enemies = worldTurnData.enemies
             updateEnemySprites(level.enemies)
@@ -500,7 +509,7 @@ function setup() {
             Object.keys(worldTurnData.map).forEach(function (key) {
                 level.map.asciiTiles[key] = worldTurnData.map[key];
                 if (level.map.asciiTiles[key] == '-') {
-                    mapSprites[key].texture = mapTiles['doorOpen'];
+                    mapSprites[key].texture = mapTextures['door_open'];
                 }
             });
         }
@@ -543,11 +552,12 @@ function setup() {
     //screenWithText('Welcome to Labyrinthine Flight!', 'white');
     resize();
 
-    // mapTiles is alias for all the texture atlas frame id textures
+    // gameTiles is alias for all the texture atlas frame id textures
     // openDoorTexture is the texture swapped on the canvas when a player steps on a door tile
     var levelTilesPack = 'level' + (tileSets ? '' : '_new');
     // var doorTilePack = 'assets/openDoor' + (tileSets ? '' : '_new') + '.png';
-    mapTiles = resources[levelTilesPack].textures;
+    gameTextures = resources[levelTilesPack].textures;
+    mapTextures = resources['map'].textures;
     // openDoorTexture =  PIXI.Texture.from(doorTilePack);
     // Resize the game window to the browser window so player does not need to scroll
     // to see the entire game board or find where the player is on the screen.
@@ -565,14 +575,6 @@ function setup() {
 }
 
 /******************* BLOCK 4 - Menu Functions *******************/
-
-function switchGraphics() {
-    tileSets = !tileSets;
-    var levelTilesPack = 'level' + (tileSets ? '' : '_new');
-    // var doorTilePack = 'assets/openDoor' + (tileSets ? '' : '_new') + '.png';
-    mapTiles = resources[levelTilesPack].textures;
-    // openDoorTexture =  PIXI.Texture.from(doorTilePack);
-}
 
 /**
  * gameLoop
@@ -596,7 +598,7 @@ function updateMenu() {
         var textXLocation = (appWidth - (text.length * 2*fontSize))/2;
         drawText2X(text, textXLocation, (appHeight/2) - (fontHeight*18), 'blue');
 
-        menuInput = new Sprite(mapTiles['player']);
+        menuInput = new Sprite(gameTextures['player']);
         var textYLocation =  (appHeight/2) - (fontHeight*14 - 32) ;
         menuInput.position.set(textXLocation, textYLocation);
         menuInput.vx = 0;
@@ -612,8 +614,8 @@ function updateMenu() {
         clearApp();
         var text = 'Load Game'
         var textXLocation = (appWidth/2 - (text.length * 2*fontSize)/2);
-        drawText2X(text, textXLocation, (appHeight/2) - (fontHeight*18), 'blue');
-        menuInput = new Sprite(mapTiles['player']);
+        drawText2X(text, textXLocation, (appHeight / 2) - (fontHeight * 18), 'blue');
+        menuInput = new Sprite(gameTextures['player']);
         menuInput.vx = 0;
         menuInput.vy = 0;
         textXLocation = (appWidth/2 - (text.length * 2*fontSize))/2;
@@ -809,11 +811,14 @@ function play(delta) {
             // FOV is still calculated server side so that will lag behind a little.
             // If a player attacks an enemy, disable player movement until client receive world's turn from server
             socket.emit('playerTurn', {x: player_x, y: player_y});
-            if (level.map.asciiTiles[player_x+','+player_y] === '+') {
+            if (level.map.asciiTiles[player_x + ',' + player_y] === '+') {
                 level.map.asciiTiles[player_x + ',' + player_y] = '-';
-                // This doesn't work when you are in the town because there is no individual tiles.
-                // mapSprites[player_x+','+player_y].texture = mapTiles['doorOpen'];
+                mapSprites[player_x + ',' + player_y].texture = mapTextures['door_open'];
+            } else if (level.map.asciiTiles[player_x + ',' + player_y] === '╣') {
+                level.map.asciiTiles[player_x + ',' + player_y] = '╠';
+                mapSprites[player_x + ',' + player_y].texture = mapTextures['metal_gate_open'];
             }
+
         
             // Renderer is updated when the game receives updated FOV from player
             // movement, but this is to update the player's client that the player
@@ -839,30 +844,6 @@ function play(delta) {
     }
 }
 
-/**
- * canWalk
- * Walking is handled client side to give the user a better gameplay experience.
- * To test whether a player can move to a tile on the map, check the x,y coordinate
- * on the map passed to the client from the server. So far, blank tiles and '#' are
- * they only tiles that block movement
- * @param x The X value of the tile to be checked
- * @param y The Y value of the tile to be checked
- * @returns a boolean that is true for walkable tiles, false for walls
- */
-function canWalk(x, y) {
-    if (x > mapWidth || y > mapHeight || x < 0 || y < 0) {
-        return false;
-    }
-
-    var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
-    if (nonWalkableTiles.includes(level.map.asciiTiles[x + ',' + y])) {
-        return false;
-    }
-    console.log(level.map.asciiTiles[x + ',' + y]);
-    return true;
-    
-}
-
 /******************* BLOCK 6 - Graphics Helper Functions *******************/
 
 /**
@@ -878,7 +859,7 @@ function canWalk(x, y) {
 function placeTile(tileName, x, y, appContainer) {
     var tile = null;
     if (tileName !== ' ') {
-        tile = new Sprite(mapTiles[tileName]);
+        tile = new Sprite(gameTextures[tileName]);
     }
     if (tile) {
         tile.position.set(x, y);
@@ -889,6 +870,19 @@ function placeTile(tileName, x, y, appContainer) {
             gameTiles.addChild(tile);
         }
     }
+    return tile;
+}
+
+function placeMapTile(tileName, x, y, appContainer = gameTiles) {
+    var tile = null;
+    if (tileName !== ' ') {
+        tile = new Sprite(mapTextures[tileName]);
+    }
+    if (tile) {
+        tile.position.set(x, y);
+        tile.alpha = 1;
+        appContainer.addChild(tile);
+    }     
     return tile;
 }
 
@@ -1028,13 +1022,13 @@ function drawText2X(str, start_x, start_y, color, appContainer) {
 function updateEnemySprites(enemyData) {
     for (let i = 0; i < enemyData.length; i++) {
         currentEnemy = enemyData[i];
-        if (enemySprites[i].texture != mapTiles['corpse']) {
+        if (enemySprites[i].texture != gameTextures['corpse']) {
                 enemySprites[i].position.set(currentEnemy.x * tileSize, currentEnemy.y * tileSize);
                 // Enemy becomes more red as it becomes damaged.
                 enemySprites[i].tint = 0xFFFFFF - ((1 - (currentEnemy.health / currentEnemy.maxHealth)) * 0x00FFFF);
             if (currentEnemy.health <= 0) {
                 enemySprites[i].tint = 0xFFFFFF;
-                enemySprites[i].texture = mapTiles['corpse'];
+                enemySprites[i].texture = gameTextures['corpse'];
             }
             var map_tile = mapSprites[currentEnemy.x+','+currentEnemy.y];
             if (map_tile.tint == 0xFFFFFF && map_tile.alpha == 1) {
@@ -1642,4 +1636,15 @@ function directionPressed(direction) {
                 break;
         }
     }
+}
+
+function canWalk(x, y) {
+    if (x > this.width || y > this.height || x < 0 || y < 0) {
+        return false;
+    }
+    var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+    if (nonWalkableTiles.includes(level.map.asciiTiles[x + ',' + y])) {
+        return false;
+    }
+    return true;
 }
