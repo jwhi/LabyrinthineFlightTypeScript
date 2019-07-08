@@ -392,11 +392,11 @@ function setup() {
         player.vy = 0;
 
         if (level.levelNumber == 0) {
-            var townTexture = resources['town'].texture;
-            townSprite = new Sprite(townTexture);
-            townSprite.position.set(0, 0);
-            townSprite.alpha = 1;
-            gameTiles.addChild(townSprite);
+            //var townTexture = resources['town'].texture;
+            //townSprite = new Sprite(townTexture);
+            //townSprite.position.set(0, 0);
+            //townSprite.alpha = 1;
+            //gameTiles.addChild(townSprite);
         }
         
         // Tile names are determined by the server since the function required function calls that could only be done by the server.

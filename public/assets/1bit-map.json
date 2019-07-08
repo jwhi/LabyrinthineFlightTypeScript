@@ -128,7 +128,7 @@
         "h": 32
       }
     },
-    "wall_7_blank": {
+    "wall_7": {
       "frame": {
         "x": 205,
         "y": 1,
@@ -148,7 +148,7 @@
         "h": 32
       }
     },
-    "wall_8_blank": {
+    "wall_8": {
       "frame": {
         "x": 239,
         "y": 1,
@@ -168,7 +168,7 @@
         "h": 32
       }
     },
-    "wall_9_blank": {
+    "wall_9": {
       "frame": {
         "x": 273,
         "y": 1,
@@ -188,7 +188,7 @@
         "h": 32
       }
     },
-    "wall_10_blank": {
+    "wall_10": {
       "frame": {
         "x": 307,
         "y": 1,
@@ -208,7 +208,7 @@
         "h": 32
       }
     },
-    "wall_11_blank": {
+    "wall_11": {
       "frame": {
         "x": 341,
         "y": 1,
@@ -228,7 +228,7 @@
         "h": 32
       }
     },
-    "wall_12_blank": {
+    "wall_12": {
       "frame": {
         "x": 375,
         "y": 1,
@@ -1349,7 +1349,7 @@
         "h": 32
       }
     },
-    "path_12_empty": {
+    "stone_floor_corner_NW": {
       "frame": {
         "x": 375,
         "y": 137,
@@ -1369,7 +1369,7 @@
         "h": 32
       }
     },
-    "path_13_empty": {
+    "stone_floor_corner_NE": {
       "frame": {
         "x": 409,
         "y": 137,
@@ -1449,7 +1449,7 @@
         "h": 32
       }
     },
-    "floor_extra_3": {
+    "gravel_floor_1": {
       "frame": {
         "x": 69,
         "y": 171,
@@ -1469,7 +1469,7 @@
         "h": 32
       }
     },
-    "floor_extra_4": {
+    "gravel_corner_NW": {
       "frame": {
         "x": 103,
         "y": 171,
@@ -1489,7 +1489,7 @@
         "h": 32
       }
     },
-    "floor_extra_5": {
+    "gravel_corner_NE": {
       "frame": {
         "x": 137,
         "y": 171,
@@ -1509,7 +1509,7 @@
         "h": 32
       }
     },
-    "floor_extra_6": {
+    "gravel_corner_SW": {
       "frame": {
         "x": 171,
         "y": 171,
@@ -1529,7 +1529,7 @@
         "h": 32
       }
     },
-    "floor_extra_7": {
+    "gravel_corner_SE": {
       "frame": {
         "x": 205,
         "y": 171,
@@ -1549,7 +1549,7 @@
         "h": 32
       }
     },
-    "floor_extra_8": {
+    "gravel_border_N": {
       "frame": {
         "x": 239,
         "y": 171,
@@ -1569,7 +1569,7 @@
         "h": 32
       }
     },
-    "floor_extra_9": {
+    "gravel_border_W": {
       "frame": {
         "x": 273,
         "y": 171,
@@ -1589,7 +1589,7 @@
         "h": 32
       }
     },
-    "floor_extra_10": {
+    "gravel_border_E": {
       "frame": {
         "x": 307,
         "y": 171,
@@ -1609,7 +1609,7 @@
         "h": 32
       }
     },
-    "floor_extra_11": {
+    "gravel_border_S": {
       "frame": {
         "x": 341,
         "y": 171,
@@ -1629,7 +1629,7 @@
         "h": 32
       }
     },
-    "floor_extra_12": {
+    "stone_floor_corner_SW": {
       "frame": {
         "x": 375,
         "y": 171,
@@ -1649,7 +1649,7 @@
         "h": 32
       }
     },
-    "floor_extra_13": {
+    "stone_floor_corner_SE": {
       "frame": {
         "x": 409,
         "y": 171,
@@ -1890,7 +1890,7 @@
         "h": 32
       }
     },
-    "nature_6_empty": {
+    "grass_1": {
       "frame": {
         "x": 341,
         "y": 205,
@@ -1910,7 +1910,7 @@
         "h": 32
       }
     },
-    "nature_7_empty": {
+    "grass_2": {
       "frame": {
         "x": 375,
         "y": 205,
@@ -1930,7 +1930,7 @@
         "h": 32
       }
     },
-    "nature_8_empty": {
+    "grass_3": {
       "frame": {
         "x": 409,
         "y": 205,
@@ -2131,7 +2131,7 @@
         "h": 32
       }
     },
-    "nature_10_empty": {
+    "ruins_1": {
       "frame": {
         "x": 273,
         "y": 239,
@@ -2151,7 +2151,7 @@
         "h": 32
       }
     },
-    "nature_11_empty": {
+    "ruins_2": {
       "frame": {
         "x": 307,
         "y": 239,
@@ -2191,7 +2191,7 @@
         "h": 32
       }
     },
-    "nature_13_empty": {
+    "nature_13_water": {
       "frame": {
         "x": 375,
         "y": 239,
@@ -2211,7 +2211,7 @@
         "h": 32
       }
     },
-    "nature_14_empty": {
+    "nature_14_water": {
       "frame": {
         "x": 409,
         "y": 239,
@@ -2231,7 +2231,7 @@
         "h": 32
       }
     },
-    "nature_15_empty": {
+    "nature_15_water": {
       "frame": {
         "x": 443,
         "y": 239,
@@ -2291,7 +2291,7 @@
         "h": 32
       }
     },
-    "water_border_NW": {
+    "water_border_N": {
       "frame": {
         "x": 69,
         "y": 273,
@@ -2311,7 +2311,7 @@
         "h": 32
       }
     },
-    "water_corner_NW": {
+    "water_border_E": {
       "frame": {
         "x": 103,
         "y": 273,
@@ -2331,7 +2331,7 @@
         "h": 32
       }
     },
-    "river_NS": {
+    "water_border_S": {
       "frame": {
         "x": 137,
         "y": 273,
@@ -2351,7 +2351,7 @@
         "h": 32
       }
     },
-    "river_SE": {
+    "water_border_NW": {
       "frame": {
         "x": 171,
         "y": 273,
@@ -2371,7 +2371,7 @@
         "h": 32
       }
     },
-    "river_NSE": {
+    "water_border_NE": {
       "frame": {
         "x": 205,
         "y": 273,
@@ -2392,7 +2392,7 @@
       }
 
     },
-    "river_NSEW": {
+    "water_border_SE": {
       "frame": {
         "x": 239,
         "y": 273,
@@ -2412,7 +2412,7 @@
         "h": 32
       }
     },
-    "water_1_empty": {
+    "water_border_SW": {
       "frame": {
         "x": 273,
         "y": 273,
@@ -2432,7 +2432,7 @@
         "h": 32
       }
     },
-    "water_2_empty": {
+    "water_corner_NW": {
       "frame": {
         "x": 307,
         "y": 273,
@@ -2452,7 +2452,7 @@
         "h": 32
       }
     },
-    "water_3_empty": {
+    "water_corner_NE": {
       "frame": {
         "x": 341,
         "y": 273,
@@ -2472,7 +2472,7 @@
         "h": 32
       }
     },
-    "water_4_empty": {
+    "water_corner_SE": {
       "frame": {
         "x": 375,
         "y": 273,
@@ -2492,7 +2492,7 @@
         "h": 32
       }
     },
-    "water_5_empty": {
+    "water_corner_SW": {
       "frame": {
         "x": 409,
         "y": 273,
@@ -2512,7 +2512,7 @@
         "h": 32
       }
     },
-    "water_6_empty": {
+    "river_NS": {
       "frame": {
         "x": 443,
         "y": 273,
@@ -3921,6 +3921,106 @@
       "frame": {
         "x": 443,
         "y": 443,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "web": {
+      "frame": {
+        "x": 1,
+        "y": 477,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "ruins_corner_NW": {
+      "frame": {
+        "x": 35,
+        "y": 477,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "ruins_corner_NE": {
+      "frame": {
+        "x": 69,
+        "y": 477,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "ruins_corner_SE": {
+      "frame": {
+        "x": 103,
+        "y": 477,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "ruins_corner_SW": {
+      "frame": {
+        "x": 137,
+        "y": 477,
         "w": 32,
         "h": 32
       },
