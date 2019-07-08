@@ -333,7 +333,7 @@ var state = null;
 // patched in on the go and haven't had the chance to merge it into the spritesheet.
 var mapTiles;
 
-var characterSprite;
+var characterSprites;
 
 var characterTiles = {};
 
@@ -392,8 +392,9 @@ loader.add('level', 'assets/level_creatures.json')
     .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
     .load(setup);
 */
+//.add('characters', 'assets/df-font.json')
 loader.add('level', 'assets/1bit2x-expanded.json')
-    .add('characters', 'assets/df-font.json')
+    .add('characters', 'assets/1bit-map.json')
     .add(['assets/blue_font.json'])
     .add('town', 'assets/starting-town2x-transparent.png')
     .load(setup);
@@ -416,13 +417,27 @@ function setup() {
     /******************* BLOCK 2 - Setting up tile selection and map maker *******************/
     characterSprites = resources['characters'].textures;
 
-
+    /*
+    // For creating the ascii map
     for (var y = 0; y < 16; y++) {
         for (var x = 0; x < 16; x++) {
             var spriteID = (y*16) + x;
             characterTiles[spriteID] = placeTile(characterSprites, spriteID, x * tileSize, y * tileSize, infoTiles);
         }
     }
+    */
+
+    // For creating the sprite names.
+    var x = 0;
+    var y = 0;
+    Object.keys(characterSprites).forEach(key => {
+        characterTiles[key] = placeTile(characterSprites, key, x * tileSize, y * tileSize, infoTiles);
+        x += 1;
+        if (x >= 14) {
+            y += 1;
+            x = 0;
+        }
+    })
 
     infoTiles.children.forEach(c =>{
         c.buttonMode = true;
@@ -434,8 +449,8 @@ function setup() {
     });
 
     drawText("Load", 25*tileSize, 9*tileSize, "blue", infoTiles);
-    drawInvisibleButton(25*tileSize, 9*tileSize, 4*fontSize, fontHeight, infoTiles, function() {
-        asciiMapTiles = new PIXI.Container();
+    drawInvisibleButton(25 * tileSize, 9 * tileSize, 4 * fontSize, fontHeight, infoTiles, function () {
+        asciiSpriteMapTiles = new PIXI.Container();
         createdAsciiMap = getLocalStorageSave();
         for (var y = 0; y < mapHeight; y++) {
             for (var x = 0; x < mapWidth; x++) {
@@ -447,7 +462,7 @@ function setup() {
                 }
             }
         }
-        asciiMapTiles.children.forEach(c =>{
+        asciiSpriteMapTiles.children.forEach(c => {
             c.buttonMode = true;
             c.interactive = true;
             c.on('mousedown', function() {
@@ -455,12 +470,14 @@ function setup() {
                 this.texture = x.texture;
                 c.position.set(this.x, this.y)
                 asciiSpriteMapTiles[this.x/tileSize+","+this.y/tileSize] = c;
-                createdAsciiMap[this.x/tileSize+","+this.y/tileSize] = asciiCharacters[selectedCharacterTileName];
+                // createdAsciiMap[this.x/tileSize+","+this.y/tileSize] = asciiCharacters[selectedCharacterTileName];
+                console.log(selectedCharacterTileName);
+                createdAsciiMap[this.x / tileSize + "," + this.y / tileSize] = selectedCharacterTileName;
                 renderer.render(app.stage);
             });
         });
         app.stage.removeChildAt(1);
-        app.stage.addChild(asciiMapTiles);
+        app.stage.addChild(asciiSpriteMapTiles);
         renderer.render(app.stage);
         console.log("Load successful.")
         
@@ -491,18 +508,18 @@ function setup() {
     townSprite = new Sprite(townTexture);
 
     townSprite.position.set(0, 0);
-    townSprite.alpha = 1;
+    townSprite.alpha = 0.3;
     
     gameTiles.addChild(townSprite);
 
 
     for (var y = 0; y < mapHeight; y++) {
         for (var x = 0; x < mapWidth; x++) {
-            asciiSpriteMapTiles[x+","+y] = placeTile(characterSprites, '0', x*tileSize, y*tileSize, asciiMapTiles)
+            asciiSpriteMapTiles[x+","+y] = placeTile(characterSprites, 'empty', x*tileSize, y*tileSize, asciiMapTiles)
         }
     }
-    
-    asciiMapTiles.children.forEach(c =>{
+
+    asciiMapTiles.children.forEach(c => {
         c.buttonMode = true;
         c.interactive = true;
         c.on('mousedown', function() {
@@ -510,11 +527,12 @@ function setup() {
             this.texture = x.texture;
             c.position.set(this.x, this.y)
             asciiSpriteMapTiles[this.x/tileSize+","+this.y/tileSize] = c;
-            createdAsciiMap[this.x/tileSize+","+this.y/tileSize] = asciiCharacters[selectedCharacterTileName];
+            // createdAsciiMap[this.x / tileSize + "," + this.y / tileSize] = asciiCharacters[selectedCharacterTileName];
+            createdAsciiMap[this.x / tileSize + "," + this.y / tileSize] = selectedCharacterTileName;
             renderer.render(app.stage);
         });
     });
-    gameTiles.addChild(asciiMapTiles);
+    //gameTiles.addChild(asciiMapTiles);
     app.stage.addChild(gameTiles);
     app.stage.addChild(asciiMapTiles);
 

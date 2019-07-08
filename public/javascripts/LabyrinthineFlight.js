@@ -52,7 +52,7 @@ class Player {
 }
 
 class Map {
-    constructor() {
+    constructor(mapData) {
         /**
          * Contains:
          * 1. Player X,Y
@@ -63,24 +63,11 @@ class Map {
          * 6. NPCs (including enemies)
          * 7. Interactables (signs, books)
          */
+        this.asciiTiles = mapData.asciiTiles;
+        this.spriteNames = mapData.spriteNames;
     }
 
-    /**
-     * canWalk
-     * Walking is handled client side to give the user a better gameplay experience.
-     * To test whether a player can move to a tile on the map, check the x,y coordinate
-     * on the map passed to the client from the server. So far, blank tiles and '#' are
-     * they only tiles that block movement
-     * @param {number} x The X value of the tile to be checked
-     * @param {number} y The Y value of the tile to be checked
-     * @returns a boolean that is true for walkable tiles, false for walls
-     */
-    canWalk(x, y) {
-        // If x,y is off the map, return false
-        // If map tile is not walkable, return false
-        // If tile is occupied, return false
-        // Else return true
-    }
+    
 }
 
 class Interactable {

@@ -51,7 +51,7 @@ let infoTiles = new PIXI.Container();
 
 // Stores the PIXI loader for all the map textures, initiated in setup function.
 let mapTextures;
-
+let gameTextures;
 
 /* Graphic Renderers */
 
@@ -97,6 +97,8 @@ let gameInfoApp = new Application({
 // This currently causes a large number of the warning "pixi.min.js:8 Texture added to the cache with an id 'text-id' that already had an entry"
 // This is caused by me using the same texture names in the JSON font files.
 loader.add('kenney-1bit', 'assets/1bit2x-expanded.json')
+      .add('map', 'assets/1bit-map.json')
+      .add('town', 'assets/starting-town.png')
       .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
       .load(setup);
 
