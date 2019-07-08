@@ -351,10 +351,6 @@ function setup() {
         space.press = () => {
             useStairs();
         }
-
-        esc.press = () => {
-            toggleMenu();
-        }
     }
 
 
@@ -413,11 +409,11 @@ function setup() {
 
             
         }
-        /*
+        
         if (level.fov) {
             updateMapFOV(level.fov);
         }
-        */
+        
         if (level.enemies) {
             for (let i = 0; i < level.enemies.length; i++) {
                 currentEnemy = level.enemies[i];
@@ -496,11 +492,11 @@ function setup() {
             player.vx = 0;
             player.vy = 0;    
         }
-        /*
+        
         if (worldTurnData.fov) {
             updateMapFOV(worldTurnData.fov);
         }
-        */
+        
         if (worldTurnData.enemies && level) {
             level.enemies = worldTurnData.enemies
             updateEnemySprites(level.enemies)
@@ -1049,8 +1045,9 @@ function updateMapFOV(alphaValues) {
         0.4: 0x333333
     }
     Object.keys(alphaValues).forEach(key => {
+        (alphaValues[key] != 0) ? console.log(`${key}: ${alphaValues[key]}`) : { }; 
         // Key is in the format "x,y". e.g. "20,5"
-        var t = mapSprites[key]
+        var t = mapSprites[key];
         if (t) {
             // TODO: Instead of setting the sprites alpha, set the sprites tint.
             // This will improve visual effect of items and enemy's remains on explored tiles
@@ -1348,6 +1345,7 @@ function onButtonUp() {
  * @param keyPressed The key on the keyboard the use pressed. Null when use presses the button.
  */
 function useStairs(keyPressed) {
+    /*
     // TODO: prevent player from moving after request for new floor is send. Maybe switch
     // to a loading screen until new floor arrives.
         console.log('stairs');
@@ -1366,6 +1364,7 @@ function useStairs(keyPressed) {
             socket.emit('request', 'floor up');    
         }
     }
+    */
 }
 
 /**

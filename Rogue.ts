@@ -14,9 +14,13 @@ const WALL_TILES = ['#', '&', '%'];
 // `: Cave floor
 const FLOOR_TILES = ['.', ',', '`'];
 
-// +: Closed door
-// -: Open door
-const OTHER_WALKABLE_TILES = ['+', '-'];
+const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻'];
+
+const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+
+const TILES_WALKABLE_BLOCKS_LIGHT = ['+','⌠'];
+
+const TILES_WALKABLE_LIGHT_PASSES = [' ','.',',','`','"','-','<','>','Θ','╥','~','╣','╠','⌡','ⁿ','░'];
 
 var sg = new ROT.StringGenerator(null);
 
@@ -318,7 +322,7 @@ class Floor {
     }
 
     updateFOV(pX, pY) {
-        var localMap = this.map;
+        var localMap = this.map.asciiTiles;
         var localMapExplored = this.mapExplored;
 
 
@@ -330,8 +334,9 @@ class Floor {
         // Player's field-of-view light input callback
         var lightPasses = function (x, y) {
             var key = x + "," + y;
-            if (key in localMap) { return ((localMap[key] == ".") || (localMap[key] == ",") || localMap[key] == "-" || localMap[key] == "<" || localMap[key] == ">" || localMap[key] == "`"); }
-            return false;
+            if (key in localMap) { return (TILES_NONWALKABLE_LIGHT_PASSES.includes(localMap[key]) || TILES_WALKABLE_LIGHT_PASSES.includes(localMap[key])) }
+            // If the tile is undefined, return true.
+            return true;
         }
 
         var fov = new ROT.FOV.PreciseShadowcasting(lightPasses);
@@ -400,8 +405,10 @@ class Floor {
     setPlayerPosition(x, y) {
         this.playerX = x;
         this.playerY = y;
-        if (this.map[x + ',' + y] === '+') {
-            this.map[x + ',' + y] = '-';
+        if (this.map.asciiTiles[x + ',' + y] === '+') {
+            this.map.asciiTiles[x + ',' + y] = '-';
+        } else if (this.map.asciiTiles[x + ',' + y] === '╣') {
+            this.map.asciiTiles[x + ',' + y] = '╠';
         }
     }
     getExploredMap() {

@@ -97,6 +97,7 @@ io.on('connection', function (socket) {
         // TODO: Player's turn will consist of player's position, items used, enemy attacked, any object interactions on the map (trap, books, etc.)
         // TODO: World turn will calculate and send any buffs to the player that continue next player turn, enemy damage/attacks/movement, world updates that happen in response to player or enemy (enemies opening doors, setting off traps, secret passages opening), and the new FOV for the player
         if (dungeon) {
+            
             var updatedMapTiles = {};
             if (playerTurnData.x && playerTurnData.y) {
                 /* CALCULATING PLAYER'S TURN */
