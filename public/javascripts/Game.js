@@ -1045,7 +1045,6 @@ function updateMapFOV(alphaValues) {
         0.4: 0x333333
     }
     Object.keys(alphaValues).forEach(key => {
-        (alphaValues[key] != 0) ? console.log(`${key}: ${alphaValues[key]}`) : { }; 
         // Key is in the format "x,y". e.g. "20,5"
         var t = mapSprites[key];
         if (t) {

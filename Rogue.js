@@ -171,7 +171,9 @@ class Floor {
         this.height = height;
         this.levelNumber = levelNumber;
         if (this.levelNumber == 0) {
-            this.map = new Map(startingTown_json_1.default);
+            // TownData will get updated by players, so doors will be opened by previous players...
+            // This parse(stringify(TownData)) creates a fresh copy of the original town data for all players.
+            this.map = new Map(JSON.parse(JSON.stringify(startingTown_json_1.default)));
             this.playerX = 32;
             this.playerY = 31;
             return;

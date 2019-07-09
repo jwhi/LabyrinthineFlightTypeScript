@@ -135,8 +135,8 @@ io.on('connection', function (socket) {
                             element.y = playerTurnData.y;
                             element.health = 0;
                         }
-                        if (dungeon.getCurrentFloor().map[element.x + ',' + element.y] == '+') {
-                            dungeon.getCurrentFloor().map[element.x + ',' + element.y] = '-';
+                        if (dungeon.getCurrentFloor().map.asciiTiles[element.x + ',' + element.y] == '+') {
+                            dungeon.getCurrentFloor().map.asciiTiles[element.x + ',' + element.y] = '-';
                             updatedMapTiles[element.x + ',' + element.y] = '-';
                         }
                     }
@@ -159,6 +159,7 @@ io.on('connection', function (socket) {
         }
     });
 });
+process.stdout.write(String.fromCharCode(27) + "]0;" + "Labyrinthine Flight Server" + String.fromCharCode(7));
 server.listen(PORT, function () {
     console.log('Listening on port ' + PORT + '.');
 });
