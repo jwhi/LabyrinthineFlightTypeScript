@@ -11,6 +11,7 @@
 
 class LabyrinthineFlight {
     constructor(mapInfomation, playerInformation, enemyInformation) {
+        this.player = new Player(playerInformation);
         this.width = 75;
         this.height = 40;
         this.map = map;
@@ -31,15 +32,55 @@ class LabyrinthineFlight {
             return false;
         }
         var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
-        if (nonWalkableTiles.includes(this.map.asciiTiles[x + ',' + y])) {
+        if (nonWalkableTiles.includes(this.getAsciiTile(x, y))) {
             return false;
         }
         return true;
     }
+
+    movePlayer(x, y) {
+        this.player.setLocation(x, y);
+
+        if (this.getAsciiTile(x, y) === '+') {
+            this.setAsciiTile(x, y, '-');
+            this.setSpriteName(x, y, 'door_open');
+        } else if (this.getAsciiTile(x, y) === '╣') {
+            this.setAsciiTile(x, y, '╠');
+            this.setSpriteName(x, y, 'metal_gate_open');
+        }
+    }
+
+    getAsciiTile(x, y) {
+        return this.map.asciiTiles[x + ',' + y];
+    }
+
+    setAsciiTile(x, y, character) {
+        this.map.asciiTiles[x + ',' + y] = character;
+    }
+
+    getSpriteName(x, y) {
+        return this.map.spriteNames[x + ',' + y];
+    }
+
+    setSpriteName(x, y, spriteName) {
+        this.map.spriteNames[x + ',' + y] = spriteName;
+    }
 }
 
-class Player {
-    constructor() {
+class Entity {
+    constructer(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    setLocation(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Player extends Entity {
+    constructor(playerInfo) {
         /**
          * Contains:
          * 1. Name
@@ -48,6 +89,7 @@ class Player {
          * 4. Backstory
          * 5. Inventory
          */
+        super(playerInfo.x, playerInfo.y);
     }
 }
 

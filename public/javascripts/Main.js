@@ -98,7 +98,6 @@ let gameInfoApp = new Application({
 // This is caused by me using the same texture names in the JSON font files.
 loader.add('kenney-1bit', 'assets/1bit2x-expanded.json')
       .add('map', 'assets/1bit-map.json')
-      .add('town', 'assets/starting-town.png')
       .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
       .load(setup);
 
