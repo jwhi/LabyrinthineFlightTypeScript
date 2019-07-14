@@ -163,6 +163,7 @@
       }
     }
   },
+  "fov": {},
   "tiles": {
     "_comment": {
       "ascii": "These values are used to detect walkable tiles, player's field-of-vision, and more. Key is (x,y) coordinates on the map starting at top-left. Ideally the game is playable without graphics and only using these characters for graphics.",

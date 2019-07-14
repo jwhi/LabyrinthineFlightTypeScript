@@ -414,8 +414,8 @@ function socketFunctionSetup() {
 
         }
 
-        if (level.fov) {
-            updateMapFOV(level.fov);
+        if (level.map.fov) {
+            updateMapFOV(level.map.fov);
         }
 
         if (level.enemies) {
@@ -1647,7 +1647,7 @@ function canWalk(x, y) {
     if (x > this.width || y > this.height || x < 0 || y < 0) {
         return false;
     }
-    var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+    var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧', '╦', 'Ω'];
     if (nonWalkableTiles.includes(getAscii(x, y))) {
         return false;
     }

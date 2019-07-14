@@ -180,7 +180,18 @@ function setup() {
         clearApplication(gameApp);
         clearApplication(gameInfoApp);
 
-        /* Save game data to LabyrinthineFlight object */
+    /* Save game data to LabyrinthineFlight object */
+        // Info included in gameData
+        /*
+         *
+            map: exactly what is in townData json.
+            enemies: null for town implementation phase
+            playerX
+            playerY
+            tileData: not needed anymore since this is included in map.
+            fov:
+            player = {name, title, health, attack}
+        */
         labyrinthineFlight = new LabyrinthineFlight(gameData.map, gameData.player);
         
         /*

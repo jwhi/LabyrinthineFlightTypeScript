@@ -82,6 +82,9 @@
     <Folder Include="public\javascripts\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="public\javascripts\LabyrinthineFlight.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Rogue.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -102,13 +102,10 @@ class Dungeon {
     getFloorDataForClient({ includePlayerInfo = false } = {}) {
         var floor = this.getCurrentFloor();
         var returnObject = {
-            map: floor.map,
-            levelNumber: this.floorNumber,
+            map: this.getClientMapData(),
             enemies: floor.enemies,
             playerX: floor.playerX,
             playerY: floor.playerY,
-            tileData: floor.generateTileData(),
-            fov: this.mapAlphaValues(floor.playerX, floor.playerY),
             player: null
         };
         if (includePlayerInfo) {
@@ -160,6 +157,12 @@ class Dungeon {
     getMap() {
         this.getCurrentFloor().getMap();
     }
+    getClientMapData() {
+        return {
+            tiles: this.getCurrentFloor().getMap().tiles,
+            fov: this.mapAlphaValues(),
+        };
+    }
 }
 exports.Dungeon = Dungeon;
 class Floor {
@@ -173,7 +176,8 @@ class Floor {
         if (this.levelNumber == 0) {
             // TownData will get updated by players, so doors will be opened by previous players...
             // This parse(stringify(TownData)) creates a fresh copy of the original town data for all players.
-            this.map = new Map(JSON.parse(JSON.stringify(startingTown_json_1.default)));
+            var mapData = JSON.parse(JSON.stringify(startingTown_json_1.default));
+            this.map = new Map(mapData);
             this.playerX = 32;
             this.playerY = 31;
             return;
