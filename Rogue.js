@@ -16,7 +16,7 @@ const WALL_TILES = ['#', '&', '%'];
 // `: Cave floor
 const FLOOR_TILES = ['.', ',', '`'];
 const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻'];
-const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧', '╦', 'Ω'];
 const TILES_WALKABLE_BLOCKS_LIGHT = ['+', '⌠'];
 const TILES_WALKABLE_LIGHT_PASSES = [' ', '.', ',', '`', '"', '-', '<', '>', 'Θ', '╥', '~', '╣', '╠', '⌡', 'ⁿ', '░'];
 var sg = new ROT.StringGenerator(null);
@@ -291,7 +291,7 @@ class Floor {
         }, null);
     }
     updateFOV(pX, pY) {
-        var localMap = this.map.asciiTiles;
+        var localMap = this.map.getAsciiTiles();
         var localMapExplored = this.mapExplored;
         var previousMapExplored = {};
         Object.keys(this.mapExplored).forEach(key => {
@@ -370,11 +370,14 @@ class Floor {
     setPlayerPosition(x, y) {
         this.playerX = x;
         this.playerY = y;
-        if (this.map.asciiTiles[x + ',' + y] === '+') {
-            this.map.asciiTiles[x + ',' + y] = '-';
-        }
-        else if (this.map.asciiTiles[x + ',' + y] === '╣') {
-            this.map.asciiTiles[x + ',' + y] = '╠';
+        if (this.map.getTile(x, y)) {
+            if (this.map.getTile(x, y).ascii === '+') {
+                this.map.setTileAscii(x, y, '-');
+                ;
+            }
+            else if (this.map.getTile(x, y).ascii === '╣') {
+                this.map.setTileAscii(x, y, '╠');
+            }
         }
     }
     getExploredMap() {
@@ -802,11 +805,39 @@ class Enemy {
 exports.Enemy = Enemy;
 class Map {
     constructor(townData) {
-        if (townData.hasOwnProperty("asciiTiles")) {
-            this.asciiTiles = townData.asciiTiles;
+        this.tiles = {};
+        var tilesData = {};
+        if (townData.hasOwnProperty("tiles")) {
+            tilesData = townData.tiles;
         }
-        if (townData.hasOwnProperty("spriteNames")) {
-            this.spriteNames = townData.spriteNames;
+        Object.keys(tilesData).forEach(tileLocation => {
+            tilesData[tileLocation] = new Tile(tilesData[tileLocation]);
+        });
+        this.tiles = tilesData;
+    }
+    getAsciiTiles() {
+        var asciiTiles = {};
+        Object.keys(this.tiles).forEach(tileLocation => {
+            if (this.tiles[tileLocation].ascii) {
+                asciiTiles[tileLocation] = this.tiles[tileLocation].ascii;
+            }
+        });
+        return asciiTiles;
+    }
+    getTile(x, y) {
+        return this.tiles[x + ',' + y];
+    }
+    setTileAscii(x, y, value) {
+        this.tiles[x + ',' + y] = value;
+    }
+}
+class Tile {
+    constructor(tileData) {
+        if (tileData.ascii) {
+            this.ascii = tileData.ascii;
+        }
+        if (tileData.sprite) {
+            this.sprite = tileData.sprite;
         }
     }
 }

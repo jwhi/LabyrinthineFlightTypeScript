@@ -352,26 +352,30 @@ function setup() {
             useStairs();
         }
     }
+    socketFunctionSetup();
+    startGameSetup();
+}
 
+function socketFunctionSetup() {
 
     /******************* BLOCK 2 - Socket.IO Data Received Functions *******************/
 
     socket = io();
     // Sockets handled by Socket.io
     // When the page receives these packets, update the webpage as needed
-    socket.on('debug', function(message) {
+    socket.on('debug', function (message) {
         console.log(message);
     });
     // TODO: dungeon and worldTurn should be cleaner. Initializing the game is so messy.
     // The dungeon object received from the server. Defined in the server's Rogue.js file
     // Dungeons are only received at the start of games and when player travels up or down a staircase.
     // Prints the maps layout to debug console for testing. Calls updateMap to to prepare drawing the map tiles.
-    socket.on('dungeon', function(dungeonFloor) {
+    socket.on('dungeon', function (dungeonFloor) {
         level = dungeonFloor;
         var str = '';
         for (var y = 0; y < mapHeight; y++) {
             for (var x = 0; x < mapWidth; x++) {
-                str += (level.map.asciiTiles[x + ',' + y]) ? (level.map.asciiTiles[x + ',' + y]) : ' ';
+                str += (getAscii(x, y)) ? getAscii(x, y) : ' ';
             }
             str += '\n';
         }
@@ -383,7 +387,7 @@ function setup() {
         clearApp();
         player = new Sprite(gameTextures['player']);
         player.position.set(tileSize * level.playerX,
-                            tileSize * level.playerY);
+            tileSize * level.playerY);
         player.vx = 0;
         player.vy = 0;
 
@@ -394,26 +398,26 @@ function setup() {
             //townSprite.alpha = 1;
             //gameTiles.addChild(townSprite);
         }
-        
+
         // Tile names are determined by the server since the function required function calls that could only be done by the server.
         // Received whenever the player starts a new game or uses stairs. Draw tiles once received and set the state to play after
         // all tiles are drawn to allow the user to start moving the player.
         // TODO: Reduce memory of tiles. Find a way to have sprites as clones as each other instead of each an individual instance
-        if (level.map.spriteNames) {
-            Object.keys(level.map.spriteNames).forEach(key => {
+        if (level.map.tiles) {
+            Object.keys(level.map.tiles).forEach(key => {
                 var x, y;
                 [x, y] = key.split(',');
-                var tileSprite = placeMapTile(level.map.spriteNames[key], x * tileSize, y * tileSize);
+                var tileSprite = placeMapTile(getSprite(x,y), x * tileSize, y * tileSize);
                 mapSprites[key] = tileSprite;
             });
 
-            
+
         }
-        
+
         if (level.fov) {
             updateMapFOV(level.fov);
         }
-        
+
         if (level.enemies) {
             for (let i = 0; i < level.enemies.length; i++) {
                 currentEnemy = level.enemies[i];
@@ -424,7 +428,7 @@ function setup() {
                 }
             }
             updateEnemySprites(level.enemies);
-        }   
+        }
 
         gameTiles.addChild(player);
         app.stage.addChild(gameTiles);
@@ -469,16 +473,16 @@ function setup() {
 
         renderer.render(app.stage);
     });
-    
+
     // Server handles are the FOV calculation. Received after every time a player makes a successful movement on the map.
     // Server lag will lead the FOV not following the player and trailing behind.
-    socket.on('worldTurn', function(worldTurnData) {
+    socket.on('worldTurn', function (worldTurnData) {
         // Set the player's location to what the world has set
         // HACK: If enemy is not on the screen, don't snap player to the position last received by the server.
         // This will prevent player rubber banding when the enemy is off screen or defeated.
         var enemyCloseToPlayer = false;
         for (var i = 0; i < level.enemies.length; i++) {
-            var playerLocation = {x: getPlayerX(), y: getPlayerY()};
+            var playerLocation = { x: getPlayerX(), y: getPlayerY() };
             var enemyLocation = { x: level.enemies[i].x, y: level.enemies[i].y };
             var playerDistanceFromEnemy = Math.ceil(Math.sqrt(Math.pow(playerLocation.x - enemyLocation.x, 2) + Math.pow(playerLocation.y - enemyLocation.y, 2)))
             if (playerDistanceFromEnemy < 6 && level.enemies[i].health > 0) {
@@ -490,13 +494,13 @@ function setup() {
             player.position.set(tileSize * worldTurnData.player.x,
                 tileSize * worldTurnData.player.y);
             player.vx = 0;
-            player.vy = 0;    
+            player.vy = 0;
         }
-        
+
         if (worldTurnData.fov) {
             updateMapFOV(worldTurnData.fov);
         }
-        
+
         if (worldTurnData.enemies && level) {
             level.enemies = worldTurnData.enemies
             updateEnemySprites(level.enemies)
@@ -519,7 +523,7 @@ function setup() {
     // data to allow them to keep playing. Displays an error screen if there is an issue if the server can't recover. If the server can recover,
     // the user will snap to the location last saved on the server, but then will be able to continue as normal for the most part. Loading the game
     // causes all previous floors to lose their map data so exploration will be reset and doors will be closed.
-    socket.on('missing', function(err) {
+    socket.on('missing', function (err) {
         if (err === 'no dungeon') {
             if (uuid) {
                 socket.emit('load game', uuid);
@@ -533,12 +537,14 @@ function setup() {
             state = error;
         }
     });
-    
+}
+
+function startGameSetup() {
     /******************* BLOCK 3 - Initialize Game Loop and Add Game Elements to Page *******************/
     // Start the game loop by adding the `gameLoop` function to
     // Pixi's `ticker` and providing it with a 'delta' argument
-    app.ticker.add(delta=>gameLoop(delta));
-    
+    app.ticker.add(delta => gameLoop(delta));
+
     // Add the canvases that Pixi created to the HTML document
     // These three screens will handle rendering different parts of the game
     document.getElementById('gameScreen').appendChild(renderer.view);
@@ -806,12 +812,13 @@ function play(delta) {
             // Player has moved. Update the server and move the player on the map.
             // FOV is still calculated server side so that will lag behind a little.
             // If a player attacks an enemy, disable player movement until client receive world's turn from server
-            socket.emit('playerTurn', {x: player_x, y: player_y});
-            if (level.map.asciiTiles[player_x + ',' + player_y] === '+') {
-                level.map.asciiTiles[player_x + ',' + player_y] = '-';
+            socket.emit('playerTurn', { x: player_x, y: player_y });
+            var tileAsciiAtPlayersLocation = getAscii(getPlayerX(), getPlayerY())
+            if (tileAsciiAtPlayersLocation === '+') {
+                tileAsciiAtPlayersLocation = '-';
                 mapSprites[player_x + ',' + player_y].texture = mapTextures['door_open'];
-            } else if (level.map.asciiTiles[player_x + ',' + player_y] === '╣') {
-                level.map.asciiTiles[player_x + ',' + player_y] = '╠';
+            } else if (tileAsciiAtPlayersLocation === '╣') {
+                tileAsciiAtPlayersLocation = '╠';
                 mapSprites[player_x + ',' + player_y].texture = mapTextures['metal_gate_open'];
             }
 
@@ -1074,7 +1081,7 @@ function updatePlayerData(playerInfo) {
     drawText2X('Save', 0, fontHeight*3, tileSets ? 'orange' : 'blue', infoTiles);
     drawInvisibleButton(0,2*fontHeight*3, fontSize*4, 2*fontHeight, infoTiles, save);
 
-    var playerTile = level.map.asciiTiles[getPlayerX() + ',' + getPlayerY()];
+    var playerTile = getAscii(getPlayerX(), getPlayerY);
     if ((playerTile === '<') || (playerTile === '>')) {
         var x = 2*fontSize*8;
         var y = 2*fontHeight*3;
@@ -1641,8 +1648,22 @@ function canWalk(x, y) {
         return false;
     }
     var nonWalkableTiles = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻', 'Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
-    if (nonWalkableTiles.includes(level.map.asciiTiles[x + ',' + y])) {
+    if (nonWalkableTiles.includes(getAscii(x, y))) {
         return false;
     }
     return true;
+}
+
+function getSprite(x, y) {
+    if (this.level.map.tiles[x + "," + y]) {
+        return this.level.map.tiles[x + "," + y].sprite;
+    }
+    return null;
+}
+
+function getAscii(x, y) {
+    if (this.level.map.tiles[x + "," + y]) {
+        return this.level.map.tiles[x + "," + y].ascii;
+    }
+    return null;
 }

@@ -1,0 +1,4294 @@
+﻿{
+  "_comment": {
+    "ascii": "These values are used to detect walkable tiles, player's field-of-vision, and more. Key is (x,y) coordinates on the map starting at top-left. Ideally the game is playable without graphics and only using these characters for graphics.",
+    "sprite": "These values are used to draw textures from the map tilesheets. Only need to include tiles that will be updated. E.g. doors, chests, books, etc."
+  },
+  "29,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "28,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "27,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "27,32": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "27,31": {
+    "ascii": "#",
+    "sprite": "brick_wall_3"
+  },
+  "27,30": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "27,29": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "27,28": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "27,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "28,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "29,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "30,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "31,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "33,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "34,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "35,27": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "35,28": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "35,29": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "35,30": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "35,31": {
+    "ascii": "#",
+    "sprite": "brick_wall_3"
+  },
+  "35,32": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "35,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "34,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_1"
+  },
+  "33,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "32,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "31,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "30,33": {
+    "ascii": "#",
+    "sprite": "brick_wall_2"
+  },
+  "18,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "18,28": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "18,27": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "18,26": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "18,25": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "18,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "17,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "16,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "15,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "14,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "12,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "11,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,25": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,26": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,27": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,28": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "10,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "11,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "12,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "13,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "14,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "15,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "16,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "17,29": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "9,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,16": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "8,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "7,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "6,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "5,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,17": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,16": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,12": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,11": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "4,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "5,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "6,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "7,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "8,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,11": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,12": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "9,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "29,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "30,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "28,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "27,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,12": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,11": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "26,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "27,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "28,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "29,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "30,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,11": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,9": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,7": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "30,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "29,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "28,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "27,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,7": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "26,8": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "26,9": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "32,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "33,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "34,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "35,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "36,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "37,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "33,4": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "33,3": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "33,2": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "34,2": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "35,2": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "36,2": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "37,2": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "38,2": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "39,2": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,3": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,4": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,5": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,6": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,7": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,8": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,9": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "40,9": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "41,9": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,10": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,11": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,12": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,14": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "41,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "40,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "39,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "38,15": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "37,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "35,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "34,15": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "33,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "32,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "31,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "53,15": {
+    "ascii": "#",
+    "sprite": "wall_4"
+  },
+  "52,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "51,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "50,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "49,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,14": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,13": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "48,12": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,11": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,10": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,9": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,8": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "48,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "49,7": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "50,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "51,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "52,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "53,7": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "54,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "55,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "56,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "57,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "58,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "59,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,7": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,8": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,9": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "60,10": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,11": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "60,12": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,13": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,14": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "60,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "59,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "58,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "57,15": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "56,15": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "55,15": {
+    "ascii": "#",
+    "sprite": "wall_4"
+  },
+  "53,25": {
+    "ascii": ":",
+    "sprite": "ruins_corner_SE"
+  },
+  "53,24": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "54,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "55,24": {
+    "ascii": "#",
+    "sprite": "wall_7"
+  },
+  "56,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "57,24": {
+    "ascii": "#",
+    "sprite": "wall_5"
+  },
+  "58,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "58,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "57,23": {
+    "ascii": "#",
+    "sprite": "wall_12"
+  },
+  "56,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "55,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "54,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "53,23": {
+    "ascii": "#",
+    "sprite": "wall_9"
+  },
+  "59,24": {
+    "ascii": ":",
+    "sprite": "ruins_1"
+  },
+  "60,24": {
+    "ascii": ":",
+    "sprite": "ruins_2"
+  },
+  "61,24": {
+    "ascii": ":",
+    "sprite": "ruins_corner_NW"
+  },
+  "62,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "62,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "63,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "63,23": {
+    "ascii": "#",
+    "sprite": "wall_12"
+  },
+  "64,24": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "64,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "65,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "65,23": {
+    "ascii": "#",
+    "sprite": "wall_10"
+  },
+  "66,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "66,23": {
+    "ascii": "#",
+    "sprite": "ruins_2"
+  },
+  "67,24": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "67,23": {
+    "ascii": "#",
+    "sprite": "wall_11"
+  },
+  "67,25": {
+    "ascii": ":",
+    "sprite": "ruins_corner_SW"
+  },
+  "66,25": {
+    "ascii": ":",
+    "sprite": "web"
+  },
+  "67,30": {
+    "ascii": ":",
+    "sprite": "ruins_corner_NW"
+  },
+  "67,31": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "67,32": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "67,33": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "67,34": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "67,35": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "67,36": {
+    "ascii": "#",
+    "sprite": "wall_2"
+  },
+  "66,36": {
+    "ascii": "#",
+    "sprite": "wall_7"
+  },
+  "65,36": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "64,36": {
+    "ascii": ":",
+    "sprite": "ruins_corner_NW"
+  },
+  "57,36": {
+    "ascii": ":",
+    "sprite": "ruins_corner_NE"
+  },
+  "56,36": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "55,36": {
+    "ascii": "#",
+    "sprite": "wall_7"
+  },
+  "54,36": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "53,36": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "53,35": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "53,34": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "53,33": {
+    "ascii": "#",
+    "sprite": "wall_8"
+  },
+  "53,32": {
+    "ascii": "#",
+    "sprite": "wall_1"
+  },
+  "53,31": {
+    "ascii": "#",
+    "sprite": "wall_6"
+  },
+  "53,30": {
+    "ascii": ":",
+    "sprite": "ruins_corner_NW"
+  },
+  "55,35": {
+    "ascii": ":",
+    "sprite": "web"
+  },
+  "7,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "5,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,35": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "3,34": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,34": {
+    "ascii": "♠",
+    "sprite": "tree_2"
+  },
+  "3,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,34": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "1,34": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,34": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,31": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,31": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,31": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "3,31": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,30": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "2,30": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,30": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,30": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,11": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,12": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "0,13": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,14": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,15": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,15": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "0,16": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,16": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "0,17": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,17": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "0,18": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,18": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "0,19": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,19": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,20": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,20": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,21": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,21": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,22": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,22": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,22": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,23": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,23": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,23": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,23": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,24": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,24": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,24": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,24": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,25": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,25": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,25": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,25": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,26": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,26": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,26": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,26": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "0,27": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,27": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,27": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,27": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "0,28": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,28": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,28": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,28": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "9,19": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "0,10": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "0,9": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,9": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,8": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,8": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,8": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "3,7": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "2,7": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,7": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,7": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,5": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "2,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,3": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "4,3": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "3,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "7,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "7,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "7,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "7,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,3": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "9,3": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "10,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "9,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "9,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "9,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "10,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "10,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "11,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "11,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "12,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "12,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "12,2": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "13,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "14,2": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "13,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "14,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "14,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "13,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "15,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "15,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "16,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "16,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "17,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "17,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "18,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "18,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "19,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "19,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "20,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "20,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "21,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "21,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "22,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "22,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "22,2": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "21,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "24,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "23,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "23,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "24,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "26,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "25,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "27,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "28,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "29,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "31,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "30,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "32,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "33,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "34,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "35,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "36,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "37,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "38,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "39,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "40,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "41,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "42,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "44,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "43,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "44,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "45,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "46,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "46,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "45,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "47,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "48,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "49,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "50,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "51,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "52,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "53,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "55,0": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "54,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "55,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "56,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "56,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "57,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "58,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "59,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "60,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "60,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "62,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "61,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "61,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "62,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "63,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "63,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "64,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "65,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "65,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "66,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "66,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "67,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "67,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "68,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "68,1": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "69,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "69,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "69,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "69,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,0": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,1": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,2": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,2": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,3": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,4": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "72,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,4": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,5": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,6": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,6": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,7": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,7": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,7": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,8": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "74,8": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,9": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,10": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,11": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,11": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,10": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,9": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,12": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,13": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,14": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,15": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,16": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,16": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "72,16": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "72,17": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,17": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,17": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,18": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,18": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,18": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "72,19": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,19": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,19": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,20": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,20": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,21": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,21": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,22": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,22": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,23": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,24": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,26": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,25": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,27": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,27": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,28": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,28": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,28": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,29": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "72,29": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,30": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "74,30": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,31": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,32": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,33": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,34": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,34": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "73,35": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "74,35": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "74,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "74,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "74,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "73,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "72,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "71,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "70,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "69,39": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "68,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "66,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "67,39": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "65,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "64,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "63,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "62,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "61,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "59,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "60,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "58,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "57,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "56,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "55,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "53,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "54,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "52,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "50,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "51,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "50,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "49,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "49,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "48,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "48,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "47,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "47,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "47,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "46,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "46,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "46,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "45,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "45,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "45,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "44,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "44,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "43,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "43,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "43,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "44,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "41,36": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "40,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "39,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "38,36": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "38,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "39,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "40,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "41,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "41,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "41,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "40,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "40,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "39,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "39,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "38,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "38,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "37,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "37,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "37,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "36,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "36,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "36,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "35,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "35,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "34,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "34,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "33,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "32,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "33,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "32,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "32,37": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "31,37": {
+    "ascii": "♠",
+    "sprite": "tree_2"
+  },
+  "31,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "31,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "30,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "30,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "28,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "29,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "29,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "28,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "27,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "27,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "25,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "26,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "26,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "26,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "25,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "24,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "23,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "23,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "24,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "24,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "25,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "23,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "22,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "22,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "21,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "21,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "20,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "20,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "19,38": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "19,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "18,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "18,38": {
+    "ascii": "♠",
+    "sprite": "tree_5"
+  },
+  "17,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "17,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "16,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "16,38": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "16,37": {
+    "ascii": "♠",
+    "sprite": "tree_6"
+  },
+  "15,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "15,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "15,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "14,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "14,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "14,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "13,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "13,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "13,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "12,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "12,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "11,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "11,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "10,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "10,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "9,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "9,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "8,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "7,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "6,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "5,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "4,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,39": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "3,38": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,37": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,36": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "2,35": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "1,35": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "0,35": {
+    "ascii": "♠",
+    "sprite": "tree_4"
+  },
+  "58,38": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "68,32": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "66,18": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "62,21": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "67,12": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "64,8": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "43,29": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "47,22": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "40,23": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "36,27": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "28,26": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "18,22": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "20,18": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "26,16": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "19,11": {
+    "ascii": "♠",
+    "sprite": "tree_1"
+  },
+  "13,11": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "29,4": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "31,3": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "40,7": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "41,6": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "42,7": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "13,24": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "32,27": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "54,15": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "36,15": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "31,12": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "31,8": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "9,14": {
+    "ascii": "+",
+    "sprite": "door"
+  },
+  "13,27": {
+    "ascii": "╤",
+    "sprite": "table_W"
+  },
+  "14,27": {
+    "ascii": "╤",
+    "sprite": "table_EW"
+  },
+  "15,27": {
+    "ascii": "╤",
+    "sprite": "table_E"
+  },
+  "39,12": {
+    "ascii": "╤",
+    "sprite": "table_S"
+  },
+  "39,11": {
+    "ascii": "╤",
+    "sprite": "table_NS"
+  },
+  "39,10": {
+    "ascii": "╤",
+    "sprite": "table_N"
+  },
+  "33,9": {
+    "ascii": "╤",
+    "sprite": "table_W"
+  },
+  "34,9": {
+    "ascii": "╤",
+    "sprite": "table_EW"
+  },
+  "35,9": {
+    "ascii": "╤",
+    "sprite": "table_E"
+  },
+  "52,9": {
+    "ascii": "╤",
+    "sprite": "table_W"
+  },
+  "53,9": {
+    "ascii": "╤",
+    "sprite": "table_EW"
+  },
+  "54,9": {
+    "ascii": "╤",
+    "sprite": "table_EW"
+  },
+  "55,9": {
+    "ascii": "╤",
+    "sprite": "table_EW"
+  },
+  "56,9": {
+    "ascii": "╤",
+    "sprite": "table_E"
+  },
+  "6,14": {
+    "ascii": "╤",
+    "sprite": "table_S"
+  },
+  "6,13": {
+    "ascii": "╤",
+    "sprite": "table_NS"
+  },
+  "6,12": {
+    "ascii": "╤",
+    "sprite": "table_NS"
+  },
+  "6,11": {
+    "ascii": "╤",
+    "sprite": "table_N"
+  },
+  "14,23": {
+    "ascii": "µ",
+    "sprite": "sign_1"
+  },
+  "33,26": {
+    "ascii": "µ",
+    "sprite": "sign_2"
+  },
+  "10,13": {
+    "ascii": "µ",
+    "sprite": "sign_1"
+  },
+  "37,16": {
+    "ascii": "µ",
+    "sprite": "sign_inn"
+  },
+  "55,16": {
+    "ascii": "µ",
+    "sprite": "sign_1"
+  },
+  "17,25": {
+    "ascii": "☼",
+    "sprite": "campfire"
+  },
+  "36,4": {
+    "ascii": "☼",
+    "sprite": "campfire"
+  },
+  "42,39": {
+    "ascii": "≈",
+    "sprite": "river_NS"
+  },
+  "42,38": {
+    "ascii": "≈",
+    "sprite": "river_NS"
+  },
+  "42,37": {
+    "ascii": "≈",
+    "sprite": "river_NS"
+  },
+  "42,36": {
+    "ascii": "≈",
+    "sprite": "water_border_W"
+  },
+  "43,36": {
+    "ascii": "≈",
+    "sprite": "water_border_S"
+  },
+  "44,36": {
+    "ascii": "≈",
+    "sprite": "water_border_S"
+  },
+  "45,35": {
+    "ascii": "≈",
+    "sprite": "water_border_E"
+  },
+  "45,36": {
+    "ascii": "≈",
+    "sprite": "water_border_SE"
+  },
+  "44,35": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "43,35": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "42,35": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "41,35": {
+    "ascii": "≈",
+    "sprite": "water_border_S"
+  },
+  "40,35": {
+    "ascii": "≈",
+    "sprite": "water_border_S"
+  },
+  "39,35": {
+    "ascii": "≈",
+    "sprite": "water_border_S"
+  },
+  "38,35": {
+    "ascii": "≈",
+    "sprite": "water_border_SW"
+  },
+  "38,34": {
+    "ascii": "≈",
+    "sprite": "water_border_W"
+  },
+  "38,33": {
+    "ascii": "≈",
+    "sprite": "water_border_W"
+  },
+  "38,32": {
+    "ascii": "≈",
+    "sprite": "water_border_W"
+  },
+  "38,31": {
+    "ascii": "≈",
+    "sprite": "water_border_NW"
+  },
+  "39,30": {
+    "ascii": "≈",
+    "sprite": "water_border_NW"
+  },
+  "39,31": {
+    "ascii": "≈",
+    "sprite": "water_corner_NW"
+  },
+  "39,32": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "39,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "39,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "40,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "41,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "42,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "43,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "44,34": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "45,34": {
+    "ascii": "≈",
+    "sprite": "water_border_E"
+  },
+  "45,33": {
+    "ascii": "≈",
+    "sprite": "water_border_E"
+  },
+  "45,32": {
+    "ascii": "≈",
+    "sprite": "water_border_NE"
+  },
+  "44,32": {
+    "ascii": "≈",
+    "sprite": "water_corner_NE"
+  },
+  "44,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "43,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "42,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "41,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "40,33": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "40,32": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "41,32": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "42,32": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "43,32": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "44,31": {
+    "ascii": "≈",
+    "sprite": "water_border_NE"
+  },
+  "43,31": {
+    "ascii": "≈",
+    "sprite": "water_corner_NE"
+  },
+  "42,31": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "41,31": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "40,31": {
+    "ascii": "≈",
+    "sprite": "water_center"
+  },
+  "40,30": {
+    "ascii": "≈",
+    "sprite": "water_border_N"
+  },
+  "42,30": {
+    "ascii": "≈",
+    "sprite": "water_border_N"
+  },
+  "41,30": {
+    "ascii": "≈",
+    "sprite": "water_border_N"
+  },
+  "43,30": {
+    "ascii": "≈",
+    "sprite": "water_border_NE"
+  },
+  "12,30": {
+    "ascii": "ƒ",
+    "sprite": "tree_trunk"
+  },
+  "16,30": {
+    "ascii": "⌠",
+    "sprite": "weeds_2_dead"
+  },
+  "55,30": {
+    "ascii": "⌠",
+    "sprite": "weeds_2"
+  },
+  "66,32": {
+    "ascii": "⌠",
+    "sprite": "weeds_2"
+  },
+  "57,34": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "56,27": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "65,26": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "54,35": {
+    "ascii": ":",
+    "sprite": "ruins_2"
+  },
+  "66,34": {
+    "ascii": ":",
+    "sprite": "ruins_2"
+  },
+  "66,31": {
+    "ascii": ":",
+    "sprite": "ruins_2"
+  },
+  "55,31": {
+    "ascii": ":",
+    "sprite": "ruins_2"
+  },
+  "41,26": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "46,26": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "46,18": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "40,20": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "27,21": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "28,24": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "23,27": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "14,19": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "16,8": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "66,13": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "68,16": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "22,32": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "7,27": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "7,23": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "19,8": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "21,13": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "46,31": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "40,28": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "64,11": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "69,19": {
+    "ascii": "⌡",
+    "sprite": "weeds_2_dead"
+  },
+  "52,26": {
+    "ascii": "µ",
+    "sprite": "sign_2"
+  },
+  "52,36": {
+    "ascii": "♠",
+    "sprite": "tree_3"
+  },
+  "48,6": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "48,5": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "48,4": {
+    "ascii": "║",
+    "sprite": "metal_fence_broken"
+  },
+  "48,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "49,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "50,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "51,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "52,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "53,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "54,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "55,3": {
+    "ascii": "║",
+    "sprite": "metal_fence_broken"
+  },
+  "57,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "58,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "59,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "60,3": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "60,4": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "60,5": {
+    "ascii": "║",
+    "sprite": "metal_fence"
+  },
+  "60,6": {
+    "ascii": "║",
+    "sprite": "metal_fence_broken"
+  },
+  "56,3": {
+    "ascii": "╣",
+    "sprite": "metal_gate"
+  },
+  "50,5": {
+    "ascii": "♀",
+    "sprite": "tombstone_1"
+  },
+  "52,4": {
+    "ascii": "♀",
+    "sprite": "tombstone_2"
+  },
+  "51,6": {
+    "ascii": "♀",
+    "sprite": "tombstone_2"
+  },
+  "56,5": {
+    "ascii": "♀",
+    "sprite": "tombstone_1"
+  },
+  "58,5": {
+    "ascii": "♀",
+    "sprite": "tombstone_2"
+  },
+  "11,30": {
+    "ascii": "░",
+    "sprite": "crop_1"
+  },
+  "11,31": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "11,32": {
+    "ascii": "░",
+    "sprite": "crop_1"
+  },
+  "12,32": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "13,32": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "13,31": {
+    "ascii": "░",
+    "sprite": "crop_2"
+  },
+  "13,30": {
+    "ascii": "░",
+    "sprite": "crop_3"
+  },
+  "14,31": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "15,30": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "15,32": {
+    "ascii": "░",
+    "sprite": "crop_3"
+  },
+  "16,31": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "17,31": {
+    "ascii": "░",
+    "sprite": "crop_3"
+  },
+  "17,30": {
+    "ascii": "░",
+    "sprite": "crop_4"
+  },
+  "17,32": {
+    "ascii": "░",
+    "sprite": "crop_5"
+  },
+  "12,31": {
+    "ascii": "ⁿ",
+    "sprite": "dirt_floor_4"
+  },
+  "14,32": {
+    "ascii": "ⁿ",
+    "sprite": "dirt_floor_4"
+  },
+  "14,30": {
+    "ascii": "ⁿ",
+    "sprite": "dirt_floor_5"
+  },
+  "15,31": {
+    "ascii": "ⁿ",
+    "sprite": "dirt_floor_5"
+  },
+  "16,32": {
+    "ascii": "ⁿ",
+    "sprite": "dirt_floor_5"
+  },
+  "12,6": {
+    "ascii": ":",
+    "sprite": "rocks"
+  },
+  "29,28": { "ascii": "." },
+  "29,29": { "ascii": "." },
+  "28,29": { "ascii": "." },
+  "28,30": { "ascii": "." },
+  "29,31": { "ascii": "." },
+  "29,30": { "ascii": "." },
+  "28,31": { "ascii": "." },
+  "30,30": { "ascii": "." },
+  "30,29": { "ascii": "." },
+  "31,30": { "ascii": "." },
+  "31,29": { "ascii": "." },
+  "32,29": { "ascii": "." },
+  "32,30": { "ascii": "." },
+  "31,31": { "ascii": "." },
+  "30,31": { "ascii": "." },
+  "30,32": { "ascii": "." },
+  "31,32": { "ascii": "." },
+  "33,32": { "ascii": "." },
+  "33,31": { "ascii": "." },
+  "32,31": { "ascii": "." },
+  "33,30": { "ascii": "." },
+  "33,29": { "ascii": "." },
+  "33,28": { "ascii": "." },
+  "34,29": { "ascii": "." },
+  "31,28": { "ascii": "." },
+  "32,28": {
+    "ascii": ".",
+    "sprite": "door_floor_wear_1"
+  },
+  "17,28": { "ascii": "." },
+  "17,27": { "ascii": "." },
+  "16,27": { "ascii": "." },
+  "16,26": { "ascii": "." },
+  "15,26": { "ascii": "." },
+  "15,25": { "ascii": "." },
+  "14,25": { "ascii": "." },
+  "14,26": { "ascii": "." },
+  "13,26": { "ascii": "." },
+  "12,26": { "ascii": "." },
+  "12,25": { "ascii": "." },
+  "12,27": { "ascii": "." },
+  "6,16": { "ascii": "." },
+  "6,15": { "ascii": "." },
+  "7,16": { "ascii": "." },
+  "8,16": { "ascii": "." },
+  "8,15": { "ascii": "." },
+  "7,15": { "ascii": "." },
+  "7,14": { "ascii": "." },
+  "7,13": { "ascii": "." },
+  "7,12": { "ascii": "." },
+  "8,12": { "ascii": "." },
+  "8,13": { "ascii": "." },
+  "30,13": { "ascii": "." },
+  "30,12": {
+    "ascii": ".",
+    "sprite": "door_floor_wear_2"
+  },
+  "29,12": { "ascii": "." },
+  "28,12": { "ascii": "." },
+  "28,11": { "ascii": "." },
+  "27,11": { "ascii": "." },
+  "28,13": { "ascii": "." },
+  "27,13": { "ascii": "." },
+  "27,9": { "ascii": "." },
+  "28,9": { "ascii": "." },
+  "28,8": { "ascii": "." },
+  "28,7": { "ascii": "." },
+  "27,7": { "ascii": "." },
+  "29,8": { "ascii": "." },
+  "30,8": {
+    "ascii": ".",
+    "sprite": "door_floor_wear_2"
+  },
+  "30,9": { "ascii": "." },
+  "35,4": { "ascii": "." },
+  "34,3": { "ascii": "." },
+  "36,3": { "ascii": "." },
+  "38,3": { "ascii": "." },
+  "38,4": { "ascii": "." },
+  "37,4": { "ascii": "." },
+  "32,6": { "ascii": "." },
+  "32,7": { "ascii": "." },
+  "32,8": { "ascii": "." },
+  "32,9": { "ascii": "." },
+  "32,10": { "ascii": "." },
+  "32,11": { "ascii": "." },
+  "32,12": { "ascii": "." },
+  "32,13": { "ascii": "." },
+  "33,13": { "ascii": "." },
+  "33,12": { "ascii": "." },
+  "33,11": { "ascii": "." },
+  "34,11": { "ascii": "." },
+  "35,11": { "ascii": "." },
+  "35,12": { "ascii": "." },
+  "35,13": { "ascii": "." },
+  "35,14": { "ascii": "." },
+  "34,14": { "ascii": "." },
+  "33,14": { "ascii": "." },
+  "34,13": { "ascii": "." },
+  "36,13": { "ascii": "." },
+  "37,13": { "ascii": "." },
+  "38,13": { "ascii": "." },
+  "39,13": { "ascii": "." },
+  "40,13": { "ascii": "." },
+  "39,14": { "ascii": "." },
+  "38,14": { "ascii": "." },
+  "37,14": { "ascii": "." },
+  "36,12": { "ascii": "." },
+  "37,12": { "ascii": "." },
+  "37,11": { "ascii": "." },
+  "36,11": { "ascii": "." },
+  "36,10": { "ascii": "." },
+  "37,10": { "ascii": "." },
+  "37,9": { "ascii": "." },
+  "37,8": { "ascii": "." },
+  "38,8": { "ascii": "." },
+  "38,9": { "ascii": "." },
+  "38,7": { "ascii": "." },
+  "38,6": { "ascii": "." },
+  "37,6": { "ascii": "." },
+  "36,6": { "ascii": "." },
+  "36,7": { "ascii": "." },
+  "35,7": { "ascii": "." },
+  "34,7": { "ascii": "." },
+  "34,6": { "ascii": "." },
+  "33,7": { "ascii": "." },
+  "14,28": { "ascii": "☺" },
+  "5,12": { "ascii": "☺" },
+  "37,3": { "ascii": "☺" },
+  "37,7": { "ascii": "☺" },
+  "54,8": { "ascii": "☺" },
+  "34,12": { "ascii": "☻" },
+  "36,9": { "ascii": "☻" },
+  "49,8": { "ascii": "." },
+  "50,8": { "ascii": "." },
+  "51,9": { "ascii": "." },
+  "50,9": { "ascii": "." },
+  "49,9": { "ascii": "." },
+  "49,10": { "ascii": "." },
+  "50,10": { "ascii": "." },
+  "51,10": { "ascii": "." },
+  "52,10": { "ascii": "." },
+  "49,11": { "ascii": "." },
+  "49,12": { "ascii": "." },
+  "50,12": { "ascii": "." },
+  "51,12": { "ascii": "." },
+  "52,12": { "ascii": "." },
+  "53,12": { "ascii": "." },
+  "53,11": { "ascii": "." },
+  "54,11": { "ascii": "." },
+  "54,12": { "ascii": "." },
+  "54,13": { "ascii": "." },
+  "54,14": {
+    "ascii": ".",
+    "sprite": "door_floor_wear_2"
+  },
+  "53,14": { "ascii": "." },
+  "55,14": { "ascii": "." },
+  "55,13": { "ascii": "." },
+  "53,13": { "ascii": "." },
+  "55,12": { "ascii": "." },
+  "55,11": { "ascii": "." },
+  "49,13": { "ascii": "." },
+  "49,14": { "ascii": "." },
+  "50,14": { "ascii": "." },
+  "51,14": { "ascii": "." },
+  "57,14": { "ascii": "." },
+  "58,14": { "ascii": "." },
+  "59,14": { "ascii": "." },
+  "59,13": { "ascii": "." },
+  "59,12": { "ascii": "." },
+  "58,12": { "ascii": "." },
+  "57,12": { "ascii": "." },
+  "56,12": { "ascii": "." },
+  "56,10": { "ascii": "." },
+  "57,10": { "ascii": "." },
+  "57,9": { "ascii": "." },
+  "58,9": { "ascii": "." },
+  "58,8": { "ascii": "." },
+  "59,8": { "ascii": "." },
+  "59,10": { "ascii": "." },
+  "59,9": { "ascii": "." },
+  "58,10": { "ascii": "." },
+  "59,11": { "ascii": "." },
+  "33,10": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "34,10": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "35,10": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "35,8": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "34,8": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "33,8": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "38,10": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "38,11": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "38,12": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "40,12": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "40,11": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "40,10": {
+    "ascii": "╥",
+    "sprite": "stool"
+  },
+  "50,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "51,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "52,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "56,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "57,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "58,11": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "58,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "57,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "56,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "52,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "51,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "50,13": {
+    "ascii": "╥",
+    "sprite": "church_bench"
+  },
+  "60,30": {
+    "ascii": ">",
+    "sprite": "stairs_down"
+  },
+  "32,32": {
+    "ascii": "Æ",
+    "sprite": "chest"
+  },
+  "28,32": {
+    "ascii": "Θ",
+    "sprite": "bed_W"
+  },
+  "29,32": {
+    "ascii": "Θ",
+    "sprite": "bed_E"
+  },
+  "27,12": {
+    "ascii": "Θ",
+    "sprite": "bed"
+  },
+  "27,8": {
+    "ascii": "Θ",
+    "sprite": "bed"
+  },
+  "28,28": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "34,28": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "16,28": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "12,28": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "5,16": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "8,11": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "29,9": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "29,13": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "32,14": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "40,14": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "51,8": {
+    "ascii": "Φ",
+    "sprite": "candelabra"
+  },
+  "57,8": {
+    "ascii": "Φ",
+    "sprite": "candelabra"
+  },
+  "56,14": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "52,14": {
+    "ascii": "Φ",
+    "sprite": "torch_gold"
+  },
+  "10,30": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "10,31": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "10,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "10,32": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "11,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "12,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "13,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "14,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "15,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "16,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "17,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "18,33": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "18,32": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "18,31": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "18,30": {
+    "ascii": "║",
+    "sprite": "wood_fence"
+  },
+  "11,27": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "11,26": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "11,25": {
+    "ascii": "═",
+    "sprite": "bookshelf_skull"
+  },
+  "34,31": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "34,30": {
+    "ascii": "═",
+    "sprite": "bookshelf_skull"
+  },
+  "7,11": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "30,7": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "30,11": {
+    "ascii": "═",
+    "sprite": "bookshelf"
+  },
+  "5,15": {
+    "ascii": "╬",
+    "sprite": "stone_table"
+  },
+  "33,6": {
+    "ascii": "╬",
+    "sprite": "cupboard"
+  },
+  "35,6": {
+    "ascii": "╬",
+    "sprite": "fireplace"
+  },
+  "35,3": {
+    "ascii": "╬",
+    "sprite": "cabinet"
+  },
+  "34,4": {
+    "ascii": "╬",
+    "sprite": "cauldron"
+  },
+  "29,11": {
+    "ascii": "╬",
+    "sprite": "mirror"
+  },
+  "29,7": {
+    "ascii": "╬",
+    "sprite": "mirror"
+  },
+  "30,28": {
+    "ascii": "¶",
+    "sprite": "book"
+  },
+  "38,5": { "sprite": "stone_arch" },
+  "53,29": { "sprite": "gravel_floor_1" },
+  "67,28": { "sprite": "gravel_floor_1" },
+  "67,26": { "sprite": "gravel_floor_1" },
+  "62,36": { "sprite": "gravel_floor_1" },
+  "59,36": { "sprite": "gravel_corner_NW" },
+  "60,36": { "sprite": "gravel_corner_NE" },
+  "59,37": { "sprite": "gravel_corner_SW" },
+  "60,37": { "sprite": "gravel_corner_SE" },
+  "53,10": {
+    "ascii": "╤",
+    "sprite": "church_decoration"
+  },
+  "55,10": {
+    "ascii": "╤",
+    "sprite": "church_decoration"
+  },
+  "16,25": {
+    "ascii": "╦",
+    "sprite": "cauldron"
+  },
+  "17,26": {
+    "ascii": "╦",
+    "sprite": "cauldron"
+  },
+  "11,28": {
+    "ascii": "╦",
+    "sprite": "cauldron"
+  },
+  "13,25": { "sprite": "door_floor_wear_1" },
+  "8,14": { "sprite": "door_floor_wear_1" },
+  "36,14": { "sprite": "door_floor_wear_2" },
+  "34,32": {
+    "ascii": "Ω",
+    "sprite": "steer_skull"
+  },
+  "50,6": { "sprite": "dirt_floor_4" },
+  "53,6": { "sprite": "dirt_floor_4" },
+  "55,6": { "sprite": "dirt_floor_4" },
+  "57,5": { "sprite": "dirt_floor_4" },
+  "53,5": { "sprite": "grass_1" },
+  "52,6": { "sprite": "grass_1" },
+  "54,6": { "sprite": "grass_1" },
+  "57,6": { "sprite": "grass_1" },
+  "49,4": { "sprite": "grass_1" },
+  "51,4": { "sprite": "weeds_1" },
+  "59,6": { "sprite": "weeds_1" },
+  "49,6": { "sprite": "grass_2" },
+  "59,4": { "sprite": "grass_2" },
+  "49,5": { "sprite": "dirt_floor_5" },
+  "59,5": { "sprite": "dirt_floor_5" },
+  "54,33": { "sprite": "grass_1" },
+  "59,27": { "sprite": "grass_1" },
+  "64,28": { "sprite": "grass_1" },
+  "65,33": { "sprite": "grass_1" },
+  "57,31": { "sprite": "dirt_floor_2" },
+  "59,35": { "sprite": "dirt_floor_2" },
+  "61,32": { "sprite": "dirt_floor_2" },
+  "63,34": { "sprite": "dirt_floor_2" },
+  "63,26": { "sprite": "dirt_floor_2" },
+  "51,25": { "sprite": "dirt_floor_2" },
+  "54,20": { "sprite": "dirt_floor_2" },
+  "45,22": { "sprite": "dirt_floor_2" },
+  "50,18": { "sprite": "dirt_floor_2" },
+  "40,17": { "sprite": "dirt_floor_2" },
+  "42,13": { "sprite": "dirt_floor_2" },
+  "40,8": { "sprite": "dirt_floor_2" },
+  "32,16": { "sprite": "dirt_floor_2" },
+  "29,16": { "sprite": "dirt_floor_2" },
+  "28,15": { "sprite": "dirt_floor_2" },
+  "25,22": { "sprite": "dirt_floor_2" },
+  "22,24": { "sprite": "dirt_floor_2" },
+  "18,15": { "sprite": "dirt_floor_2" },
+  "12,15": { "sprite": "dirt_floor_2" },
+  "12,20": { "sprite": "dirt_floor_2" },
+  "27,5": { "sprite": "dirt_floor_2" },
+  "30,2": { "sprite": "dirt_floor_2" },
+  "40,3": { "sprite": "dirt_floor_2" },
+  "41,1": { "sprite": "dirt_floor_2" },
+  "61,26": { "sprite": "dirt_floor_1" },
+  "55,29": { "sprite": "dirt_floor_1" },
+  "53,27": { "sprite": "dirt_floor_3" },
+  "58,25": { "sprite": "dirt_floor_3" },
+  "63,31": { "sprite": "dirt_floor_3" },
+  "53,17": { "sprite": "dirt_floor_3" },
+  "35,19": { "sprite": "dirt_floor_3" },
+  "32,21": { "sprite": "dirt_floor_3" },
+  "19,21": { "sprite": "dirt_floor_3" },
+  "16,19": { "sprite": "dirt_floor_3" },
+  "14,20": { "sprite": "dirt_floor_3" },
+  "13,19": { "sprite": "dirt_floor_3" },
+  "51,31": { "sprite": "dirt_floor_2" },
+  "13,23": { "sprite": "path_NS" },
+  "13,22": { "sprite": "path_NS" },
+  "13,17": { "sprite": "path_NS" },
+  "13,16": { "sprite": "path_NS" },
+  "13,15": { "sprite": "path_NS" },
+  "20,21": { "sprite": "path_NS" },
+  "15,19": { "sprite": "path_NS" },
+  "33,21": { "sprite": "path_NS" },
+  "36,18": { "sprite": "path_NS" },
+  "36,17": { "sprite": "path_NS" },
+  "36,16": { "sprite": "path_NS" },
+  "54,17": { "sprite": "path_NS" },
+  "54,16": { "sprite": "path_NS" },
+  "32,23": { "sprite": "path_NS" },
+  "32,24": { "sprite": "path_NS" },
+  "32,25": { "sprite": "path_NS" },
+  "32,26": { "sprite": "path_NS" },
+  "22,22": { "sprite": "path_SW" },
+  "15,18": { "sprite": "path_SW" },
+  "13,14": { "sprite": "path_SW" },
+  "20,20": { "sprite": "path_SW" },
+  "13,21": { "sprite": "path_SE" },
+  "27,22": { "sprite": "path_SE" },
+  "33,20": { "sprite": "path_SE" },
+  "53,18": { "sprite": "path_SE" },
+  "36,20": { "sprite": "path_NW" },
+  "54,18": { "sprite": "path_NW" },
+  "53,19": { "sprite": "path_NW" },
+  "33,22": { "sprite": "path_NW" },
+  "27,23": { "sprite": "path_NW" },
+  "15,21": { "sprite": "path_NW" },
+  "14,21": { "sprite": "path_EW" },
+  "14,18": { "sprite": "path_EW" },
+  "12,14": { "sprite": "path_EW" },
+  "11,14": { "sprite": "path_EW" },
+  "10,14": { "sprite": "path_EW" },
+  "23,23": { "sprite": "path_EW" },
+  "24,23": { "sprite": "path_EW" },
+  "25,23": { "sprite": "path_EW" },
+  "26,23": { "sprite": "path_EW" },
+  "28,22": { "sprite": "path_EW" },
+  "29,22": { "sprite": "path_EW" },
+  "30,22": { "sprite": "path_EW" },
+  "31,22": { "sprite": "path_EW" },
+  "35,20": { "sprite": "path_EW" },
+  "34,20": { "sprite": "path_EW" },
+  "37,19": { "sprite": "path_EW" },
+  "38,19": { "sprite": "path_EW" },
+  "39,19": { "sprite": "path_EW" },
+  "40,19": { "sprite": "path_EW" },
+  "42,19": { "sprite": "path_EW" },
+  "41,19": { "sprite": "path_EW" },
+  "43,19": { "sprite": "path_EW" },
+  "44,19": { "sprite": "path_EW" },
+  "45,19": { "sprite": "path_EW" },
+  "46,19": { "sprite": "path_EW" },
+  "47,19": { "sprite": "path_EW" },
+  "48,19": { "sprite": "path_EW" },
+  "50,19": { "sprite": "path_EW" },
+  "49,19": { "sprite": "path_EW" },
+  "51,19": { "sprite": "path_EW" },
+  "52,19": { "sprite": "path_EW" },
+  "21,22": { "sprite": "path_EW" },
+  "19,20": { "sprite": "path_EW" },
+  "18,20": { "sprite": "path_EW" },
+  "17,20": { "sprite": "path_EW" },
+  "16,20": { "sprite": "path_EW" },
+  "15,20": { "sprite": "path_NSE" },
+  "36,19": { "sprite": "path_NSE" },
+  "32,22": { "sprite": "path_SEW" },
+  "13,18": { "sprite": "path_NE" },
+  "20,22": { "sprite": "path_NE" },
+  "22,23": { "sprite": "path_NE" },
+  "59,29": { "sprite": "stone_floor_corner_NW" },
+  "61,29": { "sprite": "stone_floor_corner_NE" },
+  "61,31": { "sprite": "stone_floor_corner_SE" },
+  "59,31": { "sprite": "stone_floor_corner_SW" },
+  "59,30": { "sprite": "gravel_border_W" },
+  "60,29": { "sprite": "gravel_border_N" },
+  "61,30": { "sprite": "gravel_border_E" },
+  "60,31": { "sprite": "gravel_border_S" },
+  "58,6": { "sprite": "grass_3" },
+  "52,5": { "sprite": "grass_3" },
+  "55,4": { "sprite": "grass_3" }
+}

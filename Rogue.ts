@@ -16,7 +16,7 @@ const FLOOR_TILES = ['.', ',', '`'];
 
 const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻'];
 
-const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧'];
+const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧', '╦', 'Ω'];
 
 const TILES_WALKABLE_BLOCKS_LIGHT = ['+','⌠'];
 
@@ -324,7 +324,7 @@ class Floor {
     }
 
     updateFOV(pX, pY) {
-        var localMap = this.map.asciiTiles;
+        var localMap = this.map.getAsciiTiles();
         var localMapExplored = this.mapExplored;
 
 
@@ -407,10 +407,12 @@ class Floor {
     setPlayerPosition(x, y) {
         this.playerX = x;
         this.playerY = y;
-        if (this.map.asciiTiles[x + ',' + y] === '+') {
-            this.map.asciiTiles[x + ',' + y] = '-';
-        } else if (this.map.asciiTiles[x + ',' + y] === '╣') {
-            this.map.asciiTiles[x + ',' + y] = '╠';
+        if (this.map.getTile(x, y)) {
+            if (this.map.getTile(x, y).ascii === '+') {
+                this.map.setTileAscii(x, y, '-');;
+            } else if (this.map.getTile(x, y).ascii === '╣') {
+                this.map.setTileAscii(x, y, '╠');
+            }
         }
     }
     getExploredMap() {
@@ -863,14 +865,46 @@ class Enemy {
 }
 
 class Map {
-    asciiTiles: Object;
-    spriteNames;
+    tiles = {};
     constructor(townData: Object) {
-        if (townData.hasOwnProperty("asciiTiles")) {
-            this.asciiTiles = (<any>townData).asciiTiles;
+        var tilesData = {};
+        if (townData.hasOwnProperty("tiles")) {
+            tilesData = (<any>townData).tiles;
         }
-        if (townData.hasOwnProperty("spriteNames")) {
-            this.spriteNames = (<any>townData).spriteNames;
+        Object.keys(tilesData).forEach(tileLocation => {
+            tilesData[tileLocation] = new Tile(tilesData[tileLocation]);
+        });
+        this.tiles = tilesData;
+    }
+
+    getAsciiTiles() {
+        var asciiTiles = {};
+        Object.keys(this.tiles).forEach(tileLocation => {
+            if (this.tiles[tileLocation].ascii) {
+                asciiTiles[tileLocation] = this.tiles[tileLocation].ascii;
+            }
+        });
+        return asciiTiles;
+    }
+
+    getTile(x, y) {
+        return this.tiles[x + ',' + y];
+    }
+
+    setTileAscii(x, y, value) {
+        this.tiles[x + ',' + y] = value;
+    }
+}
+
+class Tile {
+    ascii: string;
+    sprite: string;
+    constructor(tileData) {
+        if (tileData.ascii) {
+            this.ascii = tileData.ascii;
+        }
+        if (tileData.sprite) {
+            this.sprite = tileData.sprite;
         }
     }
 }

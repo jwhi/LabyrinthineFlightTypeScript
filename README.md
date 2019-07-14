@@ -22,6 +22,6 @@ Key to ASCII tiles being used for maps and used to assign sprites.
 |                             |                   | ♀                           | Grave           |                         |             | ~                       | Water                 |
 |                             |                   | ¶                           | Book            |                         |             | ╣                       | Gate                  |
 |                             |                   | ₧                           | Opened Book     |                         |             | ╠                       | Opened Gate           |
-|                             |                   |                             |                 |                         |             | ⌡                       | Dead Bush             |
-|                             |                   |                             |                 |                         |             | ⁿ                       | Plant                 |
+|                             |                   | ╦                           | Small Furniture |                         |             | ⌡                       | Dead Bush             |
+|                             |                   | Ω                           | Skull           |                         |             | ⁿ                       | Plant                 |
 |                             |                   |                             |                 |                         |             | ░                       | Crops                 |
