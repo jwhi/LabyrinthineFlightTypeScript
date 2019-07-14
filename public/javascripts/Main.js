@@ -26,6 +26,12 @@ const TILE_SIZE = 32;
 const FONT_WIDTH = 24;
 const FONT_HEIGHT = 32;
 
+const MAP_WIDTH = 75;
+const MAP_HEIGHT = 40;
+
+const APP_WIDTH = MAP_WIDTH * TILE_SIZE;
+const APP_HEIGHT = MAP_HEIGHT * TILE_SIZE;
+
 
 /* User-Input Variables */
 
@@ -42,7 +48,7 @@ let loader = new PIXI.Loader();
 let resources = loader.resources;
 
 // Map sprites stores all the map sprites currently drawn on the screen
-let mapSprites = [];
+let mapSprites = {};
 
 // PIXI can store sprites in a container. This allows all game sprites to be deleted
 // and redrawn easily after a player changes floors
@@ -55,8 +61,8 @@ let gameTextures;
 
 /* Graphic Renderers */
 
-let renderer = new PIXI.Renderer({ width: appWidth, height: appHeight, transparent: true});
-let infoRenderer = new PIXI.Renderer({ width: appWidth, height: fontHeight * 10, transparent: true});
+let renderer = new PIXI.Renderer({ width: APP_WIDTH, height: APP_HEIGHT, transparent: true });
+let infoRenderer = new PIXI.Renderer({ width: APP_HEIGHT, height: FONT_HEIGHT * 10, transparent: true });
 
 
 /* App Variables */
@@ -76,8 +82,8 @@ let labyrinthineFlight;
 /* Graphics Setup */
 
 let gameApp = new Application({
-    width: appWidth,
-    height: appHeight,
+    width: APP_WIDTH,
+    height: APP_HEIGHT,
     antialias: true,
     transparent: false,
     resolution: 1,
@@ -85,8 +91,8 @@ let gameApp = new Application({
 });
 
 let gameInfoApp = new Application({
-    width: appWidth,
-    height: fontHeight * 10,
+    width: APP_WIDTH,
+    height: FONT_HEIGHT * 10,
     antialias: true,
     transparent: false,
     resolution: 1,
@@ -96,6 +102,7 @@ let gameInfoApp = new Application({
 // Texture loading of font and map sprite sheets. Calls setup function after textures are loaded.
 // This currently causes a large number of the warning "pixi.min.js:8 Texture added to the cache with an id 'text-id' that already had an entry"
 // This is caused by me using the same texture names in the JSON font files.
+// map is all the kenney 1-bit textures used for the map. kenney-1bit.json has player and enemy sprites. needs to be reorganized.
 loader.add('kenney-1bit', 'assets/1bit2x-expanded.json')
       .add('map', 'assets/1bit-map.json')
       .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
@@ -175,7 +182,7 @@ function setup() {
     // The dungeon object received from the server. Defined in the server's Rogue.js file
     // Dungeons are only received at the start of games and when player travels up or down a staircase.
     socket.on('dungeon', function(gameData) {
-        
+        console.log(gameData);
         /* Clear the screen */
         clearApplication(gameApp);
         clearApplication(gameInfoApp);
@@ -196,17 +203,21 @@ function setup() {
         
         /*
          * Draw map/player/enemy/item sprites to the screen.
-         * Sprites' alpha/tint reflect player's field-of-vision
          */
-        if (labyrinthineFlight.map.floorNumber > 0) {
-            /* All floor numbers above 0 are dungeon levels. */
-        } else {
-            /* Floor 0 is the starting town. */
-            var townTexture = resources['town'].texture;
-            townSprite = new Sprite(townTexture);
-            townSprite.position.set(0, 0);
-            gameTiles.addChild(townSprite);
-        }
+        var spriteToDraw = labyrinthineFlight.getSpriteNames();
+        Object.keys(spriteToDraw).forEach(tileLocation => {
+            var x, y;
+            [x, y] = tileLocation.split(',');
+            mapSprites[tileLocation] = placeMapTile(spriteToDraw[tileLocation], x * TILE_SIZE, y * TILE_SIZE);
+        });
+
+        /*
+         * Adjust tint of sprites so it reflects the player's field-of-vision
+         */
+        updateMapFOV(labyrinthineFlight.getFOV());
+
+        gameApp.stage.addChild(gameTiles);
+        renderer.render(gameApp.stage);
 
         // Draw items
 
@@ -220,6 +231,7 @@ function setup() {
          * Display player's info
          * Set application state to 'play'
          */
+        state = play;
     });
     
     // Received after every time a player moves or interacts with object/character.
@@ -259,7 +271,7 @@ function setup() {
 
     // Start the game loop by adding the `gameLoop` function to
     // PIXI.js `ticker` and providing it with a 'delta' argument
-    app.ticker.add(delta=>gameLoop(delta));
+    gameApp.ticker.add(delta=>gameLoop(delta));
     
     // Add the canvases that PIXI.js creates to the HTML page
     // These screens will handle rendering different parts of the game
@@ -270,12 +282,8 @@ function setup() {
     // to see the entire game board or find where the player is on the screen.
     resize();
 
-    // levelTilesPack allows for switching between different graphics.
-    // Only supporting one for the time being.
-    var levelTilesPack = 'kenney-1bit';
-    
     // mapTextures is alias for all the texture atlas frame id textures
-    mapTextures = resources[levelTilesPack].textures;
+    mapTextures = resources['map'].textures;
     
     /**
      * Direct the application to go to the main menu
@@ -283,6 +291,7 @@ function setup() {
      *  1. New Game: Quickly start a new game with a new dungeon
      *  2. Load Game: Return to a previous game that is in browser's local storage
     */
+    socket.emit('new game');
 }
 
 /**
@@ -357,10 +366,28 @@ function placeTile(spriteContainer, textureResource, tileName, x, y) {
     var tile = new Sprite(textureResource[tileName]);
     if (tile) {
         tile.position.set(x, y);
-        tile.alpha = 0;
+        tile.alpha = 1;
         spriteContainer.addChild(tile);
     }
     return tile;
+}
+
+function updateMapFOV(tileValues) {
+    var valueToTintDict = {
+        1: 0xFFFFFF, // Tile with value 1 is fully visible and is currently in player's field-of-vision
+        0.4: 0x333333 // Tile with value 0.4 is a previously explored tile that is NOT currently in player's field-of-vision.
+    }
+    Object.keys(tileValues).forEach(tileLocation => {
+        var t = mapSprites[tileLocation];
+        if(t) {
+            if (tileValues[tileLocation] != 0) {
+                t.alpha = 1;
+                t.tint = valueToTintDict[tileValues[tileLocation]];
+            } else {
+                t.alpha = 0;
+            }
+        }
+    });
 }
 
 /**
@@ -375,4 +402,74 @@ function clearApplication(app) {
         c.removeChildren();
     });
     app.stage.removeChildren();
+}
+
+/**
+ * keyboard
+ * Modified from code that appears in the PIXI tutorial.
+ * https://github.com/kittykatattack/learningPixi#textureatlas
+ * @param keyCode
+ */
+function keyboard(keyCode) {
+    let key = {};
+    key.code = keyCode;
+    key.isDown = false;
+    key.isUp = true;
+    key.press = undefined;
+    key.release = undefined;
+    //The `downHandler`
+    key.downHandler = event => {
+        if (event.keyCode === key.code) {
+            if (key.isUp && key.press) key.press();
+            key.isDown = true;
+            key.isUp = false;
+        }
+        event.preventDefault();
+    };
+
+    //The `upHandler`
+    key.upHandler = event => {
+        if (event.keyCode === key.code) {
+            if (key.isDown && key.release) key.release();
+            key.isDown = false;
+            key.isUp = true;
+        }
+        event.preventDefault();
+    };
+
+    //Attach event listeners
+    window.addEventListener(
+        'keydown', key.downHandler.bind(key), false
+    );
+    window.addEventListener(
+        'keyup', key.upHandler.bind(key), false
+    );
+    return key;
+}
+
+/**
+ * resize
+ * Code taken from stack overflow question that linked the js fiddle example.
+ * http://jsfiddle.net/2wjw043f/
+ * https://stackoverflow.com/questions/30554533/dynamically-resize-the-pixi-stage-and-its-contents-on-window-resize-and-window
+ * This function allows the PIXI application window to resize to fit the browser window.
+ */
+function resize() {
+    var ratio = APP_WIDTH / APP_HEIGHT;
+
+    if (window.innerWidth / window.innerHeight >= ratio) {
+        var w = window.innerHeight * ratio;
+        var h = window.innerHeight;
+    } else {
+        var w = window.innerWidth;
+        var h = window.innerWidth / ratio;
+    }
+    renderer.view.style.width = w * 0.8 + 'px';
+    renderer.view.style.height = h * 0.8 + 'px';
+
+
+    window.onresize = function (event) {
+        resize();
+    };
+
 }

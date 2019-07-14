@@ -84,6 +84,20 @@ class LabyrinthineFlight {
         }
         this.updatedSprites[x + ',' + y] = spriteName;
     }
+
+    getSpriteNames() {
+        var spriteList = {};
+        Object.keys(this.map.tiles).forEach(tileLocation => {
+            if (this.map.tiles[tileLocation].sprite) {
+                spriteList[tileLocation] = this.map.tiles[tileLocation].sprite;
+            }
+        });
+        return spriteList;
+    }
+
+    getFOV() {
+        return this.map.fov;
+    }
 }
 
 class Entity {
@@ -154,6 +168,8 @@ class DungeonMap {
          * 6. NPCs (including enemies)
          * 7. Interactables (signs, books)
          */
+        this.tiles = mapData.tiles;
+        this.fov = mapData.fov;
     }
 
 

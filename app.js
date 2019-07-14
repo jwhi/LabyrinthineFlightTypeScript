@@ -16,6 +16,9 @@ app.use('/assets', express.static(__dirname + '/public/assets'));
 app.get('/map', function (req, res) {
     res.sendFile(__dirname + '/public/map.html');
 });
+app.get('/test', function (req, res) {
+    res.sendFile(__dirname + '/public/Test.html');
+});
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });

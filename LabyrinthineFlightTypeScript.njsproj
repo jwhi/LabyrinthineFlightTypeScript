@@ -69,6 +69,9 @@
     <Content Include="public\javascripts\map-maker.js" />
     <Content Include="public\javascripts\pixi.min.js" />
     <Content Include="public\map.html" />
+    <Content Include="public\Test.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
