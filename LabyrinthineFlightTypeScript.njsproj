@@ -40,6 +40,9 @@
     <Content Include="private\names\keeperrl_female_names.txt" />
     <Content Include="private\names\keeperrl_male_names.txt" />
     <Content Include="private\names\nicknames.txt" />
+    <Content Include="public\assets\1bit-character-grid.png" />
+    <Content Include="public\assets\1bit-character.json" />
+    <Content Include="public\assets\1bit-character.png" />
     <Content Include="public\assets\1bit-expanded-grid.png" />
     <Content Include="public\assets\1bit-expanded.png" />
     <Content Include="public\assets\1bit-map-grid.png" />
