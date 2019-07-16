@@ -101,6 +101,8 @@ class Dungeon {
     }
     getFloorDataForClient({ includePlayerInfo = false } = {}) {
         var floor = this.getCurrentFloor();
+        this.player.x = floor.playerX;
+        this.player.y = floor.playerY;
         var returnObject = {
             map: this.getClientMapData(),
             enemies: floor.enemies,
@@ -749,11 +751,9 @@ class Floor {
 exports.Floor = Floor;
 class Player {
     constructor(name = null) {
-        this.name;
-        this.title;
-        this.x = 0,
-            this.y = 0,
-            this.health = 10;
+        this.x = 0;
+        this.y = 0;
+        this.health = 10;
         this.attack = [1, 2];
         if (name) {
             this.name = name;

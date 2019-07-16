@@ -49,6 +49,7 @@ let resources = loader.resources;
 
 // Map sprites stores all the map sprites currently drawn on the screen
 let mapSprites = {};
+let playerSprite = null;
 
 // PIXI can store sprites in a container. This allows all game sprites to be deleted
 // and redrawn easily after a player changes floors
@@ -57,6 +58,7 @@ let infoTiles = new PIXI.Container();
 
 // Stores the PIXI loader for all the map textures, initiated in setup function.
 let mapTextures;
+let characterTextures;
 let gameTextures;
 
 /* Graphic Renderers */
@@ -105,6 +107,7 @@ let gameInfoApp = new Application({
 // map is all the kenney 1-bit textures used for the map. kenney-1bit.json has player and enemy sprites. needs to be reorganized.
 loader.add('kenney-1bit', 'assets/1bit2x-expanded.json')
       .add('map', 'assets/1bit-map.json')
+      .add('characters', 'assets/1bit-character.json')
       .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
       .load(setup);
 
@@ -216,7 +219,10 @@ function setup() {
          */
         updateMapFOV(labyrinthineFlight.getFOV());
 
+        playerSprite = placeCharacterTile('basic_sword_shield', labyrinthineFlight.player.x * TILE_SIZE, labyrinthineFlight.player.y * TILE_SIZE);
+
         gameApp.stage.addChild(gameTiles);
+        gameApp.stage.addChild(playerSprite);
         renderer.render(gameApp.stage);
 
         // Draw items
@@ -244,6 +250,9 @@ function setup() {
          * Update player (field-of-vision, health)
          * Update map sprites' tint using player's field-of-vision
          */
+        labyrinthineFlight.processServerUpdate(worldTurnData);
+        updateMapFOV(labyrinthineFlight.getFOV());
+        renderer.render(gameApp.stage);
     });
 
     // If the player disconnects from the server, the server will no
@@ -282,9 +291,9 @@ function setup() {
     // to see the entire game board or find where the player is on the screen.
     resize();
 
-    // mapTextures is alias for all the texture atlas frame id textures
+    // mapTextures and characterTextures are aliases for all the texture atlas frame id textures
     mapTextures = resources['map'].textures;
-    
+    characterTextures = resources['characters'].textures;
     /**
      * Direct the application to go to the main menu
      * From the main menu players can select:
@@ -347,10 +356,53 @@ function play(delta) {
      *      a. Retrieves data from server for interaction (if not stored locally)
      *      b. End's player turn if player moved or attacked and will have server return enemy movements and other updates. 
      */
+    if (playerSprite.vx || playerSprite.vy) {
+        // heldButtonDelay is used in the directionHeld helper function.
+        // Declaring up here so only call playerDistanceFromEnemy once which decides if the player
+        // has to wait for the server before moving.
+        // The speed the player moves while holding down varies when there is an enemy close to them.
+        var heldButtonDelay = 170;
+
+        if (labyrinthineFlight.playerCanWalk(playerSprite.vx, playerSprite.vy)) {
+            var playerX;
+            var playerY;
+            [playerX, playerY] = labyrinthineFlight.playerMovement(playerSprite.vx, playerSprite.vy);
+            playerSprite.x = playerX * TILE_SIZE;
+            playerSprite.y = playerY * TILE_SIZE;
+            socket.emit('playerTurn', { x: playerX, y: playerY });
+            while (labyrinthineFlight.updatedSprites.length > 0) {
+                var tileLocation = labyrinthineFlight.updatedSprites.pop();
+                var x, y;
+                [x, y] = tileLocation.split(',');
+                mapSprites[tileLocation].texture = mapTextures[labyrinthineFlight.getSpriteName(x, y)];
+            }
+
+            renderer.render(gameApp.stage);
+
+            if (directionKeyHeld) {
+                xDirectionHeld = playerSprite.vx;
+                yDirectionHeld = playerSprite.vy;
+                timeoutFunction = setTimeout(function () {
+                    playerSprite.vx = xDirectionHeld;
+                    playerSprite.vy = yDirectionHeld;
+                    xDirectionHeld = 0;
+                    yDirectionHeld = 0;
+                    //ticker.start();
+
+                }, heldButtonDelay);
+            }
+            playerSprite.vx = 0;
+            playerSprite.vy = 0;
+        }
+    }
 }
 
 function placeMapTile(tileName, x, y) {
     return placeTile(gameTiles, mapTextures, tileName, x, y);
+}
+
+function placeCharacterTile(tileName, x, y) {
+    return placeTile(gameTiles, characterTextures, tileName, x, y);
 }
 
 /**
@@ -446,6 +498,57 @@ function keyboard(keyCode) {
     );
     return key;
 }
+
+// The directionPressed and directionReleased functions handle clearing the timeout function
+// which allows players hold down a direction instead of having to press the key every time they want to move
+function directionReleased() {
+    var inputObject;
+    if (state == menu) {
+        inputObject = menuInput;
+    } else {
+        inputObject = playerSprite;
+    }
+    clearTimeout(timeoutFunction);
+    directionKeyHeld = '';
+    inputObject.vx = 0;
+    inputObject.vy = 0;
+}
+function directionPressed(direction) {
+    // Start the ticker once a direction is pressed if manually controlling pixi ticker.
+    //ticker.start();
+    clearTimeout(timeoutFunction);
+    var inputObject;
+    if (state == menu) {
+        inputObject = menuInput;
+    } else {
+        inputObject = playerSprite;
+    }
+    if (direction != directionKeyHeld) {
+        directionKeyHeld = direction;
+        switch (direction) {
+            case 'U':
+                inputObject.vy = -1;
+                inputObject.vx = 0;
+                break;
+            case 'D':
+                inputObject.vy = 1;
+                inputObject.vx = 0;
+                break;
+            case 'L':
+                inputObject.vx = -1;
+                inputObject.vy = 0;
+                break;
+            case 'R':
+                inputObject.vx = 1;
+                inputObject.vy = 0;
+                break;
+            default:
+                directionReleased();
+                break;
+        }
+    }
+}
+
 
 /**
  * resize

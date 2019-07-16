@@ -12,7 +12,7 @@ class LabyrinthineFlight {
     constructor(mapInformation, playerInformation, fovData) {
         this.width = 75;
         this.height = 40;
-        this.updatedSprites = {};
+        this.updatedSprites = [];
         this.player = new Player(playerInformation.name, playerInformation.title, playerInformation.x, playerInformation.y);
         this.map = new DungeonMap(mapInformation);
     }
@@ -36,16 +36,31 @@ class LabyrinthineFlight {
         }
         return true;
     }
+    // xMovement and yMovement are relative to player's position
+    playerCanWalk(xMovement, yMovement) {
+        return this.canWalk(this.player.x + xMovement, this.player.y + yMovement);
+    }
     movePlayer(x, y) {
         this.player.setLocation(x, y);
         if (this.getAsciiTile(x, y) === '+') {
             this.setAsciiTile(x, y, '-');
             this.setSpriteName(x, y, 'door_open');
+            this.updatedSprites.push(x + ',' + y);
         }
         else if (this.getAsciiTile(x, y) === '╣') {
             this.setAsciiTile(x, y, '╠');
             this.setSpriteName(x, y, 'metal_gate_open');
+            this.updatedSprites.push(x + ',' + y);
         }
+    }
+    playerMovement(xDirection, yDirection) {
+        if (this.playerCanWalk(xDirection, yDirection)) {
+            var newPositionX = this.player.x + xDirection;
+            var newPositionY = this.player.y + yDirection;
+            this.movePlayer(newPositionX, newPositionY);
+            return [newPositionX, newPositionY];
+        }
+        return [this.player.x, this.player.y];
     }
     getAsciiTile(x, y) {
         if (this.map.tiles[x + "," + y]) {
@@ -87,6 +102,12 @@ class LabyrinthineFlight {
     }
     getFOV() {
         return this.map.fov;
+    }
+    processServerUpdate(updateInfo) {
+        console.log(updateInfo);
+        Object.keys(updateInfo.fov).forEach(tileLocation => {
+            this.map.fov[tileLocation] = updateInfo.fov[tileLocation];
+        });
     }
 }
 class Entity {
