@@ -123,7 +123,6 @@ class Dungeon {
         this.player.y = floor.playerY;
         var returnObject = {
             map: this.getClientMapData(),
-            enemies: floor.enemies,
             playerX: floor.playerX,
             playerY: floor.playerY,
             player: null
@@ -184,18 +183,19 @@ class Dungeon {
         return {
             tiles: this.getCurrentFloor().getMap().tiles,
             fov: this.mapAlphaValues(),
+            npcs: this.getCurrentFloor().getMap().npcs
         }
     }
 }
 
 class Floor {
-    map: Map;
+    map: DungeonMap;
     width: number;
     height: number;
     playerX: number;
     playerY: number;
     levelNumber: number;
-    enemies: Enemy[] = [];
+    characters: NPC[] = [];
     rooms;
     dijkstra;
     // Map Explored also contains the FOV for the player
@@ -212,7 +212,7 @@ class Floor {
             // TownData will get updated by players, so doors will be opened by previous players...
             // This parse(stringify(TownData)) creates a fresh copy of the original town data for all players.
             var mapData = JSON.parse(JSON.stringify(TownData));
-            this.map = new Map(mapData);
+            this.map = new DungeonMap(mapData);
             this.playerX = 32;
             this.playerY = 31;
             return;
@@ -320,7 +320,7 @@ class Floor {
         this.playerY = this.rooms[roomID].getCenter()[1];
 
         // Initiate Enemies and Dijkstra path-finding passed function
-        this.placeEnemies();
+        //this.placeEnemies();
         this.dijkstra = new ROT.Path.Dijkstra(this.playerX, this.playerY, function (x, y) {
             if (this.map) {
                 return ((this.map[x + ',' + y] === '.') || (this.map[x + ',' + y] === ',') || (this.map[x + ',' + y] === '-') || (this.map[x + ',' + y] === '+') || (this.map[x + ',' + y] === '`'))
@@ -450,6 +450,7 @@ class Floor {
                 return true;
         }
     }
+    /*
     placeEnemies() {
         var enemyStartRoom, enemyX, enemyY, attempts = 0;
         // TODO: Improve enemy placement
@@ -474,7 +475,7 @@ class Floor {
             }
         }
         return null;
-    }
+    }*/
     generateTileData() {
         // Instead of placing individual tiles, store all tile sprites together in an array
         // in the layout of map[x+","+y] with the key being tile coordinates. This will allow
@@ -794,17 +795,23 @@ class Floor {
     }
 }
 
-class Player {
-    name: string;
-    title: string;
+class Entity {
     x: number;
     y: number;
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Player extends Entity {
+    name: string;
+    title: string;
     health: number;
     attack: number[];
 
     constructor(name = null) {
-        this.x = 0;
-        this.y = 0;
+        super(0, 0);
         this.health = 10;
         this.attack = [1, 2];
 
@@ -818,10 +825,8 @@ class Player {
     }
 }
 
-class Enemy {
+class Enemy extends Entity {
     name: string;
-    x: number;
-    y: number;
     health: number;
     attack: number[];
     accuracy: number;
@@ -832,6 +837,7 @@ class Enemy {
     maxHealth: number;
     
     constructor(name, x, y) {
+        super(x, y);
         this.name = name;
         this.x = x;
         this.y = y;
@@ -869,8 +875,23 @@ class Enemy {
     }
 }
 
-class Map {
+class NPC extends Entity {
+    name: string;
+    ascii: string;
+    sprite: string;
+    hostile: boolean;
+    constructor(npcInfo) {
+        super(npcInfo.x, npcInfo.y);
+        this.name = npcInfo.name;
+        this.ascii = npcInfo.symbol;
+        this.sprite = npcInfo.sprite;
+        this.hostile = npcInfo.hostile;
+    }
+}
+
+class DungeonMap {
     tiles = {};
+    npcs;
     constructor(townData: Object) {
         var tilesData = {};
         if (townData.hasOwnProperty("tiles")) {
@@ -880,6 +901,9 @@ class Map {
             tilesData[tileLocation] = new Tile(tilesData[tileLocation]);
         });
         this.tiles = tilesData;
+        if (townData.hasOwnProperty("npcs")) {
+            this.npcs = (<any>townData).npcs;
+        }
     }
 
     getAsciiTiles() {
@@ -949,4 +973,4 @@ class Door extends Interactable {
     locked: boolean = false;
 }
 
-export { Dungeon, Floor, Enemy, getPlayerName, getPlayerTitle };
+export { Dungeon, Floor, NPC, Enemy, getPlayerName, getPlayerTitle };

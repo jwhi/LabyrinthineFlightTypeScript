@@ -105,7 +105,6 @@ class Dungeon {
         this.player.y = floor.playerY;
         var returnObject = {
             map: this.getClientMapData(),
-            enemies: floor.enemies,
             playerX: floor.playerX,
             playerY: floor.playerY,
             player: null
@@ -163,13 +162,14 @@ class Dungeon {
         return {
             tiles: this.getCurrentFloor().getMap().tiles,
             fov: this.mapAlphaValues(),
+            npcs: this.getCurrentFloor().getMap().npcs
         };
     }
 }
 exports.Dungeon = Dungeon;
 class Floor {
     constructor(width, height, levelNumber, spawnOnDownStairs = false) {
-        this.enemies = [];
+        this.characters = [];
         // Map Explored also contains the FOV for the player
         this.mapExplored = {};
         this.width = width;
@@ -179,7 +179,7 @@ class Floor {
             // TownData will get updated by players, so doors will be opened by previous players...
             // This parse(stringify(TownData)) creates a fresh copy of the original town data for all players.
             var mapData = JSON.parse(JSON.stringify(startingTown_json_1.default));
-            this.map = new Map(mapData);
+            this.map = new DungeonMap(mapData);
             this.playerX = 32;
             this.playerY = 31;
             return;
@@ -286,7 +286,7 @@ class Floor {
         this.playerX = this.rooms[roomID].getCenter()[0];
         this.playerY = this.rooms[roomID].getCenter()[1];
         // Initiate Enemies and Dijkstra path-finding passed function
-        this.placeEnemies();
+        //this.placeEnemies();
         this.dijkstra = new ROT.Path.Dijkstra(this.playerX, this.playerY, function (x, y) {
             if (this.map) {
                 return ((this.map[x + ',' + y] === '.') || (this.map[x + ',' + y] === ',') || (this.map[x + ',' + y] === '-') || (this.map[x + ',' + y] === '+') || (this.map[x + ',' + y] === '`'));
@@ -414,6 +414,7 @@ class Floor {
                 return true;
         }
     }
+    /*
     placeEnemies() {
         var enemyStartRoom, enemyX, enemyY, attempts = 0;
         // TODO: Improve enemy placement
@@ -432,12 +433,13 @@ class Floor {
     getEnemyAt(x, y) {
         for (var i = 0; i < this.enemies.length; i++) {
             var enemy = this.enemies[i];
+
             if (enemy.x == x && enemy.y == y) {
                 return enemy;
             }
         }
         return null;
-    }
+    }*/
     generateTileData() {
         // Instead of placing individual tiles, store all tile sprites together in an array
         // in the layout of map[x+","+y] with the key being tile coordinates. This will allow
@@ -749,10 +751,15 @@ class Floor {
     }
 }
 exports.Floor = Floor;
-class Player {
+class Entity {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+class Player extends Entity {
     constructor(name = null) {
-        this.x = 0;
-        this.y = 0;
+        super(0, 0);
         this.health = 10;
         this.attack = [1, 2];
         if (name) {
@@ -764,8 +771,9 @@ class Player {
         this.title = getPlayerTitle();
     }
 }
-class Enemy {
+class Enemy extends Entity {
     constructor(name, x, y) {
+        super(x, y);
         this.char = "";
         this.loot = [];
         this.description = "";
@@ -807,7 +815,17 @@ class Enemy {
     }
 }
 exports.Enemy = Enemy;
-class Map {
+class NPC extends Entity {
+    constructor(npcInfo) {
+        super(npcInfo.x, npcInfo.y);
+        this.name = npcInfo.name;
+        this.ascii = npcInfo.symbol;
+        this.sprite = npcInfo.sprite;
+        this.hostile = npcInfo.hostile;
+    }
+}
+exports.NPC = NPC;
+class DungeonMap {
     constructor(townData) {
         this.tiles = {};
         var tilesData = {};
@@ -818,6 +836,9 @@ class Map {
             tilesData[tileLocation] = new Tile(tilesData[tileLocation]);
         });
         this.tiles = tilesData;
+        if (townData.hasOwnProperty("npcs")) {
+            this.npcs = townData.npcs;
+        }
     }
     getAsciiTiles() {
         var asciiTiles = {};

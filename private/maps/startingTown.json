@@ -164,6 +164,57 @@
     }
   },
   "fov": {},
+  "npcs": {
+    "5,12": {
+      "_comment":  "Blacksmith",
+      "name": "Blacksmith",
+      "sprite": "townsperson_3",
+      "ascii":  "☺",
+      "hostile": false
+    },
+    "14,28": {
+      "_comment": "Alchemist",
+      "name": "Alchemist",
+      "sprite": "robe_hood",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "34,12": {
+      "_comment": "Bar patron",
+      "name": "Patron",
+      "sprite": "dwarf_2",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "36,9": {
+      "_comment": "Bar patron",
+      "name": "Patron",
+      "sprite": "townsperson_1",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "37,3": {
+      "_comment": "Bar Chef",
+      "name": "Chef",
+      "sprite": "townsperson_4",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "37,7": {
+      "_comment": "Bar patron",
+      "name": "Patron",
+      "sprite": "cane",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "54,8": {
+      "_comment": "Church man",
+      "name": "Priest",
+      "sprite": "mystery_6",
+      "ascii": "☺",
+      "hostile": false
+    }
+  },
   "tiles": {
     "_comment": {
       "ascii": "These values are used to detect walkable tiles, player's field-of-vision, and more. Key is (x,y) coordinates on the map starting at top-left. Ideally the game is playable without graphics and only using these characters for graphics.",

@@ -49,6 +49,7 @@ let resources = loader.resources;
 
 // Map sprites stores all the map sprites currently drawn on the screen
 let mapSprites = {};
+let characterSprites = {};
 let playerSprite = null;
 
 // PIXI can store sprites in a container. This allows all game sprites to be deleted
@@ -212,6 +213,12 @@ function setup() {
             var x, y;
             [x, y] = tileLocation.split(',');
             mapSprites[tileLocation] = placeMapTile(spriteToDraw[tileLocation], x * TILE_SIZE, y * TILE_SIZE);
+        });
+
+        // Draw NPCs to the screen
+        var charactersToDraw = labyrinthineFlight.getCharacterSprites();
+        charactersToDraw.forEach(npc => {
+            characterSprites[npc.x + ',' + npc.y] = placeCharacterTile(npc.sprite, npc.x * TILE_SIZE, npc.y * TILE_SIZE);
         });
 
         /*
@@ -431,12 +438,21 @@ function updateMapFOV(tileValues) {
     }
     Object.keys(tileValues).forEach(tileLocation => {
         var t = mapSprites[tileLocation];
+        var c = characterSprites[tileLocation];
         if(t) {
             if (tileValues[tileLocation] != 0) {
                 t.alpha = 1;
                 t.tint = valueToTintDict[tileValues[tileLocation]];
+                
             } else {
                 t.alpha = 0;
+            }
+        }
+        if (c) {
+            if (tileValues[tileLocation] == 1) {
+                c.alpha = 1;
+            } else {
+                c.alpha = 0;
             }
         }
     });

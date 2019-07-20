@@ -15,7 +15,7 @@ class LabyrinthineFlight {
     height: number = 40;
     map: DungeonMap;
     updatedSprites = [];
-    constructor(mapInformation, playerInformation, fovData) {
+    constructor(mapInformation, playerInformation) {
         this.player = new Player(playerInformation.name, playerInformation.title, playerInformation.x, playerInformation.y);
         this.map = new DungeonMap(mapInformation);
     }
@@ -118,10 +118,17 @@ class LabyrinthineFlight {
     }
 
     processServerUpdate(updateInfo) {
-        console.log(updateInfo);
         Object.keys(updateInfo.fov).forEach(tileLocation => {
             this.map.fov[tileLocation] = updateInfo.fov[tileLocation];
         })
+    }
+
+    getCharacterSprites() {
+        var characterSprites = [];
+        this.map.characters.forEach(npc => {
+            characterSprites.push({ x: npc.x, y: npc.y, sprite: npc.sprite });
+        })
+        return characterSprites;
     }
 }
 
@@ -162,19 +169,21 @@ class NPC extends Entity {
     name: string;
     ascii: string;
     sprite: string;
+    hostile: boolean;
 
     constructor(npcInfo) {
         super(npcInfo.x, npcInfo.y);
         this.name = npcInfo.name;
         this.ascii = npcInfo.symbol;
         this.sprite = npcInfo.sprite;
+        this.hostile = npcInfo.hostile;
     }
 }
 
-class Enemy extends Entity {
+class Enemy extends NPC {
     attack: number;
     constructor(enemyInfo) {
-        super(enemyInfo.x, enemyInfo.y)
+        super(enemyInfo);
         this.attack = enemyInfo.attack;
     }
 }
@@ -182,6 +191,7 @@ class Enemy extends Entity {
 class DungeonMap {
     tiles = {};
     fov = {};
+    characters: NPC[] = [];
     constructor(mapData) {
         /**
          * Contains:
@@ -195,6 +205,16 @@ class DungeonMap {
          */
         this.tiles = mapData.tiles;
         this.fov = mapData.fov;
+        if (mapData.npcs) {
+            Object.keys(mapData.npcs).forEach(characterLocation => {
+                var x, y;
+                [x, y] = characterLocation.split(',');
+                var savedCharacter = mapData.npcs[characterLocation];
+                savedCharacter.x = x;
+                savedCharacter.y = y;
+                this.characters.push(new NPC(savedCharacter));
+            });
+        }
     }
 
 

@@ -95,19 +95,21 @@ io.on('connection', function (socket) {
             if (playerTurnData.x && playerTurnData.y) {
                 /* CALCULATING PLAYER'S TURN */
                 // COMBAT: Player possible attacks enemy
-                var playerAttackingEnemy = dungeon.getCurrentFloor().getEnemyAt(playerTurnData.x, playerTurnData.y);
+                /*
+                 * var playerAttackingEnemy = dungeon.getCurrentFloor().getEnemyAt(playerTurnData.x, playerTurnData.y);
                 if (playerAttackingEnemy && playerAttackingEnemy.health > 0) {
                     // Player tried to move to a tile with an enemy that has health.
                     // Player attacks the enemy.
                     // Player can have different attack values. Ideally this will be affected by their skills. Right now it chooses a random value in their attack array.
                     var playerDamage = dungeon.player.attack[Math.floor(Math.random() * dungeon.player.attack.length)];
                     playerAttackingEnemy.health -= playerDamage;
-                }
-                else {
-                    // If there isn't an alive enemy in the tile, move the player
-                    dungeon.getCurrentFloor().setPlayerPosition(playerTurnData.x, playerTurnData.y);
-                }
+                } else {
+                */
+                // If there isn't an alive enemy in the tile, move the player
+                dungeon.getCurrentFloor().setPlayerPosition(playerTurnData.x, playerTurnData.y);
+                //}
                 var currentPlayerPosition = dungeon.getCurrentFloor().getPlayerPosition();
+                /*
                 dungeon.getCurrentFloor().enemies.forEach(function (element) {
                     if (element.health > 0) {
                         var enemy = new Rogue.Enemy(element.name, element.x, element.y);
@@ -123,27 +125,26 @@ io.on('connection', function (socket) {
                                 if (dungeon.player.health < 0) {
                                     dungeon.player.health = 0;
                                 }
-                            }
-                            else {
+                            } else {
                                 // Tile is free of player.
                                 // Enemy is able to move to the spot.
                                 element.x = moveTo.x;
                                 element.y = moveTo.y;
                             }
-                        }
-                        else {
+                        } else {
                             // Should only be called when player is on the enemy. This shouldn't happen
                             // often so we just instantly kill the enemy.
                             element.x = playerTurnData.x;
                             element.y = playerTurnData.y;
                             element.health = 0;
+
                         }
                         if (dungeon.getCurrentFloor().map.asciiTiles[element.x + ',' + element.y] == '+') {
                             dungeon.getCurrentFloor().map.asciiTiles[element.x + ',' + element.y] = '-';
                             updatedMapTiles[element.x + ',' + element.y] = '-';
                         }
                     }
-                });
+                });*/
             }
             dungeon.mapAlphaValues();
             if (Object.keys(updatedMapTiles).length > 0) {

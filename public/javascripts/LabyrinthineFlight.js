@@ -9,7 +9,7 @@
  *
  */
 class LabyrinthineFlight {
-    constructor(mapInformation, playerInformation, fovData) {
+    constructor(mapInformation, playerInformation) {
         this.width = 75;
         this.height = 40;
         this.updatedSprites = [];
@@ -104,10 +104,16 @@ class LabyrinthineFlight {
         return this.map.fov;
     }
     processServerUpdate(updateInfo) {
-        console.log(updateInfo);
         Object.keys(updateInfo.fov).forEach(tileLocation => {
             this.map.fov[tileLocation] = updateInfo.fov[tileLocation];
         });
+    }
+    getCharacterSprites() {
+        var characterSprites = [];
+        this.map.characters.forEach(npc => {
+            characterSprites.push({ x: npc.x, y: npc.y, sprite: npc.sprite });
+        });
+        return characterSprites;
     }
 }
 class Entity {
@@ -141,11 +147,12 @@ class NPC extends Entity {
         this.name = npcInfo.name;
         this.ascii = npcInfo.symbol;
         this.sprite = npcInfo.sprite;
+        this.hostile = npcInfo.hostile;
     }
 }
-class Enemy extends Entity {
+class Enemy extends NPC {
     constructor(enemyInfo) {
-        super(enemyInfo.x, enemyInfo.y);
+        super(enemyInfo);
         this.attack = enemyInfo.attack;
     }
 }
@@ -153,6 +160,7 @@ class DungeonMap {
     constructor(mapData) {
         this.tiles = {};
         this.fov = {};
+        this.characters = [];
         /**
          * Contains:
          * 1. Player X,Y
@@ -165,6 +173,16 @@ class DungeonMap {
          */
         this.tiles = mapData.tiles;
         this.fov = mapData.fov;
+        if (mapData.npcs) {
+            Object.keys(mapData.npcs).forEach(characterLocation => {
+                var x, y;
+                [x, y] = characterLocation.split(',');
+                var savedCharacter = mapData.npcs[characterLocation];
+                savedCharacter.x = x;
+                savedCharacter.y = y;
+                this.characters.push(new NPC(savedCharacter));
+            });
+        }
     }
 }
 class Interactable {
