@@ -171,7 +171,8 @@ function setup() {
 
     space.press = () => {
         // TODO: Make generic interaction key.
-        useStairs();
+        socket.emit('interact')
+        // useStairs();
     }
 
 

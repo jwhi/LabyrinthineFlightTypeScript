@@ -171,6 +171,10 @@ io.on('connection', function (socket) {
             socket.emit('missing', 'no dungeon');
         }
     });
+    socket.on('interact', function () {
+        var nearbyInteractables = dungeon.getPlayerInteractables();
+        socket.emit('debug', nearbyInteractables);
+    });
 });
 
 process.stdout.write(

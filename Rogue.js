@@ -7,6 +7,10 @@ const ROT = require("rot-js");
 const fs = require("fs");
 const os = require("os");
 const startingTown_json_1 = __importDefault(require("./private/maps/startingTown.json"));
+const mapWidth = 75;
+const mapHeight = 40;
+const playerFOVRadius = 8;
+const previouslyExploredAlpha = 0.4;
 // #: Room wall
 // &: Hallway wall
 // %: Cave wall
@@ -66,10 +70,6 @@ function getPlayerTitle() {
     return ('the ' + adjective + ' ' + nickname);
 }
 exports.getPlayerTitle = getPlayerTitle;
-const mapWidth = 75;
-const mapHeight = 40;
-const playerFOVRadius = 8;
-const previouslyExploredAlpha = 0.4;
 class Dungeon {
     constructor(seed, floorNumber = 0, furthestFloor = floorNumber) {
         this.floorNumber = floorNumber;
@@ -131,6 +131,34 @@ class Dungeon {
             return true;
         }
         return false;
+    }
+    getPlayerInteractables() {
+        var nearbyInteractables = {};
+        var mapInteractables = this.getCurrentFloor().getInteractables();
+        // Check map for signs, people, stairs, doors, books, etc. in player's area
+        var playerInteractableReach = this.player.getNeighboringPositions();
+        Object.keys(mapInteractables).forEach(interactable => {
+            playerInteractableReach.forEach(tileLocation => {
+                var objectAtLocation = mapInteractables[interactable][tileLocation];
+                if (objectAtLocation) {
+                    // There is an interactable here
+                    if (!nearbyInteractables[interactable]) {
+                        nearbyInteractables[interactable] = {};
+                    }
+                    nearbyInteractables[interactable][tileLocation] = mapInteractables[interactable][tileLocation];
+                }
+            });
+        });
+        var mapNPCs = this.getCurrentFloor().getMap().npcs;
+        playerInteractableReach.forEach(tileLocation => {
+            if (mapNPCs[tileLocation]) {
+                if (!nearbyInteractables['npcs']) {
+                    nearbyInteractables['npcs'] = {};
+                }
+                nearbyInteractables['npcs'][tileLocation] = mapNPCs[tileLocation];
+            }
+        });
+        return nearbyInteractables;
     }
     /** mapAlphaValues
      *
@@ -749,12 +777,38 @@ class Floor {
             return newNumber;
         }
     }
+    getInteractables() {
+        return this.map.interactables;
+    }
 }
 exports.Floor = Floor;
 class Entity {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+    }
+    getPositionString() {
+        return `${this.x},${this.y}`;
+    }
+    setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    getNeighboringPositions() {
+        // Used to get the tiles x-1, x, x+1 and y-1, y, y+1 easily using some loops
+        var touchingTilesReach = [-1, 0, 1];
+        var neighboringTilesString = [];
+        touchingTilesReach.forEach(xMod => {
+            touchingTilesReach.forEach(yMod => {
+                var tileX = this.x + xMod;
+                var tileY = this.y + yMod;
+                if (tileX >= 0 && tileX < mapWidth &&
+                    tileY >= 0 && tileY < mapHeight) {
+                    neighboringTilesString.push(`${tileX},${tileY}`);
+                }
+            });
+        });
+        return neighboringTilesString;
     }
 }
 class Player extends Entity {
@@ -838,6 +892,9 @@ class DungeonMap {
         this.tiles = tilesData;
         if (townData.hasOwnProperty("npcs")) {
             this.npcs = townData.npcs;
+        }
+        if (townData.hasOwnProperty("interactables")) {
+            this.interactables = townData.interactables;
         }
     }
     getAsciiTiles() {

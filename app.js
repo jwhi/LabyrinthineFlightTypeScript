@@ -162,6 +162,10 @@ io.on('connection', function (socket) {
             socket.emit('missing', 'no dungeon');
         }
     });
+    socket.on('interact', function () {
+        var nearbyInteractables = dungeon.getPlayerInteractables();
+        socket.emit('debug', nearbyInteractables);
+    });
 });
 process.stdout.write(String.fromCharCode(27) + "]0;" + "Labyrinthine Flight Server" + String.fromCharCode(7));
 server.listen(PORT, function () {
