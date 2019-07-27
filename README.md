@@ -14,7 +14,7 @@ Key to ASCII tiles being used for maps and used to assign sprites.
 | %                           | Cave Wall         | µ                           | Sign            |                         |             | ,                       | Hallway Floor         |
 | ♠                           | Tree              | ╤                           | Table           |                         |             | `                       | Cave Floor            |
 | ƒ                           | Tree Trunk        | ☼                           | Fire            |                         |             | "                       | path                  |
-| ╬                           | Furniture         | :                           | Pile of rubble  |                         |             | -                       | Open Door             |
+|                             |                   | :                           | Pile of rubble  |                         |             | -                       | Open Door             |
 | ☺                           | NPC with Dialogue | Φ                           | Lights          |                         |             | <                       | Stairs Up             |
 | ☻                           | Generic NPC       | ═                           | Bookcase        |                         |             | >                       | Stairs Down           |
 |                             |                   | ≈                           | Deep Water      |                         |             | Θ                       | Bed                   |
@@ -24,4 +24,4 @@ Key to ASCII tiles being used for maps and used to assign sprites.
 |                             |                   | ₧                           | Opened Book     |                         |             | ╠                       | Opened Gate           |
 |                             |                   | ╦                           | Small Furniture |                         |             | ⌡                       | Dead Bush             |
 |                             |                   | Ω                           | Skull           |                         |             | ⁿ                       | Plant                 |
-|                             |                   |                             |                 |                         |             | ░                       | Crops                 |
+|                             |                   | ╬                           | Furniture       |                         |             | ░                       | Crops                 |

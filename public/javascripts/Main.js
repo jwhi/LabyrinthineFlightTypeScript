@@ -181,8 +181,11 @@ function setup() {
     socket = io();
     
     // When the page receives these packets, update the webpage as needed
-    socket.on('debug', function(message) {
-        console.log(message);
+    socket.on('debug', function (message) {
+        if (message && JSON.stringify(message) != '{}') {
+            console.log(message);
+            alert(JSON.stringify(message));
+        }
     });
     // The dungeon object received from the server. Defined in the server's Rogue.js file
     // Dungeons are only received at the start of games and when player travels up or down a staircase.

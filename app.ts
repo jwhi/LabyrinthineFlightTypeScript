@@ -172,8 +172,12 @@ io.on('connection', function (socket) {
         }
     });
     socket.on('interact', function () {
-        var nearbyInteractables = dungeon.getPlayerInteractables();
-        socket.emit('debug', nearbyInteractables);
+        if (dungeon) {
+            var nearbyInteractables = dungeon.getPlayerInteractables();
+            socket.emit('debug', nearbyInteractables);
+        } else {
+            socket.emit('debug', "Please refresh the page. Progress will be lost. Lost connection to server.");
+        }
     });
 });
 

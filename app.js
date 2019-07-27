@@ -163,8 +163,13 @@ io.on('connection', function (socket) {
         }
     });
     socket.on('interact', function () {
-        var nearbyInteractables = dungeon.getPlayerInteractables();
-        socket.emit('debug', nearbyInteractables);
+        if (dungeon) {
+            var nearbyInteractables = dungeon.getPlayerInteractables();
+            socket.emit('debug', nearbyInteractables);
+        }
+        else {
+            socket.emit('debug', "Please refresh the page. Progress will be lost. Lost connection to server.");
+        }
     });
 });
 process.stdout.write(String.fromCharCode(27) + "]0;" + "Labyrinthine Flight Server" + String.fromCharCode(7));

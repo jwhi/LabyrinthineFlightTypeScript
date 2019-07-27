@@ -166,19 +166,34 @@
   "fov": {},
   "npcs": {
     "5,12": {
-      "_comment":  "Blacksmith",
+      "_comment": "Blacksmith (behind table)",
       "name": "Blacksmith",
       "sprite": "townsperson_3",
-      "ascii":  "☺",
+      "ascii": "☺",
+      "hostile": false
+    },
+    "6,12": {
+      "_comment": "Blacksmith",
+      "name": "Blacksmith",
+      "sprite": "blank",
+      "ascii": " ",
       "hostile": false
     },
     "14,28": {
-      "_comment": "Alchemist",
+      "_comment": "Alchemist (behind table)",
       "name": "Alchemist",
       "sprite": "robe_hood",
       "ascii": "☺",
       "hostile": false
     },
+    "14,27": {
+      "_comment": "Alchemist",
+      "name": "Alchemist",
+      "sprite": "blank",
+      "ascii": " ",
+      "hostile": false
+    },
+
     "34,12": {
       "_comment": "Bar patron",
       "name": "Patron",
@@ -208,10 +223,17 @@
       "hostile": false
     },
     "54,8": {
-      "_comment": "Church man",
+      "_comment": "Church man (behind table)",
       "name": "Priest",
       "sprite": "mystery_6",
       "ascii": "☺",
+      "hostile": false
+    },
+    "54,9": {
+      "_comment": "Church man",
+      "name": "Priest",
+      "sprite": "blank",
+      "ascii": " ",
       "hostile": false
     }
   },

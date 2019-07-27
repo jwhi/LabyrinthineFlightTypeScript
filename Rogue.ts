@@ -20,9 +20,9 @@ const WALL_TILES = ['#', '&', '%'];
 // `: Cave floor
 const FLOOR_TILES = ['.', ',', '`'];
 
-const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '╬', '☺', '☻'];
+const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '☺', '☻'];
 
-const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '₧', '╦', 'Ω'];
+const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '╬', '₧', '╦', 'Ω'];
 
 const TILES_WALKABLE_BLOCKS_LIGHT = ['+','⌠'];
 
@@ -845,6 +845,26 @@ class Entity {
         this.y = y;
     }
     getNeighboringPositions() {
+        // Used to get the tiles x-1, x, x+1 and y-1, y, y+1 easily using some loops
+        var touchingTilesReach = [-1, 0, 1];
+        var neighboringTilesString = [`${this.x},${this.y}`];
+
+        touchingTilesReach.forEach(xMod => {
+            touchingTilesReach.forEach(yMod => {
+                if (Math.abs(xMod) != Math.abs(yMod)) {
+                    var tileX = this.x + xMod;
+                    var tileY = this.y + yMod;
+                    if (tileX >= 0 && tileX < mapWidth &&
+                        tileY >= 0 && tileY < mapHeight) {
+                        neighboringTilesString.push(`${tileX},${tileY}`);
+                    }
+                }
+            });
+        });
+        return neighboringTilesString;
+    }
+    // This function covers tiles diagonal from entity
+    getAllNeighboringPositions() {
         // Used to get the tiles x-1, x, x+1 and y-1, y, y+1 easily using some loops
         var touchingTilesReach = [-1, 0, 1];
         var neighboringTilesString = [];
