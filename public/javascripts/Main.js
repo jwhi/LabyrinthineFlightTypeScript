@@ -182,11 +182,13 @@ function setup() {
     
     // When the page receives these packets, update the webpage as needed
     socket.on('debug', function (message) {
-        if (message && JSON.stringify(message) != '{}') {
-            console.log(message);
-            alert(JSON.stringify(message));
-        }
+        console.log(message);
     });
+
+    socket.on('alert', function (message) {
+        alert(message);
+    });
+
     // The dungeon object received from the server. Defined in the server's Rogue.js file
     // Dungeons are only received at the start of games and when player travels up or down a staircase.
     socket.on('dungeon', function(gameData) {
@@ -264,6 +266,16 @@ function setup() {
         labyrinthineFlight.processServerUpdate(worldTurnData);
         updateMapFOV(labyrinthineFlight.getFOV());
         renderer.render(gameApp.stage);
+    });
+
+    socket.on('interactables', function (interactables) {
+        if (interactables && JSON.stringify(interactables) != '{}') {
+            //console.log(message);
+            alert(JSON.stringify(interactables));
+            // Display window with interaction text.
+        } else {
+            // Display message that there is nothing to interact with.
+        }
     });
 
     // If the player disconnects from the server, the server will no
