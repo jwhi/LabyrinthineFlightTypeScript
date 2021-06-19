@@ -347,9 +347,11 @@ function setup() {
         comma.press = () => {
             useStairs('<');
         };
-
+        
         space.press = () => {
-            useStairs();
+            // TODO: Make generic interaction key.
+            socket.emit('interact')
+            // useStairs();
         }
     }
     socketFunctionSetup();
@@ -481,13 +483,15 @@ function socketFunctionSetup() {
         // HACK: If enemy is not on the screen, don't snap player to the position last received by the server.
         // This will prevent player rubber banding when the enemy is off screen or defeated.
         var enemyCloseToPlayer = false;
-        for (var i = 0; i < level.enemies.length; i++) {
-            var playerLocation = { x: getPlayerX(), y: getPlayerY() };
-            var enemyLocation = { x: level.enemies[i].x, y: level.enemies[i].y };
-            var playerDistanceFromEnemy = Math.ceil(Math.sqrt(Math.pow(playerLocation.x - enemyLocation.x, 2) + Math.pow(playerLocation.y - enemyLocation.y, 2)))
-            if (playerDistanceFromEnemy < 6 && level.enemies[i].health > 0) {
-                // Enemy is closer than 6 tiles away. Updating player location from server.
-                enemyCloseToPlayer = true;
+        if (level.enemies) {
+            for (var i = 0; i < level.enemies.length; i++) {
+                var playerLocation = { x: getPlayerX(), y: getPlayerY() };
+                var enemyLocation = { x: level.enemies[i].x, y: level.enemies[i].y };
+                var playerDistanceFromEnemy = Math.ceil(Math.sqrt(Math.pow(playerLocation.x - enemyLocation.x, 2) + Math.pow(playerLocation.y - enemyLocation.y, 2)))
+                if (playerDistanceFromEnemy < 6 && level.enemies[i].health > 0) {
+                    // Enemy is closer than 6 tiles away. Updating player location from server.
+                    enemyCloseToPlayer = true;
+                }
             }
         }
         if (worldTurnData.player && enemyCloseToPlayer) {
@@ -781,19 +785,20 @@ function play(delta) {
         var heldButtonDelay = 170;
 
         var enemyCloseToPlayer = false;
-
-        for (var i = 0; i < level.enemies.length; i++) {
-            // Enemy sprite's alpha is 0 if they are hidden. 1 if visible.
-            // Enemy remains have alpha 1, so make sure the enemy has health before slowing player.
-            var playerLocation = {x: getPlayerX(), y: getPlayerY()};
-            var enemyLocation = { x: level.enemies[i].x, y: level.enemies[i].y };
-            var playerDistanceFromEnemy = Math.ceil(Math.sqrt(Math.pow(playerLocation.x - enemyLocation.x, 2) + Math.pow(playerLocation.y - enemyLocation.y, 2)))
-            if (enemySprites[i].alpha == 1 && playerDistanceFromEnemy <= 3 && level.enemies[i].health > 0) {
-                heldButtonDelay = 300;
-            }
-            if (playerDistanceFromEnemy < 6 && level.enemies[i].health > 0) {
-                // console.log("Enemy is closer than 6 tiles away. Player has to wait on server before movement is updated.");
-                enemyCloseToPlayer = true;
+        if (level.enemies) {
+            for (var i = 0; i < level.enemies.length; i++) {
+                // Enemy sprite's alpha is 0 if they are hidden. 1 if visible.
+                // Enemy remains have alpha 1, so make sure the enemy has health before slowing player.
+                var playerLocation = {x: getPlayerX(), y: getPlayerY()};
+                var enemyLocation = { x: level.enemies[i].x, y: level.enemies[i].y };
+                var playerDistanceFromEnemy = Math.ceil(Math.sqrt(Math.pow(playerLocation.x - enemyLocation.x, 2) + Math.pow(playerLocation.y - enemyLocation.y, 2)))
+                if (enemySprites[i].alpha == 1 && playerDistanceFromEnemy <= 3 && level.enemies[i].health > 0) {
+                    heldButtonDelay = 300;
+                }
+                if (playerDistanceFromEnemy < 6 && level.enemies[i].health > 0) {
+                    // console.log("Enemy is closer than 6 tiles away. Player has to wait on server before movement is updated.");
+                    enemyCloseToPlayer = true;
+                }
             }
         }
 
