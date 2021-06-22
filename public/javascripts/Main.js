@@ -270,11 +270,10 @@ function setup() {
 
     socket.on('interactables', function (interactables) {
         if (interactables && JSON.stringify(interactables) != '{}') {
-            //console.log(message);
             alert(JSON.stringify(interactables));
-            // Display window with interaction text.
+            // TODO: Display window with interaction text.
         } else {
-            // Display message that there is nothing to interact with.
+            // TODO: Display message that there is nothing to interact with.
         }
     });
 

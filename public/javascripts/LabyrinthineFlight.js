@@ -15,6 +15,15 @@ class LabyrinthineFlight {
         this.updatedSprites = [];
         this.player = new Player(playerInformation.name, playerInformation.title, playerInformation.x, playerInformation.y);
         this.map = new DungeonMap(mapInformation);
+        // Print out the ascii map to console
+        var str = '';
+        for (var y = 0; y < this.height; y++) {
+            for (var x = 0; x < this.width; x++) {
+                str += (this.getAsciiTile(x, y)) ? this.getAsciiTile(x, y) : ' ';
+            }
+            str += '\n';
+        }
+        console.log(str);
     }
     /**
     * canWalk
