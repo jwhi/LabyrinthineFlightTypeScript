@@ -254,9 +254,9 @@ class Floor {
         // TODO: Update this to the new Map object.
         if ((this.levelNumber) % 5 == 0) {
 
-        /* create a connected map where the player can reach all non-wall sections */
-            var options = { connected: true }
-            var cellMap = new ROT.Map.Cellular(width, height, options);
+        /* create a connected map where the player can reach all non-wall sections. Changed in new Rot.js version */
+            // var options = { connected: true }
+            var cellMap = new ROT.Map.Cellular(width, height);
 
             /* cells with 1/2 probability */
             cellMap.randomize(0.43);
@@ -282,6 +282,9 @@ class Floor {
                 if (value) { if (this.map[x + ',' + y] != '`') { this.map[key] = ' '; } }
                 else { this.map[key] = "."; }// Walls: ' ' Floor: '.'
             }
+
+            var nullConnectCallback = (x: number, y: number, contents: number) => { return null }
+            cellMap.connect(nullConnectCallback, 0, null)
         } else {
             var digger = new ROT.Map.Digger(width, height, { roomWidth: [3, 7], roomHeight: [3, 7], corridorLength: [2, 4], dugPercentage: 0.24 });
             //new ROT.Map.Uniform(width, height, {roomWidth: [3,6], roomHeight: [3,6], roomDugPercentage: 0.5});

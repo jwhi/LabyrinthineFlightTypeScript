@@ -1,16 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const http = require("http");
-const socketio = require("socket.io");
-const uuidv4 = require("uuid/v4");
+const http_1 = require("http");
+const socket_io_1 = require("socket.io");
+const uuid_1 = require("uuid");
 // import sqlite3 = require('sqlite3');
 const Rogue = require("./Rogue");
 // Local port the server will listen to connections on.
 const PORT = 1337;
 let app = express();
-var server = new http.Server(app);
-var io = socketio.listen(server);
+const server = http_1.createServer(app);
+const io = new socket_io_1.Server(server, {
+// options
+});
 app.use('/js', express.static(__dirname + '/public/javascripts'));
 app.use('/assets', express.static(__dirname + '/public/assets'));
 app.get('/map', function (req, res) {
@@ -37,7 +39,7 @@ io.on('connection', function (socket) {
         save();
     });
     socket.on('new game', function (name) {
-        uuid = uuidv4();
+        uuid = uuid_1.v4();
         // Seed for the concurrent floors is based on the initial seed.
         // Choosing a random number 1,000,000 less than max int so player
         // has plenty of floors before they hit max int. Just needs to be a check

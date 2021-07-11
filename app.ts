@@ -1,18 +1,19 @@
-﻿import debug = require('debug');
-import express = require('express');
-import http = require('http');
-import socketio = require('socket.io');
-import uuidv4 = require('uuid/v4');
+﻿import express = require('express');
+import { createServer } from "http";
+import { Server, Socket } from "socket.io";
+import { v4 as uuidv4 } from 'uuid';
 // import sqlite3 = require('sqlite3');
 import Rogue = require('./Rogue');
 
 // Local port the server will listen to connections on.
 const PORT = 1337;
 
-let app = express();
 
-var server = new http.Server(app);
-var io = socketio.listen(server);
+let app = express();
+const server = createServer(app);
+const io = new Server(server, {
+  // options
+});
 
 
 app.use('/js', express.static(__dirname + '/public/javascripts'));

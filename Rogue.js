@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getPlayerTitle = exports.getPlayerName = exports.Enemy = exports.NPC = exports.Floor = exports.Dungeon = void 0;
 const ROT = require("rot-js");
 const fs = require("fs");
 const os = require("os");
@@ -215,9 +216,9 @@ class Floor {
         return;
         // TODO: Update this to the new Map object.
         if ((this.levelNumber) % 5 == 0) {
-            /* create a connected map where the player can reach all non-wall sections */
-            var options = { connected: true };
-            var cellMap = new ROT.Map.Cellular(width, height, options);
+            /* create a connected map where the player can reach all non-wall sections. Changed in new Rot.js version */
+            // var options = { connected: true }
+            var cellMap = new ROT.Map.Cellular(width, height);
             /* cells with 1/2 probability */
             cellMap.randomize(0.43);
             /* make a few generations */
@@ -247,6 +248,8 @@ class Floor {
                     this.map[key] = ".";
                 } // Walls: ' ' Floor: '.'
             };
+            var nullConnectCallback = (x, y, contents) => { return null; };
+            cellMap.connect(nullConnectCallback, 0, null);
         }
         else {
             var digger = new ROT.Map.Digger(width, height, { roomWidth: [3, 7], roomHeight: [3, 7], corridorLength: [2, 4], dugPercentage: 0.24 });
