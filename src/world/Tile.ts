@@ -11,8 +11,8 @@ class Tile {
     }
 }
 
-function CreateTile(ascii: string, sprite: string) {
-    return new Tile({ascii: ascii, sprite: sprite})
+function CreateTileData(ascii: string, sprite: string) {
+    return {"ascii": ascii, "sprite": sprite}
 }
 
-export { Tile, CreateTile }
+export { Tile, CreateTileData }

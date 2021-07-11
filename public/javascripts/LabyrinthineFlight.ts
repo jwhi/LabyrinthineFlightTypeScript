@@ -139,6 +139,10 @@ class LabyrinthineFlight {
         })
         return characterSprites;
     }
+
+    getTileAtPlayer() {
+        return this.map.tiles[this.player.getLocationKey()] || {}
+    }
 }
 
 class Entity {
@@ -153,6 +157,10 @@ class Entity {
     setLocation(x, y) {
         this.x = x;
         this.y = y;
+    }
+
+    getLocationKey() {
+        return `${this.x},${this.y}`
     }
 }
 

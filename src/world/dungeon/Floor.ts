@@ -4,21 +4,19 @@ import Constants from '@utilities/GameConstants'
 import DungeonMap from '@world/dungeon/DungeonMap';
 
 import TownData from '@maps/startingTown.json';
-import { CreateTile } from '@world/Tile';
+import { CreateTileData } from '@world/Tile';
 
 
 
-const TILE_MAP = {
-    "OPEN_DOOR": CreateTile('+', "door"),
-    // Floor Tiles
-    "DUNGEON_FLOOR": CreateTile("",""),
-    "CAVE_FLOOR": CreateTile("",""),
-    
-    // Walls
-    "GENERIC_WALL": CreateTile("#","wall_1"),
-    "DUNGEON_WALL": CreateTile("",""),
-    "CAVE_WALL": CreateTile("","")
-}
+const CLOSED_DOOR = CreateTileData('+', "door");
+const DUNGEON_FLOOR = CreateTileData(".", null);
+const HALLWAY_FLOOR = CreateTileData(".", "dirt_floor_5")
+const CAVE_FLOOR = CreateTileData(",","dirt_floor_4");
+const DUNGEON_WALL = CreateTileData("#","ruins_2");
+const HALLWAY_WALL = CreateTileData("&","brick_wall_1");
+const CAVE_WALL = CreateTileData("%","wall_1");
+const STAIRS_DOWN = CreateTileData(">", "stairs_down");
+const STAIRS_UP = CreateTileData("<", "stairs_up");
 
 export default class Floor {
     map: DungeonMap;
@@ -50,8 +48,10 @@ export default class Floor {
             return;
         }
 
-        return;
+        if (!Constants.TESTING_DUNGEON_GEN)
+            return;
 
+        var mapData: any = {tiles: {}}
         // TODO: Update this to the new Map object.
         if ((this.levelNumber) % 5 == 0) {
 
@@ -69,9 +69,9 @@ export default class Floor {
                 for (var i = 0; i < width; i++) {
                     if (cellMap._map[i][j]) {
                         // Cave floor
-                        this.map.tiles[i + ',' + j] = '`';
+                        mapData.tiles[i + ',' + j] = CAVE_FLOOR;
                     } else {
-                        this.map.tiles[i + ',' + j] = ' '
+                        mapData.tiles[i + ',' + j] = CAVE_WALL;
                     }
                 }
             }
@@ -80,8 +80,8 @@ export default class Floor {
             var digCallback = function (x, y, value) {
                 var key = x + "," + y;
                 // Only add room wall if there isn't a cave floor there.
-                if (value) { if (this.map[x + ',' + y] != '`') { this.map[key] = ' '; } }
-                else { this.map[key] = "."; }// Walls: ' ' Floor: '.'
+                if (value) { if (mapData.tiles[x + ',' + y] != CAVE_FLOOR) { mapData.tiles[key] = DUNGEON_WALL; } }
+                else { mapData.tiles[key] = DUNGEON_FLOOR; }// Walls: ' ' Floor: '.'
             }
 
             var nullConnectCallback = (x: number, y: number, contents: number) => { return null }
@@ -92,16 +92,15 @@ export default class Floor {
 
             var digCallback = function (x, y, value) {
                 var key = x + "," + y;
-                if (value) { this.map[key] = " "; }
-                else { this.map[key] = "."; }// Walls: ' ' Floor: '.'
+                if (value) { mapData.tiles[key] = HALLWAY_WALL; }
+                else { mapData.tiles[key] = HALLWAY_FLOOR; }// Walls: ' ' Floor: '.'
             }
         }
         digger.create(digCallback.bind(this));
 
         this.rooms = digger.getRooms();
-        var worldMap = this.map;
         var drawDoor = function (x, y) {
-            worldMap[x + "," + y] = "+";
+            mapData.tiles[x + "," + y] = CLOSED_DOOR;
         }
         for (var i = 0; i < this.rooms.length; i++) {
             var room = this.rooms[i];
@@ -110,9 +109,9 @@ export default class Floor {
 
         for (var j = 0; j < this.height; j++) {
             for (var i = 0; i < this.width; i++) {
-                if (this.map[i + "," + j] === ".") {
+                if (mapData.tiles[i + "," + j].ascii === ".") {
                     if (!(this.inRoom(i, j))) {
-                        this.map[i + "," + j] = ",";
+                        mapData.tiles[i + "," + j] = DUNGEON_FLOOR;
                     }
                 }
                 this.mapExplored[i + "," + j] = 0;
@@ -121,17 +120,17 @@ export default class Floor {
 
         for (var y = 0; y < this.height; y++) {
             for (var x = 0; x < this.width; x++) {
-                if (this.map[x + "," + y] === " ") {
-                    var surroundingTiles = [this.map[x + "," + (y - 1)], this.map[x + "," + (y + 1)], this.map[(x - 1) + "," + y], this.map[(x + 1) + "," + y],
-                    this.map[(x + 1) + "," + (y - 1)], this.map[(x + 1) + "," + (y + 1)], this.map[(x - 1) + "," + (y - 1)], this.map[(x - 1) + "," + (y + 1)]].join('').trim();
+                if (mapData.tiles[x + "," + y].ascii === " ") {
+                    var surroundingTiles = [mapData.tiles[x + "," + (y - 1)], this.map.tiles[x + "," + (y + 1)], this.map.tiles[(x - 1) + "," + y], this.map.tiles[(x + 1) + "," + y],
+                    mapData.tiles[(x + 1) + "," + (y - 1)], mapData.tiles[(x + 1) + "," + (y + 1)], this.map.tiles[(x - 1) + "," + (y - 1)], this.map.tiles[(x - 1) + "," + (y + 1)]].join('').trim();
                     if (surroundingTiles.includes(".")) {
                         // If a blank tile has a floor tile around it, then the blank tile needs to be a wall
-                        this.map[x + "," + y] = "#";
+                        mapData.tiles[x + "," + y] = DUNGEON_WALL;
                     } else if (surroundingTiles.includes(",")) {
                         // If the surrounding tile includes a hallway or a cave floor, add a cave wall.
-                        this.map[x + "," + y] = "&";
+                        mapData.tiles[x + "," + y] = HALLWAY_WALL;
                     } else if (surroundingTiles.includes("`")) {
-                        this.map[x + "," + y] = "%";
+                        mapData.tiles[x + "," + y] = CAVE_WALL;
                     }
                 }
             }
@@ -139,13 +138,13 @@ export default class Floor {
 
         //var playerStartRoom = this.rooms[Math.floor(Math.random() * (this.rooms.length-1))];
         if (this.levelNumber != 0) {
-            this.map[this.rooms[0].getCenter()[0] + "," + this.rooms[0].getCenter()[1]] = "<";
+            mapData.tiles[this.rooms[0].getCenter()[0] + "," + this.rooms[0].getCenter()[1]] = STAIRS_UP;
         }
 
         //var stairsDownRoom = playerStartRoom;
         //while (stairsDownRoom == playerStartRoom) { stairsDownRoom = this.rooms[Math.floor(Math.random() * (this.rooms.length-1))]; }
 
-        this.map[this.rooms[this.rooms.length - 1].getCenter()[0] + "," + this.rooms[this.rooms.length - 1].getCenter()[1]] = ">";
+        mapData.tiles[this.rooms[this.rooms.length - 1].getCenter()[0] + "," + this.rooms[this.rooms.length - 1].getCenter()[1]] = STAIRS_DOWN;
 
         var roomID = 0;
         if (spawnOnDownStairs) {
@@ -157,12 +156,13 @@ export default class Floor {
         // Initiate Enemies and Dijkstra path-finding passed function
         //this.placeEnemies();
         this.dijkstra = new ROT.Path.Dijkstra(this.playerX, this.playerY, function (x, y) {
-            if (this.map) {
-                return ((this.map[x + ',' + y] === '.') || (this.map[x + ',' + y] === ',') || (this.map[x + ',' + y] === '-') || (this.map[x + ',' + y] === '+') || (this.map[x + ',' + y] === '`'))
+            if (mapData.tiles) {
+                return ((mapData.tiles[x + ',' + y].ascii === '.') || (mapData.tiles[x + ',' + y].ascii === ',') || (this.map[x + ',' + y] === '-') || (this.map[x + ',' + y] === '+') || (this.map[x + ',' + y] === '`'))
             } else {
                 return false;
             }
         }, null);
+        this.map = new DungeonMap(mapData);
     }
 
     updateFOV(pX, pY) {

@@ -82,6 +82,8 @@ let socket;
 // Define Labyrinthine Flight game object, will be assigned when level loads from data with server.
 let labyrinthineFlight;
 
+let playerData;
+
 /* Graphics Setup */
 
 let gameApp = new Application({
@@ -107,10 +109,10 @@ let gameInfoApp = new Application({
 // This is caused by me using the same texture names in the JSON font files.
 // map is all the kenney 1-bit textures used for the map. kenney-1bit.json has player and enemy sprites. needs to be reorganized.
 loader.add('kenney-1bit', 'assets/1bit2x-expanded.json')
-      .add('map', 'assets/1bit-map.json')
-      .add('characters', 'assets/1bit-character.json')
-      .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
-      .load(setup);
+    .add('map', 'assets/1bit-map.json')
+    .add('characters', 'assets/1bit-character.json')
+    .add(['assets/orange_font.json', 'assets/white_font.json', 'assets/grey_font.json', 'assets/blue_font.json', 'assets/red_font.json'])
+    .load(setup);
 
 /**
  * setup
@@ -179,7 +181,7 @@ function setup() {
     /* Socket.IO Data Received Functions */
     // Sending data between server and client handled by Socket.io
     socket = io();
-    
+
     // When the page receives these packets, update the webpage as needed
     socket.on('debug', function (message) {
         console.log(message);
@@ -191,13 +193,13 @@ function setup() {
 
     // The dungeon object received from the server. Defined in the server's Rogue.js file
     // Dungeons are only received at the start of games and when player travels up or down a staircase.
-    socket.on('dungeon', function(gameData) {
+    socket.on('dungeon', function (gameData) {
         console.log(gameData);
         /* Clear the screen */
         clearApplication(gameApp);
         clearApplication(gameInfoApp);
 
-    /* Save game data to LabyrinthineFlight object */
+        /* Save game data to LabyrinthineFlight object */
         // Info included in gameData
         /*
          *
@@ -209,8 +211,10 @@ function setup() {
             fov:
             player = {name, title, health, attack}
         */
-        labyrinthineFlight = new LabyrinthineFlight(gameData.map, gameData.player);
-        
+        if (gameData.player)
+            playerData = gameData.player
+        labyrinthineFlight = new LabyrinthineFlight(gameData.map, playerData);
+
         /*
          * Draw map/player/enemy/item sprites to the screen.
          */
@@ -252,9 +256,9 @@ function setup() {
          */
         state = play;
     });
-    
+
     // Received after every time a player moves or interacts with object/character.
-    socket.on('worldTurn', function(worldTurnData) {
+    socket.on('worldTurn', function (worldTurnData) {
         /**
          * Move and update enemies (health)
          * Update enemy sprites to new position and change tint if damaged
@@ -287,7 +291,7 @@ function setup() {
     // Loading the game currently causes all previous floors to lose their map data
     // so exploration will be reset and doors will be closed for all floors except the
     // current one.
-    socket.on('missing', function(err) {
+    socket.on('missing', function (err) {
         /**
          * If server sends error 'no dungeon', emit 'load game' with the game id stored in local variable.
          * If there is save id stored in the local variable, display an error screen.
@@ -296,19 +300,19 @@ function setup() {
          * Display a different error screen.
          */
     });
-    
+
 
     /* Initialize Game Loop and Add Graphic Elements to Page */
 
     // Start the game loop by adding the `gameLoop` function to
     // PIXI.js `ticker` and providing it with a 'delta' argument
-    gameApp.ticker.add(delta=>gameLoop(delta));
-    
+    gameApp.ticker.add(delta => gameLoop(delta));
+
     // Add the canvases that PIXI.js creates to the HTML page
     // These screens will handle rendering different parts of the game
     document.getElementById('gameScreen').appendChild(renderer.view);
     document.getElementById('gameInfo').appendChild(infoRenderer.view);
-    
+
     // Resize the game window to the browser window so player does not need to scroll
     // to see the entire game board or find where the player is on the screen.
     resize();
@@ -454,11 +458,11 @@ function updateMapFOV(tileValues) {
     Object.keys(tileValues).forEach(tileLocation => {
         var t = mapSprites[tileLocation];
         var c = characterSprites[tileLocation];
-        if(t) {
+        if (t) {
             if (tileValues[tileLocation] != 0) {
                 t.alpha = 1;
                 t.tint = valueToTintDict[tileValues[tileLocation]];
-                
+
             } else {
                 t.alpha = 0;
             }
@@ -605,5 +609,35 @@ function resize() {
     window.onresize = function (event) {
         resize();
     };
+}
 
+// keyPressed reflects whether '.' or ',' was pressed by user
+// '>' gets passed in for '.'; '<' gets passed in for ',';
+// Don't need to have distinction, but most desktop roguelikes have the two seperate
+// stairs buttons for up or down so I figured I should too for desktop controls.
+// If no key is passed in, function just uses whatever tile at player's position
+/**
+ * useStairs
+ * Called whenever the user presses the 'Use Stairs' button or pressed the button
+ * on the keyboard that corresponds to the stairs up or stairs down. Function will
+ * request the floor above or below from the sever based on the tile the player is
+ * standing on. While waiting for the server to respond, a 'Loading' screen will be
+ * loaded. keyPressed should be '>' if a '.' was pressed and a '<' if a ',' is pressed.
+ * @param keyPressed The key on the keyboard the use pressed. Null when use presses the button.
+ */
+function useStairs(keyPressed) {
+    // TODO: prevent player from moving after request for new floor is send. Maybe switch
+    // to a loading screen until new floor arrives.
+    console.log('stairs');
+    console.log(keyPressed);
+    if (!keyPressed) {
+        keyPressed = labyrinthineFlight.getTileAtPlayer().ascii;
+    }
+    if (keyPressed === labyrinthineFlight.getTileAtPlayer().ascii) {
+        if (keyPressed === '>') {
+            socket.emit('request', 'floor down');
+        } else if (keyPressed === '<') {
+            socket.emit('request', 'floor up');
+        }
+    }
 }

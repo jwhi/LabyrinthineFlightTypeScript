@@ -2,8 +2,8 @@ import { Tile } from "@world/Tile";
 
 export default class DungeonMap {
     tiles = {};
-    npcs;
-    interactables;
+    npcs = {};
+    interactables = {};
     constructor(townData: Object) {
         var tilesData = {};
         if (townData.hasOwnProperty("tiles")) {
