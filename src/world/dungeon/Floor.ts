@@ -1,225 +1,26 @@
-﻿import ROT = require('rot-js');
-import fs = require('fs');
-import os = require('os');
+import ROT = require('rot-js');
 
-import TownData from './private/maps/startingTown.json';
+import Constants from '@utilities/GameConstants'
+import DungeonMap from '@world/dungeon/DungeonMap';
 
-const mapWidth = 75;
-const mapHeight = 40;
-
-const playerFOVRadius = 8;
-const previouslyExploredAlpha = 0.4;
-
-// #: Room wall
-// &: Hallway wall
-// %: Cave wall
-const WALL_TILES = ['#', '&', '%'];
-
-// .: Room floor
-// ,: Hallway floor
-// `: Cave floor
-const FLOOR_TILES = ['.', ',', '`'];
-
-const TILES_NONWALKABLE_BLOCKS_LIGHT = ['&', '#', '%', '♠', 'ƒ', '☺', '☻'];
-
-const TILES_NONWALKABLE_LIGHT_PASSES = ['Æ', 'æ', 'µ', '╤', '☼', ':', 'Φ', '═', '≈', '║', '♀', '¶', '╬', '₧', '╦', 'Ω'];
-
-const TILES_WALKABLE_BLOCKS_LIGHT = ['+','⌠'];
-
-const TILES_WALKABLE_LIGHT_PASSES = [' ','.',',','`','"','-','<','>','Θ','╥','~','╣','╠','⌡','ⁿ','░'];
-
-var sg = new ROT.StringGenerator(null);
-
-var nameFile = '';
-var malePlayerNameData;
-var femalePlayerNameData;
-var adjectiveData;
-var nicknameData;
+import TownData from '@maps/startingTown.json';
+import { CreateTile } from '@world/Tile';
 
 
-fs.readFile('./private/names/keeperrl_male_names.txt', function (err, data) {
-    malePlayerNameData = data.toString().split(os.EOL);
-});
 
-fs.readFile('./private/names/keeperrl_female_names.txt', function (err, data) {
-    femalePlayerNameData = data.toString().split(os.EOL);
-});
-
-fs.readFile('./private/names/adjectives.txt', function (err, data) {
-    adjectiveData = data.toString().split(os.EOL);
-});
-
-fs.readFile('./private/names/nicknames.txt', function (err, data) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    nicknameData = data.toString().split(os.EOL);
-});
-
-function getPlayerName() {
-    // Wait until name files are loaded in
-    while (!malePlayerNameData || !femalePlayerNameData) { }
-    // Decide which name file to use.
-    if (Math.round(Math.random())) {
-        var rnd = Math.floor(Math.random() * malePlayerNameData.length);
-        return malePlayerNameData[rnd];
-    } else {
-        var rnd = Math.floor(Math.random() * femalePlayerNameData.length);
-        return femalePlayerNameData[rnd];
-    }
+const TILE_MAP = {
+    "OPEN_DOOR": CreateTile('+', "door"),
+    // Floor Tiles
+    "DUNGEON_FLOOR": CreateTile("",""),
+    "CAVE_FLOOR": CreateTile("",""),
+    
+    // Walls
+    "GENERIC_WALL": CreateTile("#","wall_1"),
+    "DUNGEON_WALL": CreateTile("",""),
+    "CAVE_WALL": CreateTile("","")
 }
 
-function getPlayerTitle() {
-    // Wait until adjective and nickname files are loaded
-    while (!adjectiveData || !nicknameData) { }
-    // Choose title for player
-    var rnd = Math.floor(Math.random() * adjectiveData.length);
-    var adjective = adjectiveData[rnd];
-    rnd = Math.floor(Math.random() * nicknameData.length);
-    var nickname = nicknameData[rnd];
-    return ('the ' + adjective + ' ' + nickname);
-}
-
-class Dungeon {
-    floorNumber: number;
-    furthestFloor: number;
-    player: Player;
-    floors: Floor[];
-    seed: number;
-
-    constructor(seed, floorNumber = 0, furthestFloor = floorNumber) {
-        this.floorNumber = floorNumber;
-
-        if (furthestFloor) {
-            this.furthestFloor = furthestFloor;
-        } else {
-            this.furthestFloor = floorNumber;
-        }
-
-        this.player = new Player();
-        this.floors = [];
-        this.seed = seed;
-        ROT.RNG.setSeed(this.seed + this.floorNumber);
-        this.floors[this.floorNumber] = new Floor(mapWidth, mapHeight, this.floorNumber);
-    }
-    gotoFloor(floorNumber, upOrDown? : string) {
-        if (floorNumber < 0) return;
-        if (!this.floors[floorNumber]) {
-            // New level that needs to be created and stored.
-            // RNG for ROT set to initial seed + floorNumber
-            ROT.RNG.setSeed(this.seed + floorNumber);
-            this.floors[floorNumber] = new Floor(mapWidth, mapHeight, floorNumber, upOrDown === 'down');
-        }
-        this.floorNumber = floorNumber;
-    }
-    getCurrentFloor() {
-        return this.floors[this.floorNumber];
-    }
-
-    getFloorDataForClient({ includePlayerInfo = false } = {}) {
-        var floor = this.getCurrentFloor();
-        this.player.x = floor.playerX;
-        this.player.y = floor.playerY;
-        var returnObject = {
-            map: this.getClientMapData(),
-            playerX: floor.playerX,
-            playerY: floor.playerY,
-            player: null
-        }
-        if (includePlayerInfo) {
-            returnObject.player = this.player
-        }
-        return returnObject;
-    }
-
-    useStairs(symbol) {
-        var cf = this.getCurrentFloor();
-        if (!symbol) {
-            symbol = cf.getMap()[cf.playerX + "," + cf.playerY];
-        } else if (symbol !== cf.getMap()[cf.playerX + "," + cf.playerY]) {
-            return false;
-        }
-        if (symbol === ">") {
-            this.gotoFloor(this.floorNumber + 1);
-            return true;
-        } else if (symbol === "<") {
-            this.gotoFloor(this.floorNumber - 1);
-            return true;
-        }
-        return false;
-    }
-
-    getPlayerInteractables() {
-        var nearbyInteractables = {};
-        var mapInteractables = this.getCurrentFloor().getInteractables();
-        // Check map for signs, people, stairs, doors, books, etc. in player's area
-        var playerInteractableReach = this.player.getNeighboringPositions();
-        Object.keys(mapInteractables).forEach(interactable => {
-            playerInteractableReach.forEach(tileLocation => {
-                var objectAtLocation = mapInteractables[interactable][tileLocation];
-                if (objectAtLocation) {
-                    // There is an interactable here
-                    if (!nearbyInteractables[interactable]) {
-                        nearbyInteractables[interactable] = {};
-                    }
-                    nearbyInteractables[interactable][tileLocation] = mapInteractables[interactable][tileLocation];
-                }
-            });
-        });
-
-        var mapNPCs = this.getCurrentFloor().getMap().npcs;
-        playerInteractableReach.forEach(tileLocation => {
-            if (mapNPCs[tileLocation]) {
-                if (!nearbyInteractables['npcs']) {
-                    nearbyInteractables['npcs'] = {};
-                }
-                nearbyInteractables['npcs'][tileLocation] = mapNPCs[tileLocation];
-            }
-        });
-
-        return nearbyInteractables;
-    }
-
-    /** mapAlphaValues
-     * 
-     * @param x Player's X 
-     * @param y Player's Y
-     * @returns an array of alpha values to be used on the map of the tiles
-     * Tiles seen by the player = 1
-     * Tiles the player hasn't seen = 0
-     * Tiles previously seen but not currently in FOV is a value between 0 and 1.
-     */
-    mapAlphaValues(x?, y?) {
-        if (x && y) {
-            return this.getCurrentFloor().updateFOV(x, y);
-        } else {
-            return this.getCurrentFloor().updateFOV(this.getCurrentFloor().playerX, this.getCurrentFloor().playerY);
-        }
-    }
-
-    setAlphaValues(alpha) {
-        this.getCurrentFloor().mapExplored = alpha;
-    }
-
-    updatePlayerPosition(x, y) {
-        this.getCurrentFloor().setPlayerPosition(x, y);
-    }
-
-    getMap() {
-        this.getCurrentFloor().getMap();
-    }
-
-    getClientMapData() {
-        return {
-            tiles: this.getCurrentFloor().getMap().tiles,
-            fov: this.mapAlphaValues(),
-            npcs: this.getCurrentFloor().getMap().npcs
-        }
-    }
-}
-
-class Floor {
+export default class Floor {
     map: DungeonMap;
     width: number;
     height: number;
@@ -254,9 +55,9 @@ class Floor {
         // TODO: Update this to the new Map object.
         if ((this.levelNumber) % 5 == 0) {
 
-        /* create a connected map where the player can reach all non-wall sections */
-            var options = { connected: true }
-            var cellMap = new ROT.Map.Cellular(width, height, options);
+        /* create a connected map where the player can reach all non-wall sections. Changed in new Rot.js version */
+            // var options = { connected: true }
+            var cellMap = new ROT.Map.Cellular(width, height);
 
             /* cells with 1/2 probability */
             cellMap.randomize(0.43);
@@ -268,9 +69,9 @@ class Floor {
                 for (var i = 0; i < width; i++) {
                     if (cellMap._map[i][j]) {
                         // Cave floor
-                        this.map[i + ',' + j] = '`';
+                        this.map.tiles[i + ',' + j] = '`';
                     } else {
-                        this.map[i + ',' + j] = ' '
+                        this.map.tiles[i + ',' + j] = ' '
                     }
                 }
             }
@@ -282,6 +83,9 @@ class Floor {
                 if (value) { if (this.map[x + ',' + y] != '`') { this.map[key] = ' '; } }
                 else { this.map[key] = "."; }// Walls: ' ' Floor: '.'
             }
+
+            var nullConnectCallback = (x: number, y: number, contents: number) => { return null }
+            cellMap.connect(nullConnectCallback, 0, null)
         } else {
             var digger = new ROT.Map.Digger(width, height, { roomWidth: [3, 7], roomHeight: [3, 7], corridorLength: [2, 4], dugPercentage: 0.24 });
             //new ROT.Map.Uniform(width, height, {roomWidth: [3,6], roomHeight: [3,6], roomDugPercentage: 0.5});
@@ -374,14 +178,14 @@ class Floor {
         // Player's field-of-view light input callback
         var lightPasses = function (x, y) {
             var key = x + "," + y;
-            if (key in localMap) { return (TILES_NONWALKABLE_LIGHT_PASSES.includes(localMap[key]) || TILES_WALKABLE_LIGHT_PASSES.includes(localMap[key])) }
+            if (key in localMap) { return (Constants.TILES_NONWALKABLE_LIGHT_PASSES.includes(localMap[key]) || Constants.TILES_WALKABLE_LIGHT_PASSES.includes(localMap[key])) }
             // If the tile is undefined, return true.
             return true;
         }
 
         var fov = new ROT.FOV.PreciseShadowcasting(lightPasses);
         // Output callback for player's field-of-view
-        fov.compute(pX, pY, playerFOVRadius, function (x, y, r, visibility) {
+        fov.compute(pX, pY, Constants.PLAYER_FOV_RADIUS, function (x, y, r, visibility) {
             var ch = (r ? "" : "@");
             localMapExplored[x + "," + y] = 2;
         });
@@ -390,10 +194,10 @@ class Floor {
             for (var i = 0; i < this.width; i++) {
                 var tileAlpha = this.mapExplored[i + "," + j];
                 if (tileAlpha == 1) {
-                    tileAlpha = previouslyExploredAlpha;
+                    tileAlpha = Constants.PREVIOUSLY_EXPLORED_ALPHA;
                 } else if (tileAlpha == 2) {
                     tileAlpha = 1;
-                } else if (tileAlpha != previouslyExploredAlpha) {
+                } else if (tileAlpha != Constants.PREVIOUSLY_EXPLORED_ALPHA) {
                     tileAlpha = 0;
                 }
                 this.mapExplored[i + "," + j] = tileAlpha;
@@ -603,8 +407,8 @@ class Floor {
         var mapData = ' ';
         var localMap = this.map;
 
-        for (let y = 0; y < mapHeight; y++) {
-            for (let x = 0; x < mapWidth; x++) {
+        for (let y = 0; y < Constants.MAP_HEIGHT; y++) {
+            for (let x = 0; x < Constants.MAP_WIDTH; x++) {
                 mapData = this.map[x + "," + y];
                 switch (mapData) {
                     case '&':
@@ -736,7 +540,7 @@ class Floor {
                         tileName = name;
                         break;
                     case '%':
-                        function getMapTile(x, y): string {
+                        var getMapTile = (x, y): string => {
                             var tile = localMap[x + "," + y];
                             if (tile)
                                 return tile
@@ -763,16 +567,16 @@ class Floor {
 
                         // If the tile could only connect to 1 cave wall, try to see if there are other wall tiles nearby to connect to
                         if (connectedWalls.join('').trim().length <= 1) {
-                            if (WALL_TILES.includes(surroundingTiles[0])) {
+                            if (Constants.WALL_TILES.includes(surroundingTiles[0])) {
                                 connectedWalls[0] = 'N';
                             }
-                            if (WALL_TILES.includes(surroundingTiles[1])) {
+                            if (Constants.WALL_TILES.includes(surroundingTiles[1])) {
                                 connectedWalls[1] = 'S';
                             }
-                            if (WALL_TILES.includes(surroundingTiles[2])) {
+                            if (Constants.WALL_TILES.includes(surroundingTiles[2])) {
                                 connectedWalls[2] = 'E';
                             }
-                            if (WALL_TILES.includes(surroundingTiles[3])) {
+                            if (Constants.WALL_TILES.includes(surroundingTiles[3])) {
                                 connectedWalls[3] = 'W';
                             }
                         }
@@ -810,6 +614,10 @@ class Floor {
         return mapTileData;
     }
 
+    getTileInfoFromAscii(ascii: String) {
+        
+    }
+
     chooseTexture(x, y, z) {
         // https://stackoverflow.com/questions/12964279/whats-the-origin-of-this-glsl-rand-one-liner
         // x and y in the below equation should be divided by total height or width so that way x and y
@@ -829,231 +637,3 @@ class Floor {
         return this.map.interactables;
     }
 }
-
-class Entity {
-    x: number;
-    y: number;
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    getPositionString() {
-        return `${this.x},${this.y}`;
-    }
-    setPosition(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    getNeighboringPositions() {
-        // Used to get the tiles x-1, x, x+1 and y-1, y, y+1 easily using some loops
-        var touchingTilesReach = [-1, 0, 1];
-        var neighboringTilesString = [`${this.x},${this.y}`];
-
-        touchingTilesReach.forEach(xMod => {
-            touchingTilesReach.forEach(yMod => {
-                if (Math.abs(xMod) != Math.abs(yMod)) {
-                    var tileX = this.x + xMod;
-                    var tileY = this.y + yMod;
-                    if (tileX >= 0 && tileX < mapWidth &&
-                        tileY >= 0 && tileY < mapHeight) {
-                        neighboringTilesString.push(`${tileX},${tileY}`);
-                    }
-                }
-            });
-        });
-        return neighboringTilesString;
-    }
-    // This function covers tiles diagonal from entity
-    getAllNeighboringPositions() {
-        // Used to get the tiles x-1, x, x+1 and y-1, y, y+1 easily using some loops
-        var touchingTilesReach = [-1, 0, 1];
-        var neighboringTilesString = [];
-
-        touchingTilesReach.forEach(xMod => {
-            touchingTilesReach.forEach(yMod => {
-                var tileX = this.x + xMod;
-                var tileY = this.y + yMod;
-                if (tileX >= 0 && tileX < mapWidth &&
-                    tileY >= 0 && tileY < mapHeight) {
-                    neighboringTilesString.push(`${tileX},${tileY}`);
-                }
-            });
-        });
-        return neighboringTilesString;
-    }
-}
-
-class Player extends Entity {
-    name: string;
-    title: string;
-    health: number;
-    attack: number[];
-
-    constructor(name = null) {
-        super(0, 0);
-        this.health = 10;
-        this.attack = [1, 2];
-
-        if (name) {
-            this.name = name;
-        } else {
-            this.name = getPlayerName();
-        }
-
-        this.title = getPlayerTitle();
-    }
-}
-
-class Enemy extends Entity {
-    name: string;
-    health: number;
-    attack: number[];
-    accuracy: number;
-    char: string = "";
-    loot = [];
-    description: string = "";
-    path = [];
-    maxHealth: number;
-    
-    constructor(name, x, y) {
-        super(x, y);
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.health = 0;
-        this.attack = [1];
-        this.accuracy = 0;
-
-        switch (name) {
-            case 'goblin':
-                this.health = 4;
-                this.maxHealth = this.health;
-                this.attack = [1];
-                this.accuracy = 0.8;
-                this.char = "g";
-                this.description = "It a goblin.";
-                break;
-        }
-    }
-    calculateMove(playerX, playerY, map) {
-        var dijkstra = new ROT.Path.Dijkstra(playerX, playerY, function (x, y) {
-            if (map) {
-                return ((map[x + ',' + y] === '.') || (map[x + ',' + y] === ',') || (map[x + ',' + y] === '-') || (map[x + ',' + y] === '+') || (map[x + ',' + y] === '`'))
-            } else {
-                return false;
-            }
-        }, { topology: 4 });
-        var localPath = this.path;
-        dijkstra.compute(this.x, this.y, function (x, y) {
-            // For testing, have the alpha of all the tiles in the enemies path should have the alpha value of 1.
-            localPath.push({ x: x, y: y });
-        });
-        // Remove the first spot in path because it contains the enemy's current location. We want the first spot to be where the enemy's next turn should be.
-        this.path.shift();
-        return this.path;
-    }
-}
-
-class NPC extends Entity {
-    name: string;
-    ascii: string;
-    sprite: string;
-    hostile: boolean;
-    constructor(npcInfo) {
-        super(npcInfo.x, npcInfo.y);
-        this.name = npcInfo.name;
-        this.ascii = npcInfo.symbol;
-        this.sprite = npcInfo.sprite;
-        this.hostile = npcInfo.hostile;
-    }
-}
-
-class DungeonMap {
-    tiles = {};
-    npcs;
-    interactables;
-    constructor(townData: Object) {
-        var tilesData = {};
-        if (townData.hasOwnProperty("tiles")) {
-            tilesData = (<any>townData).tiles;
-        }
-        Object.keys(tilesData).forEach(tileLocation => {
-            tilesData[tileLocation] = new Tile(tilesData[tileLocation]);
-        });
-        this.tiles = tilesData;
-        if (townData.hasOwnProperty("npcs")) {
-            this.npcs = (<any>townData).npcs;
-        }
-        if (townData.hasOwnProperty("interactables")) {
-            this.interactables = (<any>townData).interactables;
-        }
-    }
-
-    getAsciiTiles() {
-        var asciiTiles = {};
-        Object.keys(this.tiles).forEach(tileLocation => {
-            if (this.tiles[tileLocation].ascii) {
-                asciiTiles[tileLocation] = this.tiles[tileLocation].ascii;
-            }
-        });
-        return asciiTiles;
-    }
-
-    getTile(x, y) {
-        return this.tiles[x + ',' + y];
-    }
-
-    setTileAscii(x, y, value) {
-        this.tiles[x + ',' + y] = value;
-    }
-}
-
-class Tile {
-    ascii: string;
-    sprite: string;
-    constructor(tileData) {
-        if (tileData.ascii) {
-            this.ascii = tileData.ascii;
-        }
-        if (tileData.sprite) {
-            this.sprite = tileData.sprite;
-        }
-    }
-}
-
-class TownRoom {
-    name: string;
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
-    description: string = "";
-}
-
-class Interactable {
-    name: string;
-    interacted: boolean = false;
-    description: string = "";
-}
-
-class Sign extends Interactable {
-    text: string = "";
-    constructor() {
-        super();
-    }
-}
-
-class Book extends Interactable {
-    title: string = "";
-    author: string = "";
-    contents: Object;
-    constructor() {
-        super();
-    }
-}
-
-class Door extends Interactable {
-    locked: boolean = false;
-}
-
-export { Dungeon, Floor, NPC, Enemy, getPlayerName, getPlayerTitle };

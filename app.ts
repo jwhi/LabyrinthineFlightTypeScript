@@ -1,18 +1,19 @@
-﻿import debug = require('debug');
+﻿require('module-alias/register')
 import express = require('express');
-import http = require('http');
-import socketio = require('socket.io');
-import uuidv4 = require('uuid/v4');
+import { createServer } from "http";
+import { Server, Socket } from "socket.io";
+import { v4 as uuidv4 } from 'uuid';
 // import sqlite3 = require('sqlite3');
-import Rogue = require('./Rogue');
+import Rogue = require('./src/Rogue');
 
 // Local port the server will listen to connections on.
 const PORT = 1337;
 
 let app = express();
-
-var server = new http.Server(app);
-var io = socketio.listen(server);
+const server = createServer(app);
+const io = new Server(server, {
+  // options
+});
 
 
 app.use('/js', express.static(__dirname + '/public/javascripts'));
@@ -24,10 +25,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-
-
-
-io.on('connection', function (socket) {
+io.on('connection', function (socket: Socket) {
     console.log('a user connected');
     var uuid;
     var dungeon;
@@ -178,15 +176,14 @@ io.on('connection', function (socket) {
     });
 });
 
-process.stdout.write(
-    String.fromCharCode(27) + "]0;" + "Labyrinthine Flight Server" + String.fromCharCode(7)
-);
-
 server.listen(PORT, function () {
     console.log('Listening on port ' + PORT + '.');
 });
 
-process.on('SIGINT', function () {
+var shutdown = (signal = null) => {
     console.log('Shuting down...');
+    server.close()
     process.exit(0);
-});
+}
+
+process.on('SIGINT', shutdown);
