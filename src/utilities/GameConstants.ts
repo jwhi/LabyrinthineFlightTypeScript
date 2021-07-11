@@ -5,6 +5,9 @@ export default class Constants {
     static readonly PLAYER_FOV_RADIUS = 8
     static readonly PREVIOUSLY_EXPLORED_ALPHA = 0.4
 
+    static readonly TESTING_DUNGEON_GEN = true
+    static readonly DEFAULT_FLOOR_NUMBER = 0
+
     // #: Room wall
     // &: Hallway wall
     // %: Cave wall

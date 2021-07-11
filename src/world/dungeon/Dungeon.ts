@@ -11,7 +11,7 @@ export default class Dungeon {
     floors: Floor[];
     seed: number;
 
-    constructor(seed, floorNumber = 0, furthestFloor = floorNumber) {
+    constructor(seed, floorNumber = Constants.DEFAULT_FLOOR_NUMBER, furthestFloor = floorNumber) {
         console.log("In the dungeon class....")
         this.floorNumber = floorNumber;
 
