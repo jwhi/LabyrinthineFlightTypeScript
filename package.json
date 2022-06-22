@@ -19,7 +19,7 @@
     "module-alias": "^2.2.2",
     "rot-js": "^2.1.5",
     "socket.io": "^4.1.2",
-    "sqlite3": "^5.0.2",
+    "sqlite3": "^5.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
